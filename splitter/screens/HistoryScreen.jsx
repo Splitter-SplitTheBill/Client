@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   box: {
     backgroundColor: 'white',
-    height: '100%',
+    flex: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 15,
