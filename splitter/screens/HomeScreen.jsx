@@ -20,6 +20,11 @@ export default function HomeScreen(props) {
         onPress={() => props.navigation.navigate("RegistAdd")}
         color="rgb(150,9,77)"
       />
+      <Button
+        title="Ke Profile"
+        onPress={() => props.navigation.navigate("Profile")}
+        color="rgb(150,9,77)"
+      />
     </View>
   );
 }

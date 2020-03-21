@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,8 @@ import {
 import logoImage from "../assets/logo.jpg";
 
 export default function LoginScreen(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <View style={styles.container}>
       <View style={styles.boxLogo}>
@@ -22,17 +24,18 @@ export default function LoginScreen(props) {
         <Text style={styles.textInput}>Username</Text>
         <TextInput
           editable
-          maxLength={40}
-          //   onChangeText={text => setName(text)}
-          //   value={name}
+          maxLength={50}
+          onChangeText={text => setUsername(text)}
+          value={username}
           style={styles.inputLogin}
         ></TextInput>
         <Text style={styles.textInput}>Password</Text>
         <TextInput
           editable
-          maxLength={40}
-          //   onChangeText={text => setName(text)}
-          //   value={name}
+          maxLength={50}
+          onChangeText={text => setPassword(text)}
+          value={password}
+          secureTextEntry={true}
           style={styles.inputLogin}
         ></TextInput>
         <View style={styles.buttonLogin}>
@@ -43,8 +46,11 @@ export default function LoginScreen(props) {
           />
         </View>
       </View>
-      <TouchableOpacity onPress={() => props.navigation.navigate("Register")}>
-        <Text style={styles.textRegister}>Register</Text>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("Register")}
+        style={styles.textRegister}
+      >
+        <Text>Register</Text>
       </TouchableOpacity>
     </View>
   );
@@ -58,7 +64,8 @@ const styles = StyleSheet.create({
   textLogo: {
     color: "white",
     fontSize: 50,
-    marginLeft: 10
+    marginLeft: 10,
+    zIndex: 0
   },
   imageLogo: {
     width: 100,
@@ -67,35 +74,40 @@ const styles = StyleSheet.create({
     borderWidth: 2
   },
   loginText: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "normal",
     textAlign: "center"
   },
   boxLogin: {
     backgroundColor: "white",
-    padding: 15,
+    padding: 20,
     shadowColor: "black",
     shadowOpacity: 0.5,
-    width: 250,
+    width: 300,
     zIndex: 5,
     shadowRadius: 6,
     elevation: 2,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    position: "absolute",
+    zIndex: 1,
+    marginTop: 220,
+    paddingBottom: 50
   },
   inputLogin: {
     borderBottomColor: "#6597A0",
     borderBottomWidth: 2,
-    marginBottom: 5
+    marginBottom: 30
   },
   textInput: {
     color: "#6597A0",
     marginBottom: 5,
     marginTop: 5,
-    marginRight: "auto"
+    marginRight: "auto",
+    fontSize: 17
   },
   boxLogo: {
-    paddingTop: 100,
+    paddingTop: 80,
     paddingBottom: 50,
     backgroundColor: "#6597A0",
     width: "100%",
@@ -105,13 +117,17 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   buttonLogin: {
-    width: 80,
+    width: 100,
     shadowRadius: 3,
     elevation: 2,
-    marginTop: 5
+    marginTop: 150,
+    position: "absolute",
+    zIndex: 3
   },
   textRegister: {
-    marginTop: 20,
-    fontSize: 15
+    marginTop: 400,
+    fontSize: 15,
+    zIndex: 10,
+    position: "absolute"
   }
 });
