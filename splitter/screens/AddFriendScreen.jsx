@@ -1,10 +1,16 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { BackButton, SearchBar } from '../components'
 
-function AddFriend() {
+function AddFriend({navigation}) {
+  console.log(navigation, '< navigation')
+  const back = () => {
+    navigation.goBack()
+  }
+
   return (
     <View>
-      <Text>Add Friend</Text>
+      <BackButton methods={back} />
     </View>
   )
 }
