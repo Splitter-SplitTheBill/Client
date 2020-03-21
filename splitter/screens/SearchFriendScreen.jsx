@@ -5,7 +5,7 @@ import { BackButton, SearchBar } from '../components'
 import searchFriend from '../assets/images/searchFriend.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-function AddFriend({navigation}) {
+function SearchFriend({navigation}) {
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
 
@@ -27,6 +27,7 @@ function AddFriend({navigation}) {
       id: 1,
       name : "Ajeng 1",
       username: "ajengrf1",
+      photo: "https://img.okeinfo.net/content/2019/04/13/196/2043095/sifat-tersembunyi-orang-yang-lahir-di-bulan-april-ada-sifatmu-DAxp6rDzP8.jpg"
     }
     navigation.navigate('AddFriendScreen', {data: dummy})
   }
@@ -94,4 +95,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AddFriend
+export default SearchFriend
