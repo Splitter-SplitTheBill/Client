@@ -6,8 +6,8 @@ import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
 export default function SearchBar() {
   return (
     <View style={styles.search}>
-      <TextInput placeholder="Search friend" placeholderTextColor="white"/>
-      <Ionicons name="md-search" size={22} color="white" />
+      <TextInput placeholder="Search friend" placeholderTextColor="white" style={styles.input}/>
+      <Ionicons name="md-search" size={28} color="white" style={styles.icon} />
     </View>
   )
 }
@@ -15,13 +15,21 @@ export default function SearchBar() {
 const styles = StyleSheet.create({
   search: {
     backgroundColor: '#6597a0',
-    height: 40,
+    height: 50,
     width: "85%",
     padding: 10,
     borderRadius: 10,
-    marginLeft: 10,
     flexDirection: "row",
     justifyContent: 'space-between',
     opacity: 0.8
+  },
+  input: {
+    flex: 1,
+    fontSize: 18,
+    color: 'white'
+  },
+  icon: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

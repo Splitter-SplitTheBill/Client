@@ -8,6 +8,9 @@ const friendsReducer = (state = initialState, action) => {
     case 'ALLFRIENDS':
       const listFriends = state.friends.concat(action.payload.friends)
       return { ...state, friends: listFriends }
+    // case 'DELETEFRIEND':
+    //   const 
+    //   return {...state, friends: listFriends}
     default:
       return state
   }
