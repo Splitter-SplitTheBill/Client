@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
 
-export default function SearchBar() {
+export default function SearchBar({search}) {
+
   return (
     <View style={styles.search}>
-      <TextInput placeholder="Search friend" placeholderTextColor="white" style={styles.input}/>
+      <TextInput 
+        placeholder="Search friend" 
+        placeholderTextColor="white" 
+        style={styles.input}
+        onChangeText={search}
+      />
       <Ionicons name="md-search" size={28} color="white" style={styles.icon} />
     </View>
   )

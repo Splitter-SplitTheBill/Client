@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, Image, KeyboardAvoidingView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { BackButton, SearchBar } from '../components'
@@ -6,9 +6,12 @@ import searchFriend from '../assets/images/searchFriend.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 function AddFriend({navigation}) {
-  console.log(navigation, '< navigation')
   const back = () => {
     navigation.goBack()
+  }
+
+  const findFriend = (username) => {
+    console.log(username)
   }
 
   return (
@@ -20,7 +23,7 @@ function AddFriend({navigation}) {
           windowSoftInputMode="adjustResize">
         <View style={styles.search}>
           <Image source={searchFriend} style={styles.image} />
-          <SearchBar />
+          <SearchBar search={findFriend}/>
         </View>
         <View style={styles.add}>
           <TouchableOpacity style={styles.next}>
@@ -34,9 +37,7 @@ function AddFriend({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 5,
-    paddingLeft: 5
-    // marginTop: '50%'
+    padding: 5
   },
   box: {
     justifyContent: 'center',
@@ -45,12 +46,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center'
   },
   image: {
-    height: 129,
-    width: 120,
-    margin: 10
+    height: '25%',
+    width: '36%',
+    margin: 10,
   },
   add: {
     marginTop: "auto",
