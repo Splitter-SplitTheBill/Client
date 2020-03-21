@@ -6,12 +6,24 @@ import searchFriend from '../assets/images/searchFriend.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 function AddFriend({navigation}) {
+  const [input, setInput] = useState('')
+  const [error, setError] = useState('')
+
+
   const back = () => {
     navigation.goBack()
   }
 
-  const findFriend = (username) => {
+  const searchInput = (username) => {
     console.log(username)
+    setInput(username)
+    setError('')
+  }
+
+  const findFriend = () => {
+    // axios
+    console.log(input, '< input')
+    setError('Username not found!')
   }
 
   return (
@@ -19,14 +31,18 @@ function AddFriend({navigation}) {
       <BackButton methods={back} />
       <KeyboardAvoidingView style={{ flex: 1 }}
           behavior="height"
-          keyboardVerticalOffset={20}
+          keyboardVerticalOffset={10}
           windowSoftInputMode="adjustResize">
         <View style={styles.search}>
           <Image source={searchFriend} style={styles.image} />
-          <SearchBar search={findFriend}/>
+          <SearchBar search={searchInput}/>
+          {error ?
+            <Text style={styles.error}>{error}</Text>
+            : null
+          }
         </View>
         <View style={styles.add}>
-          <TouchableOpacity style={styles.next}>
+          <TouchableOpacity style={styles.next} onPress={findFriend}>
             <Ionicons name="ios-arrow-forward" style={styles.icon} size={50} />
           </TouchableOpacity>
         </View>
@@ -48,9 +64,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    height: '25%',
-    width: '36%',
+    height: 150,
+    width: 150,
     margin: 10,
+  },
+  error: {
+    color: '#900'
   },
   add: {
     marginTop: "auto",
