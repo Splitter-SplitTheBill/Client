@@ -4,11 +4,14 @@ import Constants from 'expo-constants';
 import { BackButton } from '../components'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
-function DetailHistory() {
+function DetailHistory({navigation}) {
+  const back = () => {
+    navigation.goBack()
+  }
   return (
     <View style={styles.container}>
       <View style={styles.back}>
-        <BackButton />
+        <BackButton methods={back} />
         <Text style={styles.headline}>Detail Transaction</Text>
       </View>
       <View style={styles.boxTitle}>

@@ -10,6 +10,10 @@ import { CustomCard, BackButton } from '../components'
 
 
 function HistoryScreen({navigation}) {
+  const back = () => {
+    navigation.goBack()
+  }
+
   const detailHistory = () => {
     console.log('pressed')
     navigation.navigate('DetailHistoryScreen')
@@ -18,7 +22,7 @@ function HistoryScreen({navigation}) {
   return (
     <View style={styles.container} >
       <View style={styles.head}>
-        <BackButton />
+        <BackButton methods={back} />
         <Image source={pay} style={styles.image}/>
         <View style={styles.title}>
           <Text style={styles.totalBill}>HISTORY</Text>
