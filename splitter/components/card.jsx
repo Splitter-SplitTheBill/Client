@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import receipt from '../assets/images/receipt.png'
-import right from '../assets/images/right.png'
 
 export default function Card() {
 
@@ -18,7 +17,7 @@ export default function Card() {
           <Text>- Rp 500.000,00</Text>
         </View>
         <View>
-          <Image source = {right} style={styles.next}/>
+          {/* <Image source = {right} style={styles.next}/> */}
         </View>
       </TouchableOpacity>
     </View>
