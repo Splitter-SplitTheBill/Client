@@ -34,6 +34,7 @@ export default function HomeScreen ({navigation}) {
 
 const { width, height } = Dimensions.get('window')
 
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -44,23 +45,22 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+      marginHorizontal: 10
     },
     title: {
       color: '#6597a0',
       fontSize: 30,
-      marginLeft: 20
     }, 
     desc: {
       color: '#6597a0',
-      fontSize: 20,
-      marginLeft: 15,
+      fontSize: 18,
       fontStyle: 'italic'
     },
     image: {
-      width: height * 0.4,
-      height: height * 0.4, 
-      // width: 'auto',
-      marginTop: 'auto'
+      width: height * 0.32,
+      height: height * 0.257, 
+      marginTop: 'auto',
+      marginBottom: 10
     },
     box: {
       backgroundColor: '#6597a0',
