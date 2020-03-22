@@ -1,7 +1,6 @@
 import React from 'react'
-import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
 
 import { HomeScreen, ProfileScreen, FriendListScreen } from './index'
 
