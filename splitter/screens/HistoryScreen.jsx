@@ -1,20 +1,20 @@
-import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, Image, Modal } from 'react-native'
 import Constants from 'expo-constants';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
 import payment from '../assets/images/payment.jpg'
+import pay from '../assets/images/pay.png'
 
 import { CustomCard, BackButton } from '../components'
+
 
 function HistoryScreen() {
   return (
     <View style={styles.container} >
       <View style={styles.head}>
         <BackButton />
-        <View>
-          <Image source={payment} style={styles.image}/>
-        </View>
+        <Image source={pay} style={styles.image}/>
         <View style={styles.title}>
           <Text style={styles.totalBill}>HISTORY</Text>
           <View style={styles.boxAmount}>
@@ -38,16 +38,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   head: {
-    padding: 10,
+    paddingLeft: 10,
     flexDirection: 'row',
   },
   title: {
     justifyContent: 'center',
+    marginLeft: 'auto',
+    marginRight: 20
   },
   image: {
-    marginTop: Constants.statusBarHeight,
     height: 150,
-    width: 150,
+    width: 100,
+    marginLeft: 10
   },
   totalBill: {
     marginTop: 20,

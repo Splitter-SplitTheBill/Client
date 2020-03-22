@@ -6,10 +6,9 @@ import { Ionicons } from '@expo/vector-icons'
 import receipt from '../assets/images/receipt.png'
 
 export default function Card() {
-
   return (
-    <View>
-      <TouchableOpacity style={styles.event}>
+    <View >
+      <TouchableOpacity style={styles.event}  >
         <View style = {styles.circle} >
           <Image source = {receipt} style={styles.icon}/>
         </View>
@@ -34,8 +33,8 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowRadius: 2,
-    elevation: 3,
+    shadowRadius: 1,
+    elevation: 2,
   },
   circle: {
     backgroundColor: 'white',
