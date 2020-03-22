@@ -50,7 +50,7 @@ export default function LoginScreen(props) {
         onPress={() => props.navigation.navigate("Register")}
         style={styles.textRegister}
       >
-        <Text>Register</Text>
+        <Text>Register Here</Text>
       </TouchableOpacity>
     </View>
   );
@@ -89,15 +89,15 @@ const styles = StyleSheet.create({
     elevation: 2,
     alignItems: "center",
     justifyContent: "center",
-    position: "absolute",
     zIndex: 1,
-    marginTop: 220,
+    marginTop: 30,
     paddingBottom: 50
   },
   inputLogin: {
     borderBottomColor: "#6597A0",
     borderBottomWidth: 2,
-    marginBottom: 30
+    marginBottom: 30,
+    width: 150
   },
   textInput: {
     color: "#6597A0",
@@ -120,14 +120,11 @@ const styles = StyleSheet.create({
     width: 100,
     shadowRadius: 3,
     elevation: 2,
-    marginTop: 150,
-    position: "absolute",
+    marginTop: 30,
     zIndex: 3
   },
   textRegister: {
-    marginTop: 400,
-    fontSize: 15,
-    zIndex: 10,
-    position: "absolute"
+    marginTop: 30,
+    fontSize: 25
   }
 });

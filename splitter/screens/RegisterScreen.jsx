@@ -93,15 +93,15 @@ const styles = StyleSheet.create({
     elevation: 2,
     alignItems: "center",
     justifyContent: "center",
-    position: "absolute",
     zIndex: 1,
-    marginTop: 260,
+    marginTop: 30,
     paddingBottom: 30
   },
   inputLogin: {
     borderBottomColor: "#6597A0",
     borderBottomWidth: 2,
-    marginBottom: 15
+    marginBottom: 15,
+    width: 150
   },
   textInput: {
     color: "#6597A0",
@@ -124,8 +124,7 @@ const styles = StyleSheet.create({
     width: 100,
     shadowRadius: 3,
     elevation: 2,
-    marginTop: 180,
-    position: "absolute",
+    marginTop: 30,
     zIndex: 3
   }
 });

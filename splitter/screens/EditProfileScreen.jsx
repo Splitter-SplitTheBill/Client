@@ -8,7 +8,9 @@ import {
   Button,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView
+  SafeAreaView,
+  Modal,
+  TouchableHighlight
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
 
@@ -31,6 +33,13 @@ export default function EditProfileScreen(props) {
     }
   ];
 
+  const [modalVisible, setModal] = useState(false);
+
+  function setModalVisible(visible) {
+    console.log(visible);
+    setModal(visible);
+  }
+
   function editProfile() {
     props.navigation.navigate("Home");
   }
@@ -38,6 +47,10 @@ export default function EditProfileScreen(props) {
   function onChangeTextPress(value) {
     setAccount(accounts.concat({ type: value, detail: "" }));
     console.log(accounts);
+  }
+
+  function deleteAcc(acc) {
+    console.log(acc);
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -57,7 +70,9 @@ export default function EditProfileScreen(props) {
               }}
             />
             <TouchableOpacity style={styles.textChangeImage}>
-              <Text style={{ color: "black", opacity: 0.5 }}>
+              <Text
+                style={{ color: "black", opacity: 0.5, textAlign: "center" }}
+              >
                 Change Profile Picture
               </Text>
             </TouchableOpacity>
@@ -89,39 +104,52 @@ export default function EditProfileScreen(props) {
                   style={{ flexDirection: "row", justifyContent: "center" }}
                 >
                   <Text style={styles.AccDetailType}>{acc.type}</Text>
-                  <Text style={styles.AccDetailNumber}>{acc.detail}</Text>
+                  <View style={styles.AccDetailNumber}>
+                    <Text>{acc.detail}</Text>
+                    <TouchableOpacity onPress={() => deleteAcc(acc)}>
+                      <Image
+                        style={{ width: 20, height: 20, marginLeft: 10 }}
+                        source={{
+                          uri:
+                            "https://pngimage.net/wp-content/uploads/2018/05/delete-icon-png-red-2.png"
+                        }}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
               );
             })}
           </View>
-          <Text style={styles.textInput}>Add Account</Text>
-          <View style={{ marginTop: 10 }}>
-            <Dropdown
-              dropdownOffset={{ top: 5 }}
-              containerStyle={{
-                borderWidth: 1,
-                borderColor: "lightgrey",
-                borderRadius: 50,
-                width: 200,
-                paddingLeft: 3
-              }}
-              rippleCentered={true}
-              inputContainerStyle={{ borderBottomColor: "transparent" }}
-              label="Payment Account"
-              data={data}
-              valueExtractor={({ value }) => value}
-              onChangeText={value => {
-                onChangeTextPress(value);
-              }}
-            />
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Text style={styles.textInput}>Add Account</Text>
+            <View style={{ marginTop: 10 }}>
+              <Dropdown
+                dropdownOffset={{ top: 5 }}
+                containerStyle={{
+                  borderWidth: 1,
+                  borderColor: "lightgrey",
+                  borderRadius: 50,
+                  width: 250,
+                  paddingLeft: 3
+                }}
+                rippleCentered={true}
+                inputContainerStyle={{ borderBottomColor: "transparent" }}
+                label="Payment Account"
+                data={data}
+                valueExtractor={({ value }) => value}
+                onChangeText={value => {
+                  onChangeTextPress(value);
+                }}
+              />
+            </View>
+            <View style={styles.buttonManage}>
+              <Button
+                title="Submit"
+                onPress={() => editProfile()}
+                color="#BE3030"
+              />
+            </View>
           </View>
-        </View>
-        <View style={styles.buttonManage}>
-          <Button
-            title="Submit"
-            onPress={() => editProfile()}
-            color="#BE3030"
-          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -146,7 +174,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     shadowRadius: 3,
     elevation: 2,
-    marginBottom: 10
+    marginBottom: 10,
+    width: 150
   },
   inputLogin: {
     borderBottomColor: "#6597A0",
@@ -156,9 +185,10 @@ const styles = StyleSheet.create({
   textInput: {
     color: "#6597A0",
     marginBottom: 5,
-    marginTop: 5,
+    marginTop: 20,
     marginRight: "auto",
-    fontSize: 17
+    fontSize: 17,
+    fontWeight: "bold"
   },
   textTitleAcc: {
     fontSize: 20,
@@ -179,15 +209,14 @@ const styles = StyleSheet.create({
     borderColor: "#6597A0",
     borderWidth: 1,
     padding: 5,
-    width: 120,
-    textAlign: "center"
+    width: 150,
+    textAlign: "center",
+    flexDirection: "row"
   },
   textChangeImage: {
     borderColor: "#6597A0",
     borderWidth: 1,
-    width: 100,
     padding: 5,
-    textAlign: "center",
     margin: 20
   }
 });

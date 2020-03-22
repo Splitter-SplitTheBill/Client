@@ -10,7 +10,9 @@ import {
   RegisterScreen,
   RegistAddScreen,
   ProfileScreen,
-  EditProfileScreen
+  EditProfileScreen,
+  UnpaidScreen,
+  UnpaidDetailScreen
 } from "./screens";
 
 const Stack = createStackNavigator();
@@ -31,6 +33,8 @@ export default function App() {
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="RegistAdd" component={RegistAddScreen} />
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+        <Stack.Screen name="Unpaid" component={UnpaidScreen} />
+        <Stack.Screen name="UnpaidDetail" component={UnpaidDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     // </Provider>

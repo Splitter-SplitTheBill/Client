@@ -38,6 +38,7 @@ export default function ProfileScreen(props) {
             source={{
               uri: userData.image_profile
             }}
+            resizeMode="cover"
           />
         </View>
         <View>
@@ -82,15 +83,14 @@ const styles = StyleSheet.create({
     color: "#6597A0",
     fontSize: 50,
     marginBottom: 15,
-    fontWeight: 30,
     textAlign: "center"
   },
   imageProfile: {
-    width: 150,
+    alignSelf: "center",
     height: 150,
-    borderRadius: 99,
-    justifyContent: "center",
-    marginBottom: 10
+    width: 150,
+    borderWidth: 1,
+    borderRadius: 75
   },
   detailProfile: {
     flexDirection: "row"

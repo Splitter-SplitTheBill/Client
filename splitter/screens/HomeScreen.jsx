@@ -25,6 +25,11 @@ export default function HomeScreen(props) {
         onPress={() => props.navigation.navigate("Profile")}
         color="rgb(150,9,77)"
       />
+      <Button
+        title="Ke Unpaid"
+        onPress={() => props.navigation.navigate("Unpaid")}
+        color="rgb(150,9,77)"
+      />
     </View>
   );
 }

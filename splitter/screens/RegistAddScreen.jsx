@@ -107,9 +107,8 @@ const styles = StyleSheet.create({
     elevation: 2,
     alignItems: "center",
     justifyContent: "center",
-    position: "absolute",
     zIndex: 1,
-    marginTop: 200,
+    marginTop: 30,
     paddingBottom: 30
   },
   inputLogin: {
