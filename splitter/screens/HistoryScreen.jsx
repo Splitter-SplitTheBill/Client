@@ -16,14 +16,13 @@ function HistoryScreen() {
           <Image source={payment} style={styles.image}/>
         </View>
         <View style={styles.title}>
-          <Text style={styles.totalBill}>Split The Bill</Text>
+          <Text style={styles.totalBill}>HISTORY</Text>
           <View style={styles.boxAmount}>
-            <Text style={styles.amount}>Rp 1.253.000,00</Text>
+            <Text style={styles.amount}>Transactions</Text>
           </View>
         </View>
       </View>
       <View style={styles.box}>
-        <Text style= {styles.titleTransaction}>RECENT TRANSACTIONS</Text>
         <ScrollView>
           <CustomCard />
         </ScrollView>
@@ -41,7 +40,6 @@ const styles = StyleSheet.create({
   head: {
     padding: 10,
     flexDirection: 'row',
-    justifyContent: 'center',
   },
   title: {
     justifyContent: 'center',
@@ -65,7 +63,8 @@ const styles = StyleSheet.create({
   },
   amount: {
     color: 'rgb(101, 151, 160)',
-    fontSize: 13,
+    fontSize: 14,
+    letterSpacing: 2,
     textAlign: 'center',
     fontWeight: 'bold',
     fontStyle: 'italic'
@@ -78,9 +77,6 @@ const styles = StyleSheet.create({
     padding: 15,
     shadowRadius: 15,
     elevation: 10,
-  },
-  titleTransaction: {
-    fontSize: 14
   },
   next: {
     height: 20,

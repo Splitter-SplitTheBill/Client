@@ -15,7 +15,7 @@ export default function Card() {
         </View>
         <View style={styles.detail}>
           <Text style={styles.eventName}>17 Agustusan</Text>
-          <Text>- Rp 500.000,00</Text>
+          <Text>You and 4 other people</Text>
         </View>
         <View style={styles.nextIcon}>
           <Ionicons name="ios-arrow-forward" style={styles.next} size={30} />
@@ -27,7 +27,7 @@ export default function Card() {
 
 const styles = StyleSheet.create({
   event: {
-    backgroundColor: '#bfc6cc',
+    backgroundColor: '#e5e5e5',
     height: 100,
     marginTop: 10,
     borderRadius: 15,
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   eventName: {
     fontWeight: 'bold',
     color: 'rgb(101, 151, 160)',
+    fontSize: 18
   },
   nextIcon: {
     marginLeft: 'auto'
