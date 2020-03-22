@@ -33,7 +33,7 @@ function HistoryScreen({navigation}) {
       </View>
       <View style={styles.box}>
         <ScrollView>
-          <CustomCard method={detailHistory} />
+          <CustomCard methods={detailHistory} />
         </ScrollView>
       </View>
     </View>

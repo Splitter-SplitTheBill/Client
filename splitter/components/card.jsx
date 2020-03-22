@@ -5,22 +5,20 @@ import { Ionicons } from '@expo/vector-icons'
 
 import receipt from '../assets/images/receipt.png'
 
-export default function Card() {
+export default function Card({methods}) {
   return (
-    <View>
-      <TouchableOpacity style={styles.event} >
-        <View style = {styles.circle} >
-          <Image source = {receipt} style={styles.icon}/>
-        </View>
-        <View style={styles.detail}>
-          <Text style={styles.eventName}>17 Agustusan</Text>
-          <Text>You and 4 other people</Text>
-        </View>
-        <View style={styles.nextIcon}>
-          <Ionicons name="ios-arrow-forward" style={styles.next} size={30} />
-        </View>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity style={styles.event} onPress={methods} >
+      <View style = {styles.circle} >
+        <Image source = {receipt} style={styles.icon}/>
+      </View>
+      <View style={styles.detail}>
+        <Text style={styles.eventName}>17 Agustusan</Text>
+        <Text>You and 4 other people</Text>
+      </View>
+      <View style={styles.nextIcon}>
+        <Ionicons name="ios-arrow-forward" style={styles.next} size={30} />
+      </View>
+    </TouchableOpacity>
   )
 }
 
