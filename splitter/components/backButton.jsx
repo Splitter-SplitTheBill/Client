@@ -1,14 +1,14 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Image, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import Constants from 'expo-constants';
 
-import Back from '../assets/images/back.png'
-
-export default function BackButton() {
+export default function BackButton({methods}) {
+  // console.log(props, '< props')
   return (
-    <TouchableOpacity style={styles.circle}>
-      <Image source={Back} style={styles.back} />
+    <TouchableOpacity style={styles.circle} onPress={methods}>
+      <Ionicons name="ios-arrow-back" style={styles.back} size={30} />
     </TouchableOpacity>
   )
 }
@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginTop: Constants.statusBarHeight,
-    marginLeft: 10
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   back: {
-    height: 20,
-    width: 20
+    color: '#6597a0',
+   
   }
 })

@@ -5,30 +5,28 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
 import payment from '../assets/images/payment.jpg'
 
-import { CustomCard } from '../components'
+import { CustomCard, BackButton } from '../components'
 
 function HistoryScreen() {
   return (
     <View style={styles.container} >
-      {/* <Text style={styles.title}>MY WALLET</Text> */}
-      <View style={styles.total}>
+      <View style={styles.head}>
+        <BackButton />
         <View>
           <Image source={payment} style={styles.image}/>
         </View>
-        <View>
+        <View style={styles.title}>
           <Text style={styles.totalBill}>Split The Bill</Text>
           <View style={styles.boxAmount}>
             <Text style={styles.amount}>Rp 1.253.000,00</Text>
           </View>
         </View>
       </View>
-      <View>
-        <View style={styles.box}>
-          <Text style= {styles.titleTransaction}>RECENT TRANSACTIONS</Text>
-          <ScrollView>
-            <CustomCard />
-          </ScrollView>
-        </View>
+      <View style={styles.box}>
+        <Text style= {styles.titleTransaction}>RECENT TRANSACTIONS</Text>
+        <ScrollView>
+          <CustomCard />
+        </ScrollView>
       </View>
     </View>
   )
@@ -38,22 +36,20 @@ function HistoryScreen() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgb(101, 151, 160)',
-    flex: 1
+    flex: 1,
+  },
+  head: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   title: {
-    marginTop: Constants.statusBarHeight,
-    color: 'white',
-    fontSize: 15,
-    fontWeight: 'bold',
-    letterSpacing: 2,
-    marginLeft: 10
+    justifyContent: 'center',
   },
   image: {
+    marginTop: Constants.statusBarHeight,
     height: 150,
     width: 150,
-  },
-  total: {
-    flexDirection: 'row'
   },
   totalBill: {
     marginTop: 20,
@@ -61,7 +57,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   boxAmount: {
-    backgroundColor: '#bfc6cc',
+    backgroundColor: 'white',
     padding: 5,
     borderRadius: 15,
     shadowRadius: 2,
@@ -85,35 +81,6 @@ const styles = StyleSheet.create({
   },
   titleTransaction: {
     fontSize: 14
-  },
-  event: {
-    backgroundColor: '#bfc6cc',
-    height: 100,
-    marginTop: 10,
-    borderRadius: 15,
-    padding: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    shadowRadius: 2,
-    elevation: 3,
-  },
-  circle: {
-    backgroundColor: 'white',
-    width: 50,
-    padding: 10,
-    borderRadius: 90
-  },
-  icon: {
-    width: 30,
-    height: 30
-  },
-  detail: {
-    marginLeft: 10
-  },
-  eventName: {
-    fontWeight: 'bold',
-    color: 'rgb(101, 151, 160)',
   },
   next: {
     height: 20,

@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons'
 
 import receipt from '../assets/images/receipt.png'
 
@@ -16,8 +17,8 @@ export default function Card() {
           <Text style={styles.eventName}>17 Agustusan</Text>
           <Text>- Rp 500.000,00</Text>
         </View>
-        <View>
-          {/* <Image source = {right} style={styles.next}/> */}
+        <View style={styles.nextIcon}>
+          <Ionicons name="ios-arrow-forward" style={styles.next} size={30} />
         </View>
       </TouchableOpacity>
     </View>
@@ -33,7 +34,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     shadowRadius: 2,
     elevation: 3,
   },
@@ -54,7 +54,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'rgb(101, 151, 160)',
   },
+  nextIcon: {
+    marginLeft: 'auto'
+  },
   next: {
-    height: 20,
+    color: 'white'
   }
 });
