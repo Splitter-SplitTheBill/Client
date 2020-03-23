@@ -6,7 +6,7 @@ import { BackButton, SearchBar } from '../components'
 import {useSelector, useDispatch} from 'react-redux'
 import { ALLFRIENDS } from '../action/index'
 
-function FriendListScreen() {
+function FriendListScreen({navigation}) {
   const dispatch = useDispatch()
   
   useEffect(() => {
@@ -15,13 +15,17 @@ function FriendListScreen() {
 
   const friends = useSelector(state => state.friendsReducer.friends)
   
+  const addFriend = () => {
+    navigation.navigate('AddFriendScreen')
+  }
+
   return (
     <View style={styles.container}>
       <BackButton />
       <Text style={styles.title}>Friends</Text>
       <View style={styles.search}>
         <SearchBar />
-        <Ionicons name="md-person-add" style={styles.addIcon} size={32} />
+        <Ionicons name="md-person-add" style={styles.addIcon} size={32} onPress={addFriend}/>
       </View>
       {friends.map(friend => {
         return (

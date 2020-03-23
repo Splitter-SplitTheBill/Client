@@ -16,13 +16,13 @@ import {
   HistoryScreen
 } from "./screens";
 import TabNavigation from './screens/TabNavigation'
-import { HistoryScreen, DetailHistoryScreen } from './screens'
+import { HistoryScreen, DetailHistoryScreen, AddFriendScreen } from './screens'
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    // <Provider store={store}>
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -40,8 +40,9 @@ export default function App() {
         <Stack.Screen name="UnpaidDetail" component={UnpaidDetailScreen} />
         <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
         <Stack.Screen name="DetailHistoryScreen" component={DetailHistoryScreen} />
+        <Stack.Screen name="AddFriendScreen" component={AddFriendScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-    // </Provider>
+  </Provider>
   );
 }
