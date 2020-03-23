@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { Divider } from 'react-native-elements'
+import { Ionicons } from '@expo/vector-icons'
 import { BackButton, SearchBar } from '../components'
-import addIcon from '../assets/images/add.png'
 
 function FriendListScreen() {
   return (
@@ -11,7 +11,7 @@ function FriendListScreen() {
       <Text style={styles.title}>Friends</Text>
       <View style={styles.search}>
         <SearchBar />
-        <Image source={addIcon} style={styles.addIcon} />
+        <Ionicons name="md-person-add" style={styles.addIcon} size={32} />
       </View>
       <Text style={styles.name}>John Doe</Text>
       <Divider />
@@ -38,10 +38,9 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   addIcon: {
-    height: 30,
-    width: 30,
     marginLeft: 10,
-    marginTop: 5
+    marginTop: 3,
+    color: '#6597a0',
   },
   name: {
     fontSize: 18,

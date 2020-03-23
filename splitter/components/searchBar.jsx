@@ -1,14 +1,13 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Ionicons } from '@expo/vector-icons'
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
-
-import searchIcon from '../assets/images/search.png'
 
 export default function SearchBar() {
   return (
     <View style={styles.search}>
-      <TextInput placeholder="Search friend"/>
-      <Image source={searchIcon} style={styles.searchIcon}/>
+      <TextInput placeholder="Search friend" placeholderTextColor="white"/>
+      <Ionicons name="md-search" size={22} color="white" />
     </View>
   )
 }
@@ -24,9 +23,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'space-between',
     opacity: 0.8
-  },
-  searchIcon: {
-    height: 20,
-    width: 20
   }
 })
