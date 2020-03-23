@@ -19,6 +19,7 @@ export default function Card({methods}) {
         <Ionicons name="ios-arrow-forward" style={styles.next} size={30} />
       </View>
     </TouchableOpacity>
+
   )
 }
 
@@ -33,6 +34,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     shadowRadius: 1,
     elevation: 2,
+    shadowRadius: 2,
+    elevation: 3,
   },
   circle: {
     backgroundColor: 'white',
@@ -57,5 +60,5 @@ const styles = StyleSheet.create({
   },
   next: {
     color: 'white'
-  }
+  },
 });

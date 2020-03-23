@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-// import { Provider } from 'react-redux'
-// import store from './store'
+import { Provider } from 'react-redux'
+import store from './store'
 import {
   HomeScreen,
   LoginScreen,
@@ -13,16 +13,18 @@ import {
   EditProfileScreen,
   UnpaidScreen,
   UnpaidDetailScreen,
-  HistoryScreen
+  HistoryScreen,
+  DetailHistoryScreen, 
+  AddFriendScreen,
+  SearchFriendScreen
 } from "./screens";
 import TabNavigation from './screens/TabNavigation'
-import { HistoryScreen, DetailHistoryScreen } from './screens'
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    // <Provider store={store}>
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -40,8 +42,10 @@ export default function App() {
         <Stack.Screen name="UnpaidDetail" component={UnpaidDetailScreen} />
         <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
         <Stack.Screen name="DetailHistoryScreen" component={DetailHistoryScreen} />
+        <Stack.Screen name="SearchFriendScreen" component={SearchFriendScreen} />
+        <Stack.Screen name="AddFriendScreen" component={AddFriendScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-    // </Provider>
+  </Provider>
   );
 }
