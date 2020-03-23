@@ -6,7 +6,8 @@ import {
   Image,
   TextInput,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 import logoImage from "../assets/logo.jpg";
 
@@ -30,45 +31,49 @@ export default function ProfileScreen(props) {
   };
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.titlePage}>Profile</Text>
-        <View style={{ alignItems: "center" }}>
-          <Image
-            style={styles.imageProfile}
-            source={{
-              uri: userData.image_profile
-            }}
-            resizeMode="cover"
+      <ScrollView>
+        <View>
+          <Text style={styles.titlePage}>Profile</Text>
+          <View style={{ alignItems: "center" }}>
+            <Image
+              style={styles.imageProfile}
+              source={{
+                uri: userData.image_profile
+              }}
+              resizeMode="cover"
+            />
+          </View>
+          <View>
+            <Text style={styles.textUsername}>{userData.username}</Text>
+            <Text style={styles.textDetail}>{userData.name}</Text>
+            <Text style={styles.textDetail}>{userData.email}</Text>
+          </View>
+          <View>
+            <Text style={styles.textTitleAcc}>Account List</Text>
+            {userData.accounts.map(acc => {
+              return (
+                <View
+                  style={{ flexDirection: "row", justifyContent: "center" }}
+                >
+                  <Text style={styles.AccDetailType}>{acc.type}</Text>
+                  <Text style={styles.AccDetailNumber}>{acc.detail}</Text>
+                </View>
+              );
+            })}
+          </View>
+        </View>
+        <View style={styles.buttonManage}>
+          <Button
+            title="Manage Profile"
+            onPress={() =>
+              props.navigation.navigate("EditProfile", {
+                userData: userData
+              })
+            }
+            color="#BE3030"
           />
         </View>
-        <View>
-          <Text style={styles.textUsername}>{userData.username}</Text>
-          <Text style={styles.textDetail}>{userData.name}</Text>
-          <Text style={styles.textDetail}>{userData.email}</Text>
-        </View>
-        <View>
-          <Text style={styles.textTitleAcc}>Account List</Text>
-          {userData.accounts.map(acc => {
-            return (
-              <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                <Text style={styles.AccDetailType}>{acc.type}</Text>
-                <Text style={styles.AccDetailNumber}>{acc.detail}</Text>
-              </View>
-            );
-          })}
-        </View>
-      </View>
-      <View style={styles.buttonManage}>
-        <Button
-          title="Manage Profile"
-          onPress={() =>
-            props.navigation.navigate("EditProfile", {
-              userData: userData
-            })
-          }
-          color="#BE3030"
-        />
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -77,7 +82,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: "20%"
   },
   titlePage: {
     color: "#6597A0",

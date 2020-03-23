@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,10 @@ import {
   TouchableHighlight
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
+
+import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
 
 export default function EditProfileScreen(props) {
   const userData = props.route.params.userData;
@@ -52,6 +56,34 @@ export default function EditProfileScreen(props) {
   function deleteAcc(acc) {
     console.log(acc);
   }
+
+  const getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+      }
+    }
+  };
+
+  const _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImange(result.uri);
+    }
+  };
+
+  useEffect(() => {
+    getPermissionAsync();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -69,7 +101,10 @@ export default function EditProfileScreen(props) {
                 uri: image_profile
               }}
             />
-            <TouchableOpacity style={styles.textChangeImage}>
+            <TouchableOpacity
+              style={styles.textChangeImage}
+              onPress={() => _pickImage()}
+            >
               <Text
                 style={{ color: "black", opacity: 0.5, textAlign: "center" }}
               >
@@ -160,7 +195,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: "15%"
   },
   imageProfile: {
     width: 130,

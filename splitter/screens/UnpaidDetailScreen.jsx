@@ -36,6 +36,10 @@ export default function UnpaidScreen(props) {
     }
   ];
 
+  function pay() {
+    props.navigation.navigate("Home");
+  }
+
   return (
     <SafeAreaView style={{ backgroundColor: "#6597A0", flex: 1 }}>
       <ScrollView>
@@ -93,6 +97,9 @@ export default function UnpaidScreen(props) {
             <View style={styles.boxTotal}>
               <Text>{formatMoney(dataUnpaid.total)}</Text>
             </View>
+          </View>
+          <View style={styles.buttonPay}>
+            <Button title="PAY" color="black" onPress={() => pay()} />
           </View>
         </View>
       </ScrollView>
@@ -178,5 +185,14 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     marginTop: 20,
     marginBottom: 5
+  },
+  buttonPay: {
+    borderRadius: 6,
+    marginTop: 20,
+    shadowRadius: 3,
+    elevation: 2,
+    marginBottom: 10,
+    width: 150,
+    color: "#BE3030"
   }
 });
