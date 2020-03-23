@@ -89,8 +89,6 @@ const styles = StyleSheet.create({
     shadowRadius: 15,
     elevation: 10,
   },
-<<<<<<< HEAD
-=======
   titleTransaction: {
     fontSize: 14
   },
@@ -123,7 +121,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'rgb(101, 151, 160)',
   },
->>>>>>> create custom back button
   next: {
     height: 20,
   }
