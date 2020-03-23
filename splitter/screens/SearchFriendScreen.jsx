@@ -24,9 +24,9 @@ function SearchFriend({navigation}) {
     console.log(input, '< input')
     // setError('Username not found!')
     let dummy = {
-      id: 1,
-      name : "Ajeng 1",
-      username: "ajengrf1",
+      id: 3,
+      name : "Ajeng 3",
+      username: "ajengrf3",
       photo: "https://img.okeinfo.net/content/2019/04/13/196/2043095/sifat-tersembunyi-orang-yang-lahir-di-bulan-april-ada-sifatmu-DAxp6rDzP8.jpg"
     }
     navigation.navigate('AddFriendScreen', {data: dummy})
