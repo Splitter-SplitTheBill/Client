@@ -13,10 +13,12 @@ import {
   EditProfileScreen,
   UnpaidScreen,
   UnpaidDetailScreen,
-  HistoryScreen
+  HistoryScreen,
+  DetailHistoryScreen, 
+  AddFriendScreen,
+  SearchFriendScreen
 } from "./screens";
 import TabNavigation from './screens/TabNavigation'
-import { HistoryScreen, DetailHistoryScreen, AddFriendScreen } from './screens'
 
 const Stack = createStackNavigator();
 
@@ -40,6 +42,7 @@ export default function App() {
         <Stack.Screen name="UnpaidDetail" component={UnpaidDetailScreen} />
         <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
         <Stack.Screen name="DetailHistoryScreen" component={DetailHistoryScreen} />
+        <Stack.Screen name="SearchFriendScreen" component={SearchFriendScreen} />
         <Stack.Screen name="AddFriendScreen" component={AddFriendScreen} />
       </Stack.Navigator>
     </NavigationContainer>

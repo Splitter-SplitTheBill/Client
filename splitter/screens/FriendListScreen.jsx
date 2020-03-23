@@ -17,7 +17,7 @@ function FriendListScreen({navigation}) {
   const friends = useSelector(state => state.friendsReducer.friends)
   
   const addFriend = () => {
-    navigation.navigate('AddFriendScreen')
+    navigation.navigate('SearchFriendScreen')
   }
 
   const confirmDelete = (id) => {
