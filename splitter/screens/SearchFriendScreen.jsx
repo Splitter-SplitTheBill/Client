@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { BackButton, SearchBar } from '../components'
 import searchFriend from '../assets/images/searchFriend.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import axios from 'axios'
 
 function SearchFriend({navigation}) {
   const [input, setInput] = useState('')
@@ -20,16 +21,21 @@ function SearchFriend({navigation}) {
   }
 
   const findFriend = () => {
-    // axios
-    console.log(input, '< input')
-    // setError('Username not found!')
-    let dummy = {
-      id: 3,
-      name : "Ajeng 3",
-      username: "ajengrf3",
-      photo: "https://img.okeinfo.net/content/2019/04/13/196/2043095/sifat-tersembunyi-orang-yang-lahir-di-bulan-april-ada-sifatmu-DAxp6rDzP8.jpg"
-    }
-    navigation.navigate('AddFriendScreen', {data: dummy})
+    axios({
+      method: 'GET',
+      url: `http://localhost:3000/users/username/${input}`,
+      headers: {
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk1NTEwOH0.bB6t_mcyZTV1RCuzEVP_dRpmrlofmWsgyJ_vd4sbmro'
+      }
+    })
+      .then(res => {
+        const friend = res.data
+        navigation.navigate('AddFriendScreen', {data: friend})
+      })
+      .catch(err => {
+        const error = err.response.data.message
+        setError(error)
+      })
   }
 
   return (
