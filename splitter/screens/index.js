@@ -14,3 +14,4 @@ export { default as SearchFriendScreen } from "./SearchFriendScreen";
 export { default as CreateEventScreen } from "./CreateEventScreen";
 export { default as CameraScreen } from "./CameraScreen";
 export { default as DetailUnpaid } from "./DetailUnpaid";
+export { default as ChoosePaymentScreen } from './ChoosePaymentScreen'

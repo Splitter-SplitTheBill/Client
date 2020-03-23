@@ -86,7 +86,7 @@ export default function CreateEventScreen ({navigation}) {
                                 <EventFriend profPic={profPicUri} id={6}></EventFriend>
                             </View>
                         </View>
-                        <Button title="Create Event" onPress={() => console.log(newEventName)} />
+                        <Button title="Create Event" onPress={() => navigation.navigate('PaymentMethod')} />
                     </View>
                 </ScrollView>
             </View>

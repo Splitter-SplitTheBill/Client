@@ -19,7 +19,8 @@ import {
   SearchFriendScreen,
   CreateEventScreen,
   CameraScreen,
-  DetailUnpaid
+  DetailUnpaid,
+  ChoosePaymentScreen
 } from "./screens";
 import TabNavigation from "./screens/TabNavigation";
 
@@ -56,6 +57,7 @@ export default function App() {
           <Stack.Screen name="AddFriendScreen" component={AddFriendScreen} />
           <Stack.Screen name="Create" component={CreateEventScreen} />
           <Stack.Screen name="Camera" component={CameraScreen} />
+          <Stack.Screen name="PaymentMethod" component={ChoosePaymentScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
