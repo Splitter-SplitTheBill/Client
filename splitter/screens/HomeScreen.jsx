@@ -2,6 +2,9 @@ import React from 'react'
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import peopleMoney from '../assets/images/peopleMoney.png'
+import recentEvent from '../assets/images/pay.png'
+import history from '../assets/images/bill.png'
+import add from '../assets/images/add.png'
 
 export default function HomeScreen ({navigation}) {
     return (
@@ -17,15 +20,18 @@ export default function HomeScreen ({navigation}) {
             <ScrollView>
               <View style={styles.horBox}>
                 <TouchableOpacity style={styles.boxes}>
-                  <Text>Recent Transaction</Text>
+                  <Image source={recentEvent} style={styles.logo}/>
+                  <Text>Recent Event</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.boxes} onPress={() => navigation.navigate('HistoryScreen')}>
+                  <Image source={history} style={styles.logo}/>
                   <Text>History</Text>
               </TouchableOpacity>
               </View>
               <TouchableOpacity style={styles.button} >
-                    <Text>Add Bill</Text>
-                </TouchableOpacity>
+                <Image source={add} style={styles.logo}/>
+                <Text>Add Bill</Text>
+              </TouchableOpacity>
             </ScrollView>
           </View>
         </View>
@@ -86,7 +92,14 @@ const styles = StyleSheet.create({
       margin: 8,
       opacity: 0.8,
       height: height * 0.3,
-      width: width * 0.4
+      width: width * 0.4,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    logo: {
+      width: 60,
+      height: 60,
+      margin: 5
     },
     button: {
       backgroundColor: 'white',
@@ -98,6 +111,8 @@ const styles = StyleSheet.create({
       margin: 8,
       opacity: 0.8,
       height: height * 0.17,
-      width: width * 0.85
+      width: width * 0.85,
+      justifyContent: 'center',
+      alignItems: 'center'
     }
   });
