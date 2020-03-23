@@ -58,6 +58,9 @@ const styles = StyleSheet.create({
   nextIcon: {
     marginLeft: 'auto'
   },
+  nextIcon: {
+    marginLeft: 'auto'
+  },
   next: {
     color: 'white'
   },
