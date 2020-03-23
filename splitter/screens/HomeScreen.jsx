@@ -19,7 +19,7 @@ export default function HomeScreen ({navigation}) {
           <View style={styles.box}>
             <ScrollView>
               <View style={styles.horBox}>
-                <TouchableOpacity style={styles.boxes}>
+                <TouchableOpacity style={styles.boxes} onPress={() => navigation.navigate('Unpaid')}>
                   <Image source={recentEvent} style={styles.logo}/>
                   <Text>Recent Event</Text>
                 </TouchableOpacity>

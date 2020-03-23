@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import { View, Text, StyleSheet, Image, Modal } from 'react-native'
 import Constants from 'expo-constants';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
@@ -7,16 +8,27 @@ import payment from '../assets/images/payment.jpg'
 import pay from '../assets/images/pay.png'
 
 import { CustomCard, BackButton } from '../components'
+import { showAllEvents } from '../actions/eventAction'
 
 
 function HistoryScreen({navigation}) {
+  const dispatch = useDispatch()
+
+  let user = '5e787cbff1349c203efdf2fe'
+
+  useEffect(() => {
+    dispatch(showAllEvents(user))
+  }, [])
+
+  const allEvents = useSelector(state => state.eventReducer.allEvents)
+
   const back = () => {
     navigation.goBack()
   }
 
-  const detailHistory = () => {
+  const detailHistory = (event) => {
     console.log('pressed')
-    navigation.navigate('DetailHistoryScreen')
+    navigation.navigate('DetailHistoryScreen', {event: event.participants})
   }
 
   return (
@@ -33,7 +45,11 @@ function HistoryScreen({navigation}) {
       </View>
       <View style={styles.box}>
         <ScrollView>
-          <CustomCard methods={detailHistory} />
+          {allEvents.map(event => {
+            return (
+              <CustomCard methods={detailHistory} data={event} />
+            )
+          })}
         </ScrollView>
       </View>
     </View>
@@ -47,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   head: {
-    paddingLeft: 10,
+    paddingLeft: 5,
     flexDirection: 'row',
   },
   title: {

@@ -1,20 +1,18 @@
 import axios from 'axios'
 
-export const ALLFRIENDS = (id) => {
+export const ALLFRIENDS = (id, token) => {
   return (dispatch) => {
     axios({
       method: 'GET',
-      url: `http://localhost:3000/users/5e787cbff1349c203efdf2fe`,
-      headers: {
-        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk1NTEwOH0.bB6t_mcyZTV1RCuzEVP_dRpmrlofmWsgyJ_vd4sbmro'
-       }
+      url: `http://localhost:3000/users/${id}`,
+      headers: { token }
     })
       .then(result => {
         console.log(result.data.friendList)
         dispatch(allfriends(result.data.friendList))
       })
       .catch(err => {
-        console.log(err.response, '< error')
+        console.log(err.response, '< error show all friends')
       })
   }
 }
@@ -27,14 +25,12 @@ const allfriends = (friends) => ({
 })
 
 
-export const DELETEFRIEND = (friendId) => {
+export const DELETEFRIEND = (userId, friendId, token) => {
   return (dispatch) => {
     axios({
       method: 'PATCH',
-      url: `http://localhost:3000/users/5e787cbff1349c203efdf2fe/friends/${friendId}`,
-      headers: {
-        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk1NTEwOH0.bB6t_mcyZTV1RCuzEVP_dRpmrlofmWsgyJ_vd4sbmro'
-       }
+      url: `http://localhost:3000/users/${userId}/friends/${friendId}`,
+      headers: { token }
     })
       .then(result => {
         dispatch(deleted(result.data.userId))
@@ -53,14 +49,12 @@ const deleted = (friend) => ({
 })
 
 
-export const ADDFRIEND = (friendId) => {
+export const ADDFRIEND = (id, friendId, token) => {
   return (dispatch) => {
     axios({
       method: 'PATCH',
-      url: `http://localhost:3000/users/5e787cbff1349c203efdf2fe/friends`,
-      headers: {
-        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk1NTEwOH0.bB6t_mcyZTV1RCuzEVP_dRpmrlofmWsgyJ_vd4sbmro'
-      },
+      url: `http://localhost:3000/users/${id}/friends`,
+      headers: { token },
       data: {
         friendId
       }
@@ -70,17 +64,12 @@ export const ADDFRIEND = (friendId) => {
         axios({
           method: 'GET',
           url: `http://localhost:3000/users/${result.data.userId}`,
-          headers: {
-            token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk1NTEwOH0.bB6t_mcyZTV1RCuzEVP_dRpmrlofmWsgyJ_vd4sbmro'
-          }
+          headers: { token }
         })
-          .then(res => {
-            console.log(res.data, '< friend')
-            dispatch(added(res.data))
-          })
-          .catch(err => {
-            console.log(err.response, '< error find one')
-          })
+      })
+      .then(res => {
+        console.log(res.data, '< friend')
+        dispatch(added(res.data))
       })
       .catch(err => {
         console.log(err.response, '< error add friend action')

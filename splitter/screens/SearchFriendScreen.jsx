@@ -6,7 +6,7 @@ import searchFriend from '../assets/images/searchFriend.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import axios from 'axios'
 
-function SearchFriend({navigation}) {
+function SearchFriend({navigation, route}) {
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
 
@@ -20,13 +20,13 @@ function SearchFriend({navigation}) {
     setError('')
   }
 
+  const token = route.params.token
+
   const findFriend = () => {
     axios({
       method: 'GET',
       url: `http://localhost:3000/users/username/${input}`,
-      headers: {
-        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk1NTEwOH0.bB6t_mcyZTV1RCuzEVP_dRpmrlofmWsgyJ_vd4sbmro'
-      }
+      headers: { token }
     })
       .then(res => {
         const friend = res.data

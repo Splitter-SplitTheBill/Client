@@ -12,14 +12,18 @@ function AddFriend({route, navigation}) {
 
   let friend = route.params.data
 
-  console.log(friend, '< friend add')
-
   const back = () => {
     navigation.goBack()
   }
+  const user = useSelector(state => {
+    return state.userReducer.UserLogin;
+  })
+
+  const userId = user._id
+  const token = user.token
 
   const addFriend = () => {
-    dispatch(ADDFRIEND(friend._id))
+    dispatch(ADDFRIEND(userId, friend._id, token))
     navigation.navigate('FriendListScreen')
   } 
 

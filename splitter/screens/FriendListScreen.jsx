@@ -8,15 +8,22 @@ import { ALLFRIENDS, DELETEFRIEND } from '../actions/friendAction'
 
 function FriendListScreen({navigation}) {
   const dispatch = useDispatch()
-  
+
+  const user = useSelector(state => {
+    return state.userReducer.UserLogin;
+  })
+
+  const userId = user._id
+  const token = user.token
+
   useEffect(() => {
-    dispatch(ALLFRIENDS())
+    dispatch(ALLFRIENDS(userId, token))
   }, [])
 
   const friends = useSelector(state => state.friendsReducer.friends)
   
   const addFriend = () => {
-    navigation.navigate('SearchFriendScreen')
+    navigation.navigate('SearchFriendScreen', {token})
   }
 
   // const confirmDelete = (id) => {
@@ -31,9 +38,9 @@ function FriendListScreen({navigation}) {
   //   )
   // }
 
-  const deleteFriend = (id) => {
-    console.log(id, '< id friend')
-    dispatch(DELETEFRIEND(id))
+  const deleteFriend = (friendId) => {
+    console.log(friendId, '< friendId friend')
+    dispatch(DELETEFRIEND(userId, friendId, token))
   }
 
   return (
