@@ -16,7 +16,9 @@ import {
   HistoryScreen,
   DetailHistoryScreen, 
   AddFriendScreen,
-  SearchFriendScreen
+  SearchFriendScreen,
+  CreateEventScreen,
+  CameraScreen
 } from "./screens";
 import TabNavigation from './screens/TabNavigation'
 
@@ -44,6 +46,8 @@ export default function App() {
         <Stack.Screen name="DetailHistoryScreen" component={DetailHistoryScreen} />
         <Stack.Screen name="SearchFriendScreen" component={SearchFriendScreen} />
         <Stack.Screen name="AddFriendScreen" component={AddFriendScreen} />
+        <Stack.Screen name="Create" component={CreateEventScreen} />
+        <Stack.Screen name="Camera" component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   </Provider>
