@@ -20,7 +20,9 @@ import {
   CreateEventScreen,
   CameraScreen,
   DetailUnpaid,
-  ChoosePaymentScreen
+  ChoosePaymentScreen,
+  AssignBillScreen,
+  NewEventCreatedScreen
 } from "./screens";
 import TabNavigation from "./screens/TabNavigation";
 
@@ -58,6 +60,8 @@ export default function App() {
           <Stack.Screen name="Create" component={CreateEventScreen} />
           <Stack.Screen name="Camera" component={CameraScreen} />
           <Stack.Screen name="PaymentMethod" component={ChoosePaymentScreen} />
+          <Stack.Screen name="Split" component={AssignBillScreen} />
+          <Stack.Screen name="Event" component={NewEventCreatedScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

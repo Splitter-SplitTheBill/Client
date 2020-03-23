@@ -5,14 +5,18 @@ import { ScrollView } from 'react-native-gesture-handler'
 import TransactionItem from '../components/TransactionItems'
 import { useSelector, useDispatch } from 'react-redux'
 import ReceiptImageModal from '../components/ReceiptImageModal'
-import { FetchTransactionItems } from '../actions/eventAction'
+import { submitEvent, setParticipantsWithItems, FetchTransactionItemsAgain } from '../actions/eventAction'
 import ConvertToIdr from '../helpers/RpConverter'
+import ConfirmationModal from '../components/ConfirmationModal'
 
 export default function AssignBillScreen ({ navigation }) {
     const eventName = useSelector(state => state.eventReducer.eventName)
     const [receiptModalTrigger, setReceiptModalTrigger] = useState(false)
+    const [confirmTrigger, setConfirmTrigger] = useState(false)
     const receiptImageUrl = useSelector(state => state.eventReducer.billPicture)
-    const transactionItems = useSelector(state => state.eventReducer.transactionItems) 
+    const transactionItems = useSelector(state => state.eventReducer.transactionItems)
+    const participants = useSelector(state => state.eventReducer.participants)
+    const userData = useSelector(state => state.eventReducer.mockUserData)
     const [totalReceipt, setTotalReceipt] = useState(0)
     const dispatch = useDispatch()
 
@@ -20,12 +24,24 @@ export default function AssignBillScreen ({ navigation }) {
         setReceiptModalTrigger(!receiptModalTrigger)
     }
 
-    // useEffect(() => {
-    //     dispatch(FetchTransactionItems(receiptImageUrl))
-    // }, [])
+    const submitTheEvent = (confirmation) => {
+        if (confirmation) {
+            dispatch(setParticipantsWithItems())
+            dispatch(submitEvent(userData._id))
+            navigation.navigate('Event')
+        } else {
+            setConfirmTrigger(false)
+            console.log( 'cancelled' )
+        }
+        
+    }
 
     useEffect(() => {
-        if(transactionItems.length > 0) {
+        console.log(participants)
+    }, [])
+
+    useEffect(() => {
+        if(transactionItems.length > 1) {
             let newTotal = 0
             transactionItems.forEach(item => {
                 newTotal += item.price
@@ -48,7 +64,7 @@ export default function AssignBillScreen ({ navigation }) {
                 </TouchableOpacity>
                 <View style={styles.eventDetails}>
                     <Text style={{fontSize: 25, fontWeight: 'bold', flexWrap: 'wrap', textAlign: 'center', flexDirection: 'row'}}>{eventName}</Text>
-                    <Text>Paid by: Okka Linardi</Text>
+                    <Text>Paid by: {userData.username}</Text>
                     <Text>{new Date().toDateString()}</Text>
                 </View>
             </View>
@@ -57,7 +73,7 @@ export default function AssignBillScreen ({ navigation }) {
                     <Text style={{fontSize: 13, fontWeight: 'bold'}}>Transaction Details</Text>
                 </View>
                 {   
-                    transactionItems.length > 0
+                    transactionItems.length > 1
                     ? <><View style={styles.transactionDetails}>
                         <View style={styles.transactionItemHeader}>
                             <View style={{height: '100%', width: '40%', alignItems: 'center', justifyContent: 'center'}}>
@@ -87,17 +103,30 @@ export default function AssignBillScreen ({ navigation }) {
                             </View>
                         </ScrollView>
                     </View></>
-                    : <View style={styles.transactionDetails}>
-                        <ActivityIndicator size="large" color='#6597A0' />
+                    : transactionItems.length == 1 
+                    ? <View style={styles.transactionDetails}>
+                        <TouchableOpacity onPress={() => {
+                            dispatch(FetchTransactionItemsAgain(receiptImageUrl))
+                        }}>
+                            <Text>TryAgain</Text>
+                        </TouchableOpacity>
                     </View>
+                    : <View style={styles.transactionDetails}>
+                    <ActivityIndicator size="large" color='#6597A0' />
+                        </View>
+                    
                 }
             </View>
-            <TouchableOpacity style={styles.splitTheBillButton}>
+            <TouchableOpacity style={styles.splitTheBillButton} onPress={() => setConfirmTrigger(true)}>
                 <Text>Split The Bill!</Text>
             </TouchableOpacity>
             {
                 receiptModalTrigger
                 && <ReceiptImageModal triggerModal={triggerModal} />
+            }
+            {
+                confirmTrigger
+                && <ConfirmationModal confirmationFunction={submitTheEvent} />
             }
         </View>
     )

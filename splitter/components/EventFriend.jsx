@@ -1,34 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { AddFriendToEvent, RemoveFriendToEvent} from '../actions/eventAction'
 
-export default function EventFriend ({profPic, id}) {
+export default function EventFriend ({ friendData }) {
     const friendInEvent = useSelector(state => state.eventReducer.friendInEvent)
+    const [selected, setSelected] = useState(false)
     const dispatch = useDispatch()
 
     const addFriend = () => {
-        dispatch(AddFriendToEvent(id))
+        dispatch(AddFriendToEvent(friendData))
     }
+
+    useEffect(() => {
+        console.log(friendData)
+    },[])
+
+    useEffect(() => {
+        const selectedParticipants = friendInEvent.filter (friend => friend._id == friendData._id)
+
+        if(selectedParticipants.length > 0){
+            setSelected(true)
+        } else {
+            setSelected(false)
+        }
+    }, [friendInEvent])
 
     const RemoveFriend = () => {
-        dispatch(RemoveFriendToEvent(id))
+        dispatch(RemoveFriendToEvent(friendData))
     }
 
-    if (friendInEvent.includes(id)) {
+    if (selected) {
         return (
             <TouchableOpacity onPress={() => RemoveFriend()} style={{margin: 20, alignItems: 'center'}}>
                 <View style={styles.FriendPicOut}>
                     <View style={styles.FriendPicIn}>
                         <Image
                         style= {styles.FriendPic}
-                        source={{uri: profPic}}
+                        source={{uri: friendData.image_url}}
                         />
                     </View>
                 </View>
                 <View style={styles.FriendNameOut}>
                     <View style={styles.FriendNameIn}>
-                    <Text>UserName</Text>
+                        <Text>{friendData.username}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -40,13 +55,13 @@ export default function EventFriend ({profPic, id}) {
                     <View style={styles.FriendPicIn}>
                         <Image
                         style= {styles.FriendPic}
-                        source={{uri: profPic}}
+                        source={{uri: friendData.image_url}}
                         />
                     </View>
                 </View>
                 <View style={styles.FriendNameOutNone}>
                     <View style={styles.FriendNameIn}>
-                        <Text>UserName</Text>
+                        <Text>{friendData.username}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -61,7 +76,11 @@ const styles = StyleSheet.create({
         height: 35,
         width: 90,
         backgroundColor: '#55efc4',
-        translateY: -10,
+        transform: [
+            {
+                translateY: -10
+            }
+        ],
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10
@@ -69,7 +88,11 @@ const styles = StyleSheet.create({
     FriendNameOutNone: {
         height: 35,
         width: 90,
-        translateY: -10,
+        transform: [
+            {
+                translateY: -10
+            }
+        ],
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10

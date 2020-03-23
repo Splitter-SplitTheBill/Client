@@ -5,17 +5,21 @@ import { Camera } from 'expo-camera';
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { useDispatch } from 'react-redux'
 import { TakePicture } from '../actions/cameraAction'
+import CameraLoading from '../components/CameraLoading'
 
 export default function CameraScreen ({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [camera, setCamera] = useState(null)
+  const [cameraLoading, setCameraLoading] = useState(false)
   const dispatch = useDispatch()
 
   const takePicture = async () => {
     if (camera) {
+      setCameraLoading(true)
       let photo = await camera.takePictureAsync();
-      dispatch(TakePicture(photo.uri))
+      setCameraLoading(false)
+      dispatch(TakePicture(photo))
       navigation.navigate('Create')
     }
   }
@@ -23,7 +27,7 @@ export default function CameraScreen ({navigation}) {
   const openGallery = async() => {
     let result = await ImagePicker.launchImageLibraryAsync()
     if(!result.cancelled) {
-      dispatch(TakePicture(result.uri))
+      dispatch(TakePicture(result))
       navigation.navigate('Create')
     }
   }
@@ -43,7 +47,7 @@ export default function CameraScreen ({navigation}) {
   }
   return (
         <View style={{ flex: 1 }}>
-            <Camera style={{ flex: 1 }} type={type} ref={ref => {
+            <Camera quality={0.1} autoFocus={'on'} style={{ flex: 1 }} type={type} ref={ref => {
           setCamera(ref)
         }}>
             <View style={{flex:1, flexDirection:"row",justifyContent:"space-between",margin:20}}>
@@ -94,6 +98,10 @@ export default function CameraScreen ({navigation}) {
         </TouchableOpacity>
       </View>
             </Camera>
+            {
+              cameraLoading
+              && <CameraLoading />
+            }
           </View>
   )
 }

@@ -1,21 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, ImageBackground, Dimensions, Image, TextInput, TouchableOpacity, ScrollView, Button } from 'react-native'
 import Constants from 'expo-constants'
 import { Feather } from '@expo/vector-icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { ResetPicture } from '../actions/cameraAction'
+import { SetEventName, SetParticipantsId, userMockFetch } from '../actions/eventAction'
 import EventFriend from '../components/EventFriend'
 
 export default function CreateEventScreen ({navigation}) {
     const billPicture = useSelector(state => state.cameraReducer.newBillPicture)
-    const [newEventName, setNewEventName] = useState('')
+    // const [newEventName, setNewEventName] = useState('')
+    const userData = useSelector(state => state.eventReducer.mockUserData)
     const dispatch = useDispatch()
 
     // JANGAN LUPA DI HAPUS INI HANYA UNTUK TESTING
     const profPicUri = 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_weight_other/1800x1200_cat_weight_other.jpg?resize=600px:*'
+    const mockFriendList = [{
+        id: '5e78b2a9ab98c8a9c5cb94d6',
+        userName: 'Novi',
+        image_url: profPicUri
+    },{
+        id: '5e78b2baab98c8a9c5cb94d7',
+        userName: 'Riko',
+        image_url: profPicUri
+    }]
+    useEffect(() => {
+       dispatch(userMockFetch())
+    }, [])
+    // HAPUSNYA SAMPAI SINI
 
     const resetPicture = () => {
         dispatch(ResetPicture())
+        navigation.navigate('Camera')
+    }
+
+    const changeEventName = (newEventName) => {
+        dispatch(SetEventName(newEventName))
+    }
+
+    const goToPaymentSelection = () => {
+        dispatch(SetParticipantsId())
+        navigation.navigate('PaymentMethod')
+
     }
 
     return (
@@ -36,7 +62,7 @@ export default function CreateEventScreen ({navigation}) {
                                 }}
                                 placeholder="Enter Event Name"
                                 placeholderTextColor="#57606f"
-                                onChangeText={(eventNameInput) => setNewEventName(eventNameInput)}>
+                                onChangeText={(eventNameInput) => changeEventName(eventNameInput)}>
                             </TextInput>
                         </View>
                         {
@@ -48,10 +74,10 @@ export default function CreateEventScreen ({navigation}) {
                                 borderRadius: 20,
                                 overflow: 'hidden'
                                 }}>
-                                <Image source={{uri: billPicture}} style={{width: '100%', height: '100%'}} />
+                                <Image source={{uri: billPicture.uri}} style={{width: '100%', height: '100%'}} />
                             </View>
-                            <TouchableOpacity onPress={() => resetPicture()} style={{height: '5%', width: '50%'}}>
-                                    <Text>Reset</Text>
+                            <TouchableOpacity onPress={() => resetPicture()} style={{height: '3%', marginVertical: 3, width: '50%', borderWidth: 2, justifyContent: 'center', alignItems: 'center', borderRadius: 10}}>
+                                    <Text>Change Picture</Text>
                                 </TouchableOpacity>
                             </>
                             : <TouchableOpacity
@@ -77,16 +103,18 @@ export default function CreateEventScreen ({navigation}) {
                         }
                         <View style={styles.addFriendContainer}>
                             <Text style={{fontSize: 20, fontWeight: 'bold'}}>Add Friends to this Event</Text>
-                            <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap'}}>
-                                <EventFriend profPic={profPicUri} id={1}></EventFriend>
-                                <EventFriend profPic={profPicUri} id={2}></EventFriend>
-                                <EventFriend profPic={profPicUri} id={3}></EventFriend>
-                                <EventFriend profPic={profPicUri} id={4}></EventFriend>
-                                <EventFriend profPic={profPicUri} id={5}></EventFriend>
-                                <EventFriend profPic={profPicUri} id={6}></EventFriend>
+                            <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap'}}>      
+                                {
+                                    userData
+                                    && userData.friendList.map(friend => {
+                                        return (
+                                            <EventFriend friendData={friend.userId}></EventFriend>
+                                        )
+                                    })
+                                }
                             </View>
                         </View>
-                        <Button title="Create Event" onPress={() => navigation.navigate('PaymentMethod')} />
+                        <Button title="Create Event" onPress={() => goToPaymentSelection()} />
                     </View>
                 </ScrollView>
             </View>

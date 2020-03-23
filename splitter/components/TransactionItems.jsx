@@ -24,7 +24,8 @@ export default function TransactionItems ({ itemDetails, indexNum }) {
         dispatch(ChangeItemName(newItemName, indexNum))
     }
 
-    const assignItem = (userId) => {
+    const assignItem = (userIndex) => {
+        let userId = friendsInEvent[userIndex]._id
         dispatch(AssignItemToUser({
             name: itemName,
             price: price,
@@ -39,7 +40,7 @@ export default function TransactionItems ({ itemDetails, indexNum }) {
         let forDropdownList = []
         friendsInEvent.forEach(friend => {
             forDropdownList.push({
-                value: friend
+                value: friend.username
             })
         })
         setDropDownList(forDropdownList)
@@ -65,7 +66,7 @@ export default function TransactionItems ({ itemDetails, indexNum }) {
                 <Dropdown
                     data={dropDownList}
                     containerStyle={{width: '100%', height: '100%', marginBottom: 25}}
-                    onChangeText={(userId) => assignItem(userId)}
+                    onChangeText={(userName, userIndex) => assignItem(userIndex)}
                 />
             </View>
         </View>
