@@ -7,5 +7,4 @@ export { default as EditProfileScreen } from "./EditProfileScreen";
 export { default as UnpaidScreen } from "./UnpaidScreen";
 export { default as UnpaidDetailScreen } from "./UnpaidDetailScreen";
 export { default as FriendListScreen } from './FriendListScreen'
-export { default as TabNavigation } from './TabNavigation'
 export { default as HistoryScreen } from './HistoryScreen'

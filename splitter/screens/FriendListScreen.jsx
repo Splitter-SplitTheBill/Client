@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-
+import { BackButton } from '../components'
 
 function FriendListScreen() {
   return (
     <View>
-      <Text>Friend List Screen</Text>
+      <BackButton />
     </View>
   )
 }

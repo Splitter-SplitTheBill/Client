@@ -1,44 +1,28 @@
-import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export default function HomeScreen(props) {
-  return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Ke Login"
-        onPress={() => props.navigation.navigate("Login")}
-        color="rgb(150,9,77)"
-      />
-      <Button
-        title="Ke Register"
-        onPress={() => props.navigation.navigate("Register")}
-        color="rgb(150,9,77)"
-      />
-      <Button
-        title="Ke Register Add"
-        onPress={() => props.navigation.navigate("RegistAdd")}
-        color="rgb(150,9,77)"
-      />
-      <Button
-        title="Ke Profile"
-        onPress={() => props.navigation.navigate("Profile")}
-        color="rgb(150,9,77)"
-      />
-      <Button
-        title="Ke Unpaid"
-        onPress={() => props.navigation.navigate("Unpaid")}
-        color="rgb(150,9,77)"
-      />
-    </View>
-  );
+export default function HomeScreen ({navigation}) {
+    return (
+        <View style={styles.container}>
+            <Text>Home Screen</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('HistoryScreen')}>
+                <Text>History</Text>
+            </TouchableOpacity>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    button: {
+      backgroundColor: 'rgb(101, 151, 160)',
+      padding: 10,
+      borderRadius: 10
+    }
+  });

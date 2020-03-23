@@ -4,8 +4,8 @@ import Constants from 'expo-constants';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
 import payment from '../assets/images/payment.jpg'
-import receipt from '../assets/images/receipt.png'
-import right from '../assets/images/right.png'
+
+import { CustomCard } from '../components'
 
 function HistoryScreen() {
   return (
@@ -26,18 +26,7 @@ function HistoryScreen() {
         <View style={styles.box}>
           <Text style= {styles.titleTransaction}>RECENT TRANSACTIONS</Text>
           <ScrollView>
-          <TouchableOpacity style={styles.event}>
-            <View style = {styles.circle} >
-              <Image source = {receipt} style={styles.icon}/>
-            </View>
-            <View style={styles.detail}>
-              <Text style={styles.eventName}>17 Agustusan</Text>
-              <Text>- Rp 500.000,00</Text>
-            </View>
-            <View>
-              <Image source = {right} style={styles.next}/>
-            </View>
-          </TouchableOpacity>
+            <CustomCard />
           </ScrollView>
         </View>
       </View>
@@ -55,7 +44,6 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     color: 'white',
     fontSize: 15,
-    fontFamily: 'Lato-Regular',
     fontWeight: 'bold',
     letterSpacing: 2,
     marginLeft: 10
@@ -71,7 +59,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: 'white',
     fontSize: 30,
-    fontFamily: 'Lato-Regular'
   },
   boxAmount: {
     backgroundColor: '#bfc6cc',
@@ -85,7 +72,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     textAlign: 'center',
     fontWeight: 'bold',
-    fontFamily: 'Lato-Regular',
     fontStyle: 'italic'
   },
   box: {
@@ -98,7 +84,6 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   titleTransaction: {
-    fontFamily: 'Lato-Regular',
     fontSize: 14
   },
   event: {
@@ -129,7 +114,6 @@ const styles = StyleSheet.create({
   eventName: {
     fontWeight: 'bold',
     color: 'rgb(101, 151, 160)',
-    fontFamily: 'Lato-Regular'
   },
   next: {
     height: 20,

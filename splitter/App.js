@@ -13,8 +13,9 @@ import {
   EditProfileScreen,
   UnpaidScreen,
   UnpaidDetailScreen,
-  TabNavigation
+  HistoryScreen
 } from "./screens";
+import TabNavigation from './screens/TabNavigation'
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,7 @@ export default function App() {
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         <Stack.Screen name="Unpaid" component={UnpaidScreen} />
         <Stack.Screen name="UnpaidDetail" component={UnpaidDetailScreen} />
+        <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     // </Provider>
