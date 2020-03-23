@@ -12,8 +12,11 @@ import {
   ProfileScreen,
   EditProfileScreen,
   UnpaidScreen,
-  UnpaidDetailScreen
+  UnpaidDetailScreen,
+  HistoryScreen
 } from "./screens";
+import TabNavigation from './screens/TabNavigation'
+import { HistoryScreen, DetailHistoryScreen } from './screens'
 
 const Stack = createStackNavigator();
 
@@ -27,7 +30,7 @@ export default function App() {
           unmountInactiveRoutes: true
         }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="TabNavigation" component={TabNavigation} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
@@ -35,6 +38,8 @@ export default function App() {
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         <Stack.Screen name="Unpaid" component={UnpaidScreen} />
         <Stack.Screen name="UnpaidDetail" component={UnpaidDetailScreen} />
+        <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
+        <Stack.Screen name="DetailHistoryScreen" component={DetailHistoryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     // </Provider>
