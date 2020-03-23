@@ -12,7 +12,8 @@ import {
   ProfileScreen,
   EditProfileScreen,
   UnpaidScreen,
-  UnpaidDetailScreen
+  UnpaidDetailScreen,
+  TabNavigation
 } from "./screens";
 
 const Stack = createStackNavigator();
@@ -27,7 +28,7 @@ export default function App() {
           unmountInactiveRoutes: true
         }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="TabNavigation" component={TabNavigation} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
