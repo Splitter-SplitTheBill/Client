@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   search: {
     backgroundColor: '#6597a0',
     height: 40,
-    width: 320,
+    width: "85%",
     padding: 10,
     borderRadius: 10,
     marginLeft: 10,
