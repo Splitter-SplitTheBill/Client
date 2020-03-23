@@ -8,3 +8,4 @@ export { default as UnpaidScreen } from "./UnpaidScreen";
 export { default as UnpaidDetailScreen } from "./UnpaidDetailScreen";
 export { default as FriendListScreen } from './FriendListScreen'
 export { default as HistoryScreen } from './HistoryScreen'
+export { default as DetailHistoryScreen } from './DetailHistoryScreen'

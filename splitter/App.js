@@ -16,6 +16,7 @@ import {
   HistoryScreen
 } from "./screens";
 import TabNavigation from './screens/TabNavigation'
+import { HistoryScreen, DetailHistoryScreen } from './screens'
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ export default function App() {
         <Stack.Screen name="Unpaid" component={UnpaidScreen} />
         <Stack.Screen name="UnpaidDetail" component={UnpaidDetailScreen} />
         <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
+        <Stack.Screen name="DetailHistoryScreen" component={DetailHistoryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     // </Provider>

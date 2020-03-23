@@ -7,8 +7,8 @@ import receipt from '../assets/images/receipt.png'
 
 export default function Card() {
   return (
-    <View >
-      <TouchableOpacity style={styles.event}  >
+    <View>
+      <TouchableOpacity style={styles.event} >
         <View style = {styles.circle} >
           <Image source = {receipt} style={styles.icon}/>
         </View>

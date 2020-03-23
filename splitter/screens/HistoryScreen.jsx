@@ -9,7 +9,12 @@ import pay from '../assets/images/pay.png'
 import { CustomCard, BackButton } from '../components'
 
 
-function HistoryScreen() {
+function HistoryScreen({navigation}) {
+  const detailHistory = () => {
+    console.log('pressed')
+    navigation.navigate('DetailHistoryScreen')
+  }
+
   return (
     <View style={styles.container} >
       <View style={styles.head}>
@@ -24,7 +29,7 @@ function HistoryScreen() {
       </View>
       <View style={styles.box}>
         <ScrollView>
-          <CustomCard />
+          <CustomCard method={detailHistory} />
         </ScrollView>
       </View>
     </View>
