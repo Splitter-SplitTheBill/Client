@@ -1,8 +1,11 @@
-// import {
-//     combineReducers
-// } from 'redux'
+import {
+    combineReducers
+} from 'redux'
 
-// const reducers = combineReducers({
-//   })
+import friendsReducer from './friendsReducer'
 
-// export default reducers
+const reducers = combineReducers({
+  friendsReducer
+  })
+
+export default reducers
