@@ -89,6 +89,41 @@ const styles = StyleSheet.create({
     shadowRadius: 15,
     elevation: 10,
   },
+<<<<<<< HEAD
+=======
+  titleTransaction: {
+    fontSize: 14
+  },
+  event: {
+    backgroundColor: '#bfc6cc',
+    height: 100,
+    marginTop: 10,
+    borderRadius: 15,
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    shadowRadius: 2,
+    elevation: 3,
+  },
+  circle: {
+    backgroundColor: 'white',
+    width: 50,
+    padding: 10,
+    borderRadius: 90
+  },
+  icon: {
+    width: 30,
+    height: 30
+  },
+  detail: {
+    marginLeft: 10
+  },
+  eventName: {
+    fontWeight: 'bold',
+    color: 'rgb(101, 151, 160)',
+  },
+>>>>>>> create custom back button
   next: {
     height: 20,
   }
