@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UserLogin } from "../actions/userAction";
 import {
   View,
@@ -8,7 +8,8 @@ import {
   Image,
   TextInput,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import logoImage from "../assets/logo.jpg";
 
@@ -17,14 +18,33 @@ export default function LoginScreen(props) {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-
+  const test = useSelector(state => {
+    return state.userReducer.UserLogin;
+  });
   const login = () => {
-    if (username.length === 0 || password.length === 0) {
-      props.navigation.navigate("Login");
+    if (!username || !password) {
+      alert(
+        "Oopss..",
+        "You must filled username and password to login",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+    } else {
+      const inputLogin = { username, password };
+      dispatch(UserLogin(inputLogin));
+      if (!test.username) {
+        console.log("masuk else???haaa");
+        alert(
+          "Oopss..",
+          "Your username or password did not match",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
+      } else {
+        console.log("masuk else???");
+        props.navigation.navigate("TabNavigation");
+      }
     }
-    const inputLogin = { username, password };
-    dispatch(UserLogin(inputLogin));
-    props.navigation.navigate("TabNavigation");
   };
   return (
     <View style={styles.container}>

@@ -28,20 +28,25 @@ export default function detail(props) {
 
   console.log(userPay, "<<<user pay");
 
+  //harusnya dataUnpaid.eventId.createdUserId
   useEffect(() => {
-    getUser("5e78a782b70b3d2944d57174");
+    getUser(dataUnpaid.eventId.createdUserId);
   }, []);
 
-  function pay(eventId, userId) {
-    axios
-      .patch(`http://localhost:3000/transactions/${eventId}/${userId}`)
-      .then(response => {
-        console.log(response.data, "<<<< berhasil bayar");
-        props.navigation.navigate("Home");
-      })
-      .catch(err => {
-        console.log(err.response);
-      });
+  function pay() {
+    // axios
+    //   .patch(`http://localhost:3000/transactions/${eventId}/${userId}`, {
+    //     headers: {
+    //       token: userlogin.token
+    //     }
+    //   })
+    //   .then(response => {
+    //     console.log(response.data, "<<<< berhasil bayar");
+    //   })
+    //   .catch(err => {
+    //     console.log(err.response);
+    //   });
+    props.navigation.navigate("Unpaid");
   }
 
   const getUser = id => {
@@ -146,7 +151,7 @@ export default function detail(props) {
           </View>
           <View style={styles.buttonPay}>
             <Button
-              title="PAY"
+              title="Go Back"
               color="black"
               onPress={() => pay(dataUnpaid.eventId._id, userlogin._id)}
             />
