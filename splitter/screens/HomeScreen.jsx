@@ -34,44 +34,6 @@ export default function HomeScreen ({navigation}) {
               </TouchableOpacity>
             </ScrollView>
           </View>
-          <TouchableOpacity style={styles.button}>
-            <Image source={add} style={styles.logo} />
-            <Text>Add Bill</Text>
-          </TouchableOpacity>
-        </ScrollView>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("HistoryScreen")}
-        >
-          <Text>History</Text>
-        </TouchableOpacity>
-        <Button
-          title="Ke Login"
-          onPress={() => navigation.navigate("Login")}
-          color="rgb(150,9,77)"
-        />
-        <Button
-          title="Ke Register"
-          onPress={() => navigation.navigate("Register")}
-          color="rgb(150,9,77)"
-        />
-        <Button
-          title="Ke Register Add"
-          onPress={() => navigation.navigate("RegistAdd")}
-          color="rgb(150,9,77)"
-        />
-        <Button
-          title="Ke Profile"
-          onPress={() => navigation.navigate("Profile")}
-          color="rgb(150,9,77)"
-        />
-        <Button
-          title="Ke Unpaid"
-          onPress={() => navigation.navigate("Unpaid")}
-          color="rgb(150,9,77)"
-        />
-        <Button title="Create" onPress={() => navigation.navigate("Create")} />
-      </View>
     </View>
   );
 }
