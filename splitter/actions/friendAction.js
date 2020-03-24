@@ -5,7 +5,9 @@ export const ALLFRIENDS = (id, token) => {
     axios({
       method: 'GET',
       url: `http://localhost:3000/users/${id}`,
-      headers: { token }
+      // url: `http://localhost:3000/users/5e787cbff1349c203efdf2fe`,
+      headers: { token },
+      // headers: { token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk4OTI4NH0.GUEfRXNBUX5Tb6FEewKCnADbBR5-z-f-TPxGRWamq-k" },
     })
       .then(result => {
         console.log(result.data.friendList)

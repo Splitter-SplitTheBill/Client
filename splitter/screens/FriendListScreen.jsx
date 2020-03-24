@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Alert } from 'react-native'
 import { Divider } from 'react-native-elements'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { SearchBar } from '../components'
 import {useSelector, useDispatch} from 'react-redux'
 import { ALLFRIENDS, DELETEFRIEND } from '../actions/friendAction'
+import SearchFriend from './SearchFriendScreen'
 
 function FriendListScreen({navigation}) {
+  const [searchFriends, setFriend] = useState(false)
+
   const dispatch = useDispatch()
 
   const user = useSelector(state => {
@@ -18,10 +21,11 @@ function FriendListScreen({navigation}) {
 
   useEffect(() => {
     dispatch(ALLFRIENDS(userId, token))
+    // dispatch(ALLFRIENDS("5e787cbff1349c203efdf2fe", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk4OTI4NH0.GUEfRXNBUX5Tb6FEewKCnADbBR5-z-f-TPxGRWamq-k"))
   }, [])
 
   const friends = useSelector(state => state.friendsReducer.friends)
-  
+
   const addFriend = () => {
     navigation.navigate('SearchFriendScreen', {token})
   }
@@ -38,6 +42,11 @@ function FriendListScreen({navigation}) {
   //   )
   // }
 
+  const searchInput = (input) => {
+    const filtered = friends.filter(friend => friend.userId.name.toLowerCase().includes(input))
+    setFriend(filtered)
+  }
+
   const deleteFriend = (friendId) => {
     console.log(friendId, '< friendId friend')
     dispatch(DELETEFRIEND(userId, friendId, token))
@@ -47,10 +56,12 @@ function FriendListScreen({navigation}) {
     <View style={styles.container}>
       <Text style={styles.title}>Friends</Text>
       <View style={styles.search}>
-        <SearchBar />
+        <SearchBar search={searchInput}/>
         <Ionicons name="md-person-add" style={styles.addIcon} size={32} onPress={addFriend}/>
       </View>
-      {friends.map(friend => {
+      {searchFriends
+      ?
+      searchFriends.map(friend => {
         return (
           <View key={friend.userId._id}>
             <View style={styles.friend}>
@@ -60,7 +71,21 @@ function FriendListScreen({navigation}) {
             <Divider />
           </View>
         )
-      })}
+      })
+      : 
+      friends.map(friend => {
+        return (
+          <View key={friend.userId._id}>
+            <View style={styles.friend}>
+              <Text style={styles.name}>{friend.userId.name}</Text>
+              <MaterialIcons name="delete" size={25} color="#900" style={styles.deleteIcon} onPress={() => deleteFriend(friend.userId._id)} />
+            </View>
+            <Divider />
+          </View>
+        )
+      })
+    }
+      
     </View>
   )
 }
