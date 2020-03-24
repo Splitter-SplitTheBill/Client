@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, Alert, Image } from 'react-native'
 import boyImage from '../assets/images/boy.png'
 import { BackButton } from '../components'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { ADDFRIEND } from '../actions/friendAction'
 

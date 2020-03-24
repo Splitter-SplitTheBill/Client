@@ -24,7 +24,7 @@ export default function LoginScreen(props) {
     }
     const inputLogin = { username, password };
     dispatch(UserLogin(inputLogin));
-    props.navigation.navigate("Home");
+    props.navigation.navigate("TabNavigation");
   };
   return (
     <View style={styles.container}>

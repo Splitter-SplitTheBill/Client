@@ -29,8 +29,10 @@ const eventReducer = (state=initialState, action) => {
             }
         case 'showAllEvents':
             const events = action.payload.events
+            console.log(events, '< event reducer')
             const user = action.payload.user
             const userEvents = events.filter(event => event.createdUserId._id == user)
+            console.log(userEvents, '<<<Reducer')
             return { ...state, allEvents: userEvents }
         case 'AddPaymentMethod':
             return {
