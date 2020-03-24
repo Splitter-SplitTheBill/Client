@@ -13,15 +13,22 @@ import {
   TouchableHighlight
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
+import { useSelector } from "react-redux";
+
+import axios from "axios";
 
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 
 export default function EditProfileScreen(props) {
-  const userData = props.route.params.userData;
-  const [image_profile, setImange] = useState(userData.image_profile);
-  const [username, setUsername] = useState(userData.username);
+  // const userData = props.route.params.userData;
+  const userData = useSelector(state => {
+    return state.userReducer.UserLogin;
+  });
+  console.log(userData, "<<<<<<<userdata");
+
+  const [image_url, setImange] = useState(userData.image_url);
   const [name, setName] = useState(userData.name);
   const [accounts, setAccount] = useState(userData.accounts);
 
@@ -45,16 +52,87 @@ export default function EditProfileScreen(props) {
   }
 
   function editProfile() {
-    props.navigation.navigate("Home");
+    const userId = userData._id;
+    console.log(userData.token, "<<<<< token nih");
+    axios({
+      method: "PATCH",
+      url: `http://localhost:3000/users/${userId}`,
+      headers: {
+        token: userData.token
+      },
+      data: {
+        name,
+        accounts,
+        friendList: userData.friendList,
+        image_url
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+        console.log("berhasul bung");
+        props.navigation.navigate("Profile");
+        // let tempAcc = accounts.filter(
+        //   acc => acc._id !== response.data.successRemove._id
+        // );
+        // setAccount(tempAcc);
+        console.log(accounts);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
   }
 
   function onChangeTextPress(value) {
-    setAccount(accounts.concat({ type: value, detail: "" }));
-    console.log(accounts);
+    const userId = userData._id;
+    console.log(userData.token, "<<<<< token nih");
+    axios({
+      method: "PATCH",
+      url: `http://localhost:3000/users/${userId}/accounts`,
+      headers: {
+        token: userData.token
+      },
+      data: {
+        name: value,
+        instance: value,
+        accountNumber: "12345"
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+        console.log("berhasul bung");
+        // let tempAcc = accounts.filter(
+        //   acc => acc._id !== response.data.successRemove._id
+        // );
+        // setAccount(tempAcc);
+        console.log(accounts);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
   }
 
-  function deleteAcc(acc) {
-    console.log(acc);
+  function deleteAcc(accId) {
+    const userId = userData._id;
+    console.log(userData.token, "<<<<< token nih");
+    axios({
+      method: "PATCH",
+      url: `http://localhost:3000/users/${userId}/accounts/${accId}`,
+      headers: {
+        token: userData.token
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+        console.log("berhasul bung");
+        let tempAcc = accounts.filter(
+          acc => acc._id !== response.data.successRemove._id
+        );
+        setAccount(tempAcc);
+        console.log(accounts);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
   }
 
   const getPermissionAsync = async () => {
@@ -84,6 +162,13 @@ export default function EditProfileScreen(props) {
   useEffect(() => {
     getPermissionAsync();
   }, []);
+
+  // useEffect(() => {
+  //   useSelector(state => {
+  //     return state.userReducer.UserLogin;
+  //   });
+  // }, [accounts]);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -98,7 +183,7 @@ export default function EditProfileScreen(props) {
             <Image
               style={styles.imageProfile}
               source={{
-                uri: image_profile
+                uri: image_url
               }}
             />
             <TouchableOpacity
@@ -113,14 +198,6 @@ export default function EditProfileScreen(props) {
             </TouchableOpacity>
           </View>
           <View>
-            <Text style={styles.textInput}>Username</Text>
-            <TextInput
-              editable
-              maxLength={40}
-              onChangeText={text => setUsername(text)}
-              value={username}
-              style={styles.inputLogin}
-            ></TextInput>
             <Text style={styles.textInput}>Name</Text>
             <TextInput
               editable
@@ -138,10 +215,10 @@ export default function EditProfileScreen(props) {
                 <View
                   style={{ flexDirection: "row", justifyContent: "center" }}
                 >
-                  <Text style={styles.AccDetailType}>{acc.type}</Text>
+                  <Text style={styles.AccDetailType}>{acc.name}</Text>
                   <View style={styles.AccDetailNumber}>
-                    <Text>{acc.detail}</Text>
-                    <TouchableOpacity onPress={() => deleteAcc(acc)}>
+                    <Text>{acc.accountNumber}</Text>
+                    <TouchableOpacity onPress={() => deleteAcc(acc._id)}>
                       <Image
                         style={{ width: 20, height: 20, marginLeft: 10 }}
                         source={{

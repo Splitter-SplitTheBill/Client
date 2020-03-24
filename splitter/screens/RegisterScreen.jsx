@@ -28,7 +28,7 @@ export default function RegistAddScreen(props) {
           editable
           maxLength={40}
           onChangeText={text => setName(text)}
-          value={username}
+          value={name}
           style={styles.inputLogin}
         ></TextInput>
         <Text style={styles.textInput}>Password</Text>
@@ -51,7 +51,14 @@ export default function RegistAddScreen(props) {
         <View style={styles.buttonLogin}>
           <Button
             title="Next"
-            onPress={() => props.navigation.navigate("RegistAdd")}
+            onPress={() =>
+              props.navigation.navigate("RegistAdd", {
+                names: name,
+                username: username,
+                password: password,
+                email: email
+              })
+            }
             color="#6597A0"
           />
         </View>
