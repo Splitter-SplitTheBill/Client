@@ -10,24 +10,24 @@ import EventFriend from '../components/EventFriend'
 export default function CreateEventScreen ({navigation}) {
     const billPicture = useSelector(state => state.cameraReducer.newBillPicture)
     // const [newEventName, setNewEventName] = useState('')
-    const userData = useSelector(state => state.eventReducer.mockUserData)
+    const userData = useSelector(state => state.userReducer.UserLogin)
     const dispatch = useDispatch()
 
-    // JANGAN LUPA DI HAPUS INI HANYA UNTUK TESTING
-    const profPicUri = 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_weight_other/1800x1200_cat_weight_other.jpg?resize=600px:*'
-    const mockFriendList = [{
-        id: '5e78b2a9ab98c8a9c5cb94d6',
-        userName: 'Novi',
-        image_url: profPicUri
-    },{
-        id: '5e78b2baab98c8a9c5cb94d7',
-        userName: 'Riko',
-        image_url: profPicUri
-    }]
-    useEffect(() => {
-       dispatch(userMockFetch())
-    }, [])
-    // HAPUSNYA SAMPAI SINI
+    // // JANGAN LUPA DI HAPUS INI HANYA UNTUK TESTING
+    // const profPicUri = 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_weight_other/1800x1200_cat_weight_other.jpg?resize=600px:*'
+    // const mockFriendList = [{
+    //     id: '5e78b2a9ab98c8a9c5cb94d6',
+    //     userName: 'Novi',
+    //     image_url: profPicUri
+    // },{
+    //     id: '5e78b2baab98c8a9c5cb94d7',
+    //     userName: 'Riko',
+    //     image_url: profPicUri
+    // }]
+    // useEffect(() => {
+    //    console.log(userData)
+    // }, [])
+    // // HAPUSNYA SAMPAI SINI
 
     const resetPicture = () => {
         dispatch(ResetPicture())

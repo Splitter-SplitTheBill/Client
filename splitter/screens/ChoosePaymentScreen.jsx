@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export default function ChoosePaymentScreen ({navigation}) {
     const billPicture = useSelector(state => state.cameraReducer.newBillPicture)
-    const userData = useSelector(state => state.eventReducer.mockUserData)
+    const userData = useSelector(state => state.userReducer.UserLogin)
     const dispatch = useDispatch()
 
     const createEvent = () => {        

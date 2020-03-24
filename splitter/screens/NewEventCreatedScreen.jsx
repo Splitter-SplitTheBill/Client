@@ -4,18 +4,17 @@ import { useSelector } from 'react-redux'
 import Constants from 'expo-constants'
 import NewEventParticipantCard from '../components/NewEventParticipantCard'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Ionicons } from '@expo/vector-icons'
 
 export default function NewEventCreatedScreen ({ navigation }) {
     const newEvent = useSelector(state => state.eventReducer.newEvent)
-
-    // console.log(newEvent)
 
     if(newEvent){
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate('TabNavigation')}>
-                    <Text>Back to Home</Text>
+                <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('TabNavigation')}>
+                    <Ionicons name="ios-home" size={30} color="green" />
                 </TouchableOpacity>
                 <View style={styles.header}>
                     <Text>Your New Event!!</Text>
@@ -101,5 +100,14 @@ const styles = StyleSheet.create({
     contentContainer: {
         height: '50%',
         width: '100%'
+    },
+    homeButton: {
+        width: 100,
+        height: 35,
+        backgroundColor: '#32ff7e',
+        borderRadius: 10,
+        marginLeft: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })

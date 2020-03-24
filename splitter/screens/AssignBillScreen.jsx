@@ -16,7 +16,7 @@ export default function AssignBillScreen ({ navigation }) {
     const receiptImageUrl = useSelector(state => state.eventReducer.billPicture)
     const transactionItems = useSelector(state => state.eventReducer.transactionItems)
     const participants = useSelector(state => state.eventReducer.participants)
-    const userData = useSelector(state => state.eventReducer.mockUserData)
+    const userData = useSelector(state => state.userReducer.UserLogin)
     const [totalReceipt, setTotalReceipt] = useState(0)
     const dispatch = useDispatch()
 

@@ -209,7 +209,8 @@ const submitEvent = (createdUserId) => {
             }),
             headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'token': getState().userReducer.UserLogin.token
         }
         })
         .then(res => res.json())
@@ -230,38 +231,31 @@ const submitEvent = (createdUserId) => {
     }
 }
 
-// JANGAN LUPA DIHAPUS
-const userMockFetch = () => {
-    return (dispatch, getState) => {
-        fetch(baseUrl + '/users/login', {
-            method: 'POST',
-            body: JSON.stringify({
-                username: 'okka21',
-                password: '1234567'
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(res => res.json())
-          .then(
-            (result) => {
-              dispatch({
-                  type: 'userMockFetch',
-                  payload: {
-                    mockUserData: result
-                  }
-              })
-            },
-            (error) => {
-              console.log(error)
-            }
-          )
+const SetToPaid = (eventId, participantId) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/transactions/${eventId}/${participantId}`, {
+        method: 'PATCH',
+        headers: {
+        'token': getState().userReducer.UserLogin.token
     }
+    })
+    .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          dispatch({
+              type: 'SetToPaid',
+              payload: {
+                updatedNewEvent: result,
+              }
+          })
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
 }
-
-
+}
 
 export {
     setParticipantsWithItems,
@@ -278,5 +272,5 @@ export {
     ChangeItemPrice,
     SetParticipantsId,
     FetchTransactionItemsAgain,
-    userMockFetch
+    SetToPaid
 }

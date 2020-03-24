@@ -7,13 +7,7 @@ const initialState = {
     billPicture: '',
     participants: [],
     newEvent: null,
-    newEventTransactions: [],
-    mockUserData: null
-
-    // {
-    //     userId,
-    //     items
-    // }
+    newEventTransactions: []
 }
 
 const eventReducer = (state=initialState, action) => {
@@ -86,15 +80,6 @@ const eventReducer = (state=initialState, action) => {
         case 'setParticipantsWithItems': 
             let participantsData = JSON.parse(JSON.stringify(state.participants))
             let transactionItemsData = JSON.parse(JSON.stringify(state.transactionItems))
-            // console.log(participantsData[2])
-            // for (let i = 0; i < participantsData.length; i++) {
-            //     for (let j = 0; j < transactionItemsData.length; j++) {
-            //         if (participantsData[i].id === transactionItemsData[j].userId) {
-            //             console.log(transactionItemsData[j], 'INI J')
-            //             participantsData[i].items.push(transactionItemsData[j])
-            //         }
-            //     }
-            // }
             participantsData.forEach((participant, participantIndex) => {
                 transactionItemsData.forEach(transactionItem => {
                     if(transactionItem.userId == participant.userId) {
@@ -110,9 +95,9 @@ const eventReducer = (state=initialState, action) => {
                 ...state, newEvent: state.newEvent = action.payload.newEvent,
                 newEventTransactions: state.newEventTransactions = action.payload.transactions
             }
-        case 'userMockFetch':
+        case 'SetToPaid':
             return {
-                ...state, mockUserData: state.mockUserData = action.payload.mockUserData
+                ...state, newEvent: state.newEvent = action.payload.updatedNewEvent
             }
         default:
             return state
