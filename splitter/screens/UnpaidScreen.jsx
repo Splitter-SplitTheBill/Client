@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,109 +14,115 @@ import {
 import { Badge } from "react-native-elements";
 import logoImage from "../assets/logo.jpg";
 import { Ionicons } from "@expo/vector-icons";
-import { useSelector, useEffect } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 export default function UnpaidDetailScreen(props) {
-  const userId = useSelector(state => {
-    return state.userReducer.UserLogin._id;
+  const userLogin = useSelector(state => {
+    return state.userReducer.UserLogin;
   });
+
+  const [userData, setUserData] = useState([]);
 
   const baseUrl = "http://localhost:3000";
 
-  // const test = () => {
-  //   axios({
-  //     method: "GET",
-  //     url: baseUrl + "/transactions/user/" + userId
-  //   })
-  //     .then(response => {
-  //       console.log(response.data, "<<<<< ini ");
-  //       // props.navigation.navigate("Login");
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response);
-  //     });
-  // };
+  const test = () => {
+    console.log(userLogin._id, "<<<<<<user loginn");
+    axios({
+      method: "GET",
+      url: baseUrl + "/transactions/user/" + userLogin._id,
+      headers: {
+        token: userLogin.token
+      }
+    })
+      .then(response => {
+        console.log(response.data, "<<<<< ini transaction ");
+        setUserData(response.data);
+        // props.navigation.navigate("Login");
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
 
-  // console.log(test, "<<<<<<testtt");
-  const userData = [
-    {
-      _id: "5e78b57527668fabf8f4862a",
-      userId: {
-        _id: "5e78b2baab98c8a9c5cb94d7",
-        name: "Okka2",
-        email: "okka2@mail.com",
-        username: "okka12",
-        accounts: [],
-        friendList: [],
-        __v: 0
-      },
-      items: [
-        {
-          _id: "5e78b57527668fabf8f4862b",
-          name: " TU Rice Org nik",
-          price: 454
-        },
-        {
-          _id: "5e78b57527668fabf8f4862c",
-          name: " TU Rice Org nik",
-          price: 454
-        }
-      ],
-      total: 908,
-      status: false,
-      paymentSelection: [
-        {
-          _id: "5e78b57527668fabf8f48622",
-          name: "Okka Linardi",
-          instance: "Ovo"
-        },
-        {
-          _id: "5e78b57527668fabf8f48623",
-          name: "Okka Linardi",
-          instance: "BCA"
-        }
-      ],
-      eventId: {
-        _id: "5e78b57527668fabf8f48621",
-        name: "Test eventsssss",
-        photo:
-          "https://jsprojectdev37.s3.ap-southeast-1.amazonaws.com/1584969059895-test.jpg",
-        status: "false",
-        participants: [
-          {
-            _id: "5e78b57527668fabf8f4862f",
-            participantId: "5e78b2a9ab98c8a9c5cb94d6",
-            transactionId: "5e78b57527668fabf8f48624",
-            username: "ajenggila"
-          },
-          {
-            _id: "5e78b57527668fabf8f48630",
-            participantId: "5e78b2baab98c8a9c5cb94d7",
-            transactionId: "5e78b57527668fabf8f4862a",
-            username: "ajenggila"
-          }
-        ],
-        accounts: [
-          {
-            _id: "5e78b57527668fabf8f48622",
-            name: "Okka Linardi",
-            instance: "Ovo"
-          },
-          {
-            _id: "5e78b57527668fabf8f48623",
-            name: "Okka Linardi",
-            instance: "BCA"
-          }
-        ],
-        createdUserId: "5e78b2e7ab98c8a9c5cb94d8",
-        __v: 0
-      },
-      createdAt: "2020-03-23T13:11:17.441Z",
-      updatedAt: "2020-03-23T13:11:17.441Z",
-      __v: 0
-    }
-  ];
+  // const userData = [
+  //   {
+  //     _id: "5e78b57527668fabf8f4862a",
+  //     userId: {
+  //       _id: "5e78b2baab98c8a9c5cb94d7",
+  //       name: "Okka2",
+  //       email: "okka2@mail.com",
+  //       username: "okka12",
+  //       accounts: [],
+  //       friendList: [],
+  //       __v: 0
+  //     },
+  //     items: [
+  //       {
+  //         _id: "5e78b57527668fabf8f4862b",
+  //         name: " TU Rice Org nik",
+  //         price: 454
+  //       },
+  //       {
+  //         _id: "5e78b57527668fabf8f4862c",
+  //         name: " TU Rice Org nik",
+  //         price: 454
+  //       }
+  //     ],
+  //     total: 908,
+  //     status: false,
+  //     paymentSelection: [
+  //       {
+  //         _id: "5e78b57527668fabf8f48622",
+  //         name: "Okka Linardi",
+  //         instance: "Ovo"
+  //       },
+  //       {
+  //         _id: "5e78b57527668fabf8f48623",
+  //         name: "Okka Linardi",
+  //         instance: "BCA"
+  //       }
+  //     ],
+  //     eventId: {
+  //       _id: "5e78b57527668fabf8f48621",
+  //       name: "Test eventsssss",
+  //       photo:
+  //         "https://jsprojectdev37.s3.ap-southeast-1.amazonaws.com/1584969059895-test.jpg",
+  //       status: "false",
+  //       participants: [
+  //         {
+  //           _id: "5e78b57527668fabf8f4862f",
+  //           participantId: "5e78b2a9ab98c8a9c5cb94d6",
+  //           transactionId: "5e78b57527668fabf8f48624",
+  //           username: "ajenggila"
+  //         },
+  //         {
+  //           _id: "5e78b57527668fabf8f48630",
+  //           participantId: "5e78b2baab98c8a9c5cb94d7",
+  //           transactionId: "5e78b57527668fabf8f4862a",
+  //           username: "ajenggila"
+  //         }
+  //       ],
+  //       accounts: [
+  //         {
+  //           _id: "5e78b57527668fabf8f48622",
+  //           name: "Okka Linardi",
+  //           instance: "Ovo"
+  //         },
+  //         {
+  //           _id: "5e78b57527668fabf8f48623",
+  //           name: "Okka Linardi",
+  //           instance: "BCA"
+  //         }
+  //       ],
+  //       createdUserId: "5e78b2e7ab98c8a9c5cb94d8",
+  //       __v: 0
+  //     },
+  //     createdAt: "2020-03-23T13:11:17.441Z",
+  //     updatedAt: "2020-03-23T13:11:17.441Z",
+  //     __v: 0
+  //   }
+  // ];
 
   // function getUserPay(id) {
   //   axios({
@@ -133,9 +139,9 @@ export default function UnpaidDetailScreen(props) {
   //     });
   // }
 
-  // useEffect(() => {
-  //   test();
-  // }, []);
+  useEffect(() => {
+    test();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

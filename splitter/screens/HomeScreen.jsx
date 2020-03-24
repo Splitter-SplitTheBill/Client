@@ -1,39 +1,55 @@
-import React from 'react'
-import { View, Text, StyleSheet, Image, Dimensions, Button } from 'react-native'
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
-import peopleMoney from '../assets/images/peopleMoney.png'
-import recentEvent from '../assets/images/recentEvent.png'
-import history from '../assets/images/bill.png'
-import add from '../assets/images/add.png'
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  Button
+} from "react-native";
+import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
+import peopleMoney from "../assets/images/peopleMoney.png";
+import recentEvent from "../assets/images/recentEvent.png";
+import history from "../assets/images/bill.png";
+import add from "../assets/images/add.png";
 
-export default function HomeScreen ({navigation}) {
-    return (
-        <View style={styles.container}>
-          <View style={styles.background}>
-            <View>
-              <Text style={styles.title}>Splitter</Text>
-              <Text style={styles.desc}>Split The Bill</Text>
-            </View>
-            <Image source={peopleMoney} style={styles.image}/>
+export default function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.background}>
+        <View>
+          <Text style={styles.title}>Splitter</Text>
+          <Text style={styles.desc}>Split The Bill</Text>
+        </View>
+        <Image source={peopleMoney} style={styles.image} />
+      </View>
+      <View style={styles.box}>
+        <ScrollView>
+          <View style={styles.horBox}>
+            <TouchableOpacity
+              style={styles.boxes}
+              onPress={() => navigation.navigate("Unpaid")}
+            >
+              <Image source={recentEvent} style={styles.logo} />
+              <Text>Recent Event</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.boxes}
+              onPress={() => navigation.navigate("HistoryScreen")}
+            >
+              <Image source={history} style={styles.logo} />
+              <Text>History</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.box}>
-            <ScrollView>
-              <View style={styles.horBox}>
-                <TouchableOpacity style={styles.boxes} onPress={() => navigation.navigate('Unpaid')}>
-                  <Image source={recentEvent} style={styles.logo}/>
-                  <Text>Recent Event</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.boxes} onPress={() => navigation.navigate('HistoryScreen')}>
-                  <Image source={history} style={styles.logo}/>
-                  <Text>History</Text>
-              </TouchableOpacity>
-              </View>
-              <TouchableOpacity style={styles.button} >
-                <Image source={add} style={styles.logo}/>
-                <Text>Add Bill</Text>
-              </TouchableOpacity>
-            </ScrollView>
-          </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Create")}
+          >
+            <Image source={add} style={styles.logo} />
+            <Text>Add Bill</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
     </View>
   );
 }
