@@ -1,49 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, Alert, Image } from 'react-native'
 import boyImage from '../assets/images/boy.png'
 import { BackButton } from '../components'
+import { useDispatch } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import axios from 'axios'
+import { ADDFRIEND } from '../actions/friendAction'
+
 
 function AddFriend({route, navigation}) {
+  const dispatch = useDispatch()
+
   let friend = route.params.data
 
-  console.log(friend, '< friend')
   const back = () => {
     navigation.goBack()
   }
+  const user = useSelector(state => {
+    return state.userReducer.UserLogin;
+  })
+
+  const userId = user._id
+  const token = user.token
 
   const addFriend = () => {
-    axios({
-      method: 'PUT',
-      url: 'http://localhost:3000/users/2',
-      data: {
-        name: 'berubah',
-        username: 'berubah',
-        friends: [friend]
-      }
-    })
-    .then(result => {
-      console.log(result.data, '< result')
-      navigation.navigate('FriendListScreen')
-    })
-    .catch(err => {
-      console.log(err, '< error')
-    })
-  }
+    dispatch(ADDFRIEND(userId, friend._id, token))
+    navigation.navigate('FriendListScreen')
+  } 
 
   return (
     <View style={styles.container}>
       <BackButton methods={back} />
       <View style={styles.box}>
         <View style={styles.backgroundImage}>
-          {friend.photo
+          {friend.image_url
             ?
-            <Image source={{uri: friend.photo}} style={styles.photo} resizeMode="cover" />
+            <Image source={{uri: friend.image_url}} style={styles.photo} resizeMode="cover" />
             :
             <Image source={boyImage} style={styles.image}/>
           }
         </View>
+        <Text>{friend.name}</Text>
         <TouchableOpacity style={styles.add} onPress={addFriend}>
           <Text style={styles.text}>ADD FRIEND</Text>
         </TouchableOpacity>
@@ -93,7 +89,10 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center'
-  }
+  },
+  error: {
+    color: '#900'
+  },
 })
 
 export default AddFriend

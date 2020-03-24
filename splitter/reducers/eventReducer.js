@@ -1,5 +1,6 @@
 const initialState = {
-    friendInEvent: []
+    friendInEvent: [],
+    allEvents: []
 }
 
 const eventReducer = (state=initialState, action) => {
@@ -13,6 +14,11 @@ const eventReducer = (state=initialState, action) => {
             return {
                 ...state, friendInEvent: state.friendInEvent = newFriendInEvent
             }
+        case 'showAllEvents':
+            const events = action.payload.events
+            const user = action.payload.user
+            const userEvents = events.filter(event => event.createdUserId._id == user)
+            return { ...state, allEvents: userEvents }
         default:
             return state
     }
