@@ -1,5 +1,5 @@
 const initialState = {
-    newBillPicture: ''
+    newBillPicture: null
 }
 
 const cameraReducer = (state=initialState, action) => {

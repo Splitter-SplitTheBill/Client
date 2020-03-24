@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, Dimensions, Image, Button } from 'react-native'
 import PaymentMethodCard from '../components/PaymentMethodCard'
-import { FetchTransactionItems } from '../actions/eventAction'
+import { FetchTransactionItems, SetParticipantsId } from '../actions/eventAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function ChoosePaymentScreen ({navigation}) {
     const billPicture = useSelector(state => state.cameraReducer.newBillPicture)
+    const userData = useSelector(state => state.eventReducer.mockUserData)
     const dispatch = useDispatch()
 
-    const createEvent = () => {
+    const createEvent = () => {        
         dispatch(FetchTransactionItems(billPicture))
         navigation.navigate('Split')
     }
@@ -20,30 +21,13 @@ export default function ChoosePaymentScreen ({navigation}) {
             </View>
             <Text style={{fontSize: 23, fontWeight: 'bold', marginTop: 10}}>Choose Your Methods</Text>
             <View style={styles.paymentMethodCardContainer}>
-                <PaymentMethodCard paymentDetails={{
-                    name: 'Okka Linardi',
-                    instance: 'Mandiri',
-                    accNumber: '3456787654',
-                    id: 1
-                }}></PaymentMethodCard>
-                <PaymentMethodCard paymentDetails={{
-                    name: 'Okka Linardi',
-                    instance: 'Ovo',
-                    accNumber: '3456787654',
-                    id: 2
-                }}></PaymentMethodCard>
-                <PaymentMethodCard paymentDetails={{
-                    name: 'Okka Linardi',
-                    instance: 'BCA',
-                    accNumber: '3456787654',
-                    id: 3
-                }}></PaymentMethodCard>
-                <PaymentMethodCard paymentDetails={{
-                    name: 'Okka Linardi',
-                    instance: 'Gopay',
-                    accNumber: '3456787654',
-                    id: 4
-                }}></PaymentMethodCard>
+                {
+                    userData.accounts.map(account => {
+                        return (
+                            <PaymentMethodCard paymentDetails={account} />
+                        )
+                    })
+                }
             </View>
             <Button title="Next" onPress={() => createEvent()} />
         </View>

@@ -18,7 +18,7 @@ export default function PaymentMethodCard ({ paymentDetails }) {
     }
 
     useEffect(() => {
-        const methodList = paymenMethodList.filter (method => method.id == paymentDetails.id)
+        const methodList = paymenMethodList.filter (method => method._id == paymentDetails._id)
 
         if(methodList.length > 0){
             setSelected(true)
@@ -36,7 +36,7 @@ export default function PaymentMethodCard ({ paymentDetails }) {
                     </View>
                     <View style={styles.selectedMethodNone}>
                         <Text style={styles.accNameMethod}>{paymentDetails.name}</Text>
-                        <Text style={styles.accNumMethod}>{paymentDetails.accNumber}</Text>
+                        <Text style={styles.accNumMethod}>{paymentDetails.accountNumber}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -52,7 +52,7 @@ export default function PaymentMethodCard ({ paymentDetails }) {
                         <View style={{width: '35%', height: '100%'}}></View>
                         <View style={{width: '65%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
                             <Text style={styles.accNameMethodSelected}>{paymentDetails.name}</Text>
-                            <Text style={styles.accNumMethodSelected}>{paymentDetails.accNumber}</Text>
+                            <Text style={styles.accNumMethodSelected}>{paymentDetails.accountNumber}</Text>
                         </View>
                     </View>
                 </View>

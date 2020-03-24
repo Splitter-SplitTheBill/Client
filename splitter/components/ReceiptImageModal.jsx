@@ -3,12 +3,12 @@ import { View, StyleSheet, Dimensions, TouchableOpacity, Text, Image } from 'rea
 import { useSelector } from 'react-redux'
 
 export default function ReceiptImageModal ({ triggerModal }) {
-    const receiptImageUrl = useSelector(state => state.cameraReducer.newBillPicture)
+    const receiptImageUrl = useSelector(state => state.eventReducer.billPicture)
     return (
         <View style={styles.modalPage}>
             <View style={styles.imageContainer}>
                 <TouchableOpacity style={styles.closeModalButton} onPress={() => triggerModal()}>
-                    <Text>X</Text>
+                    <Text style={styles.crossIcon}>X</Text>
                 </TouchableOpacity>
                 <View style={styles.receiptImagePart}>
                     <Image style={styles.receiptImage} source={{uri: receiptImageUrl}} />
@@ -52,5 +52,11 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         borderRadius: 20,
         overflow: 'hidden'
+    },
+    croosIcon: {
+        height: 20,
+        width: 20,
+        borderRadius: 999,
+        backgroundColor: 'grey'
     }
 })
