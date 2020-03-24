@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Alert, Image } from "react-native";
-import boyImage from "../assets/images/boy.png";
-import { BackButton } from "../components";
-import { useDispatch, useSelector } from "react-redux";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { ADDFRIEND } from "../actions/friendAction";
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, Alert, Image } from 'react-native'
+import boyImage from '../assets/images/boy.png'
+import { BackButton } from '../components'
+import { useDispatch, useSelector } from 'react-redux'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ADDFRIEND } from '../actions/friendAction'
 
 function AddFriend({ route, navigation }) {
   const dispatch = useDispatch();

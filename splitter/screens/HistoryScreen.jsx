@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { View, Text, StyleSheet, Image, Modal } from 'react-native'
-import Constants from 'expo-constants';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
-import payment from '../assets/images/payment.jpg'
 import pay from '../assets/images/pay.png'
 
 import { CustomCard, BackButton } from '../components'
@@ -13,11 +11,15 @@ import { showAllEvents } from '../actions/eventAction'
 
 function HistoryScreen({navigation}) {
   const dispatch = useDispatch()
+  const user = useSelector(state => {
+    return state.userReducer.UserLogin;
+  })
 
-  let user = '5e787cbff1349c203efdf2fe'
+  const userId = user._id
+  const token = user.token
 
   useEffect(() => {
-    dispatch(showAllEvents(user))
+    dispatch(showAllEvents(userId, token))
   }, [])
 
   const allEvents = useSelector(state => state.eventReducer.allEvents)
@@ -27,7 +29,6 @@ function HistoryScreen({navigation}) {
   }
 
   const detailHistory = (event) => {
-    console.log('pressed')
     navigation.navigate('DetailHistoryScreen', {event: event.participants})
   }
 
@@ -47,7 +48,9 @@ function HistoryScreen({navigation}) {
         <ScrollView>
           {allEvents.map(event => {
             return (
-              <CustomCard methods={detailHistory} data={event} />
+              <View key={event._id}>
+                <CustomCard methods={detailHistory} data={event} />
+              </View>
             )
           })}
         </ScrollView>

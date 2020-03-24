@@ -6,16 +6,25 @@ import { Ionicons } from '@expo/vector-icons'
 import receipt from '../assets/images/receipt.png'
 
 export default function Card({methods, data}) {
-  console.log(data, '< data')
   return (
-    <TouchableOpacity style={styles.event} onPress={methods(data)} >
+    <TouchableOpacity style={styles.event} onPress={() => methods(data)} >
       <View style = {styles.circle} >
         <Image source = {receipt} style={styles.icon}/>
       </View>
+      {data.status 
+      ?
       <View style={styles.detail}>
         <Text style={styles.eventName}>{data.name}</Text>
         <Text>You and {data.participants.length - 1} other people</Text>
+        <Text style={{color: '#900'}}>UNCOMPLETE</Text>
       </View>
+      :
+      <View style={styles.detail}>
+        <Text style={styles.eventName}>{data.name}</Text>
+        <Text>You and {data.participants.length - 1} other people</Text>
+        <Text style={{color: '#6597a0'}}>COMPLETE</Text>
+      </View>
+      }
       <View style={styles.nextIcon}>
         <Ionicons name="ios-arrow-forward" style={styles.next} size={30} />
       </View>

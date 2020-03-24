@@ -5,7 +5,6 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { SearchBar } from '../components'
 import {useSelector, useDispatch} from 'react-redux'
 import { ALLFRIENDS, DELETEFRIEND } from '../actions/friendAction'
-import SearchFriend from './SearchFriendScreen'
 
 function FriendListScreen({navigation}) {
   const [searchFriends, setFriend] = useState(false)
@@ -21,7 +20,6 @@ function FriendListScreen({navigation}) {
 
   useEffect(() => {
     dispatch(ALLFRIENDS(userId, token))
-    // dispatch(ALLFRIENDS("5e787cbff1349c203efdf2fe", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2NiZmYxMzQ5YzIwM2VmZGYyZmUiLCJlbWFpbCI6InRlc3Rlc0BtYWlsLmNvbSIsImlhdCI6MTU4NDk4OTI4NH0.GUEfRXNBUX5Tb6FEewKCnADbBR5-z-f-TPxGRWamq-k"))
   }, [])
 
   const friends = useSelector(state => state.friendsReducer.friends)
@@ -48,7 +46,6 @@ function FriendListScreen({navigation}) {
   }
 
   const deleteFriend = (friendId) => {
-    console.log(friendId, '< friendId friend')
     dispatch(DELETEFRIEND(userId, friendId, token))
   }
 

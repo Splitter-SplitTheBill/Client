@@ -166,10 +166,15 @@ const ChangeItemPrice = (newPrice, index) => {
     }
 }
 
-const showAllEvents = (userId) => {
+const showAllEvents = (userId, token) => {
     return (dispatch) => {
-        axios.get(`http://localhost:3000/events`)
+        axios({
+          method: 'GET',
+          url: `http://localhost:3000/events`,
+          headers: { token }
+        })
           .then(result => {
+            // console.log(result, '<<<< Resultt')
             dispatch(allEvents({events: result.data.events, user: userId}))
           })
           .catch(err => {

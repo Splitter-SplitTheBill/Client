@@ -38,7 +38,6 @@ export default function App() {
             unmountInactiveRoutes: true
           }}
         >
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="TabNavigation" component={TabNavigation} />
