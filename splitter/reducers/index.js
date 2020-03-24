@@ -1,14 +1,14 @@
-import {
-    combineReducers
-} from 'redux'
-import cameraReducer from './cameraReducer'
-import eventReducer from './eventReducer'
-import friendsReducer from './friendsReducer'
+import { combineReducers } from "redux";
+import cameraReducer from "./cameraReducer";
+import eventReducer from "./eventReducer";
+import friendsReducer from "./friendsReducer";
+import userReducer from "./userReducer";
 
 const reducers = combineReducers({
-    cameraReducer,
-    eventReducer,
-    friendsReducer
-  })
+  cameraReducer,
+  eventReducer,
+  friendsReducer,
+  userReducer
+});
 
-export default reducers
+export default reducers;

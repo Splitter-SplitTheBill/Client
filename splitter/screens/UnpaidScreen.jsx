@@ -14,66 +14,128 @@ import {
 import { Badge } from "react-native-elements";
 import logoImage from "../assets/logo.jpg";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector, useEffect } from "react-redux";
+import axios from "axios";
 
 export default function UnpaidDetailScreen(props) {
+  const userId = useSelector(state => {
+    return state.userReducer.UserLogin._id;
+  });
+
+  const baseUrl = "http://localhost:3000";
+
+  // const test = () => {
+  //   axios({
+  //     method: "GET",
+  //     url: baseUrl + "/transactions/user/" + userId
+  //   })
+  //     .then(response => {
+  //       console.log(response.data, "<<<<< ini ");
+  //       // props.navigation.navigate("Login");
+  //     })
+  //     .catch(err => {
+  //       console.log(err.response);
+  //     });
+  // };
+
+  // console.log(test, "<<<<<<testtt");
   const userData = [
     {
-      transactionId: "87567842jbnjda217yt",
-      User: {
-        username: "Dila",
-        name: "Fadhilah Rayafi",
-        email: "fadhilahrayafi@gmail.com",
-        image_profile:
-          "https://i.pinimg.com/originals/b6/41/94/b6419495ba9b25efd222512d7e276fc6.gif",
-        accounts: [
-          {
-            type: "Gopay",
-            detail: "082116912705"
-          },
-          {
-            type: "Dana",
-            detail: "082116912705"
-          }
-        ]
+      _id: "5e78b57527668fabf8f4862a",
+      userId: {
+        _id: "5e78b2baab98c8a9c5cb94d7",
+        name: "Okka2",
+        email: "okka2@mail.com",
+        username: "okka12",
+        accounts: [],
+        friendList: [],
+        __v: 0
       },
       items: [
         {
-          name: "Nasi Goreng",
-          qty: 1,
-          price: 15000
+          _id: "5e78b57527668fabf8f4862b",
+          name: " TU Rice Org nik",
+          price: 454
         },
         {
-          name: "Es Jeruk",
-          qty: 1,
-          price: 5000
-        },
-        {
-          name: "Es Jeruk",
-          qty: 1,
-          price: 5000
-        },
-        {
-          name: "Es Jeruk",
-          qty: 1,
-          price: 5000
+          _id: "5e78b57527668fabf8f4862c",
+          name: " TU Rice Org nik",
+          price: 454
         }
       ],
+      total: 908,
       status: false,
-      total: 20000,
-      Event: {
-        name: "Makan Padang",
-        participants: [1, 2, 3],
-        accounts: [
+      paymentSelection: [
+        {
+          _id: "5e78b57527668fabf8f48622",
+          name: "Okka Linardi",
+          instance: "Ovo"
+        },
+        {
+          _id: "5e78b57527668fabf8f48623",
+          name: "Okka Linardi",
+          instance: "BCA"
+        }
+      ],
+      eventId: {
+        _id: "5e78b57527668fabf8f48621",
+        name: "Test eventsssss",
+        photo:
+          "https://jsprojectdev37.s3.ap-southeast-1.amazonaws.com/1584969059895-test.jpg",
+        status: "false",
+        participants: [
           {
-            name: "Dila",
-            instance: "Gopay",
-            accountNumber: "082345678"
+            _id: "5e78b57527668fabf8f4862f",
+            participantId: "5e78b2a9ab98c8a9c5cb94d6",
+            transactionId: "5e78b57527668fabf8f48624",
+            username: "ajenggila"
+          },
+          {
+            _id: "5e78b57527668fabf8f48630",
+            participantId: "5e78b2baab98c8a9c5cb94d7",
+            transactionId: "5e78b57527668fabf8f4862a",
+            username: "ajenggila"
           }
         ],
-        created_at: "02/03/2020"
-      }
+        accounts: [
+          {
+            _id: "5e78b57527668fabf8f48622",
+            name: "Okka Linardi",
+            instance: "Ovo"
+          },
+          {
+            _id: "5e78b57527668fabf8f48623",
+            name: "Okka Linardi",
+            instance: "BCA"
+          }
+        ],
+        createdUserId: "5e78b2e7ab98c8a9c5cb94d8",
+        __v: 0
+      },
+      createdAt: "2020-03-23T13:11:17.441Z",
+      updatedAt: "2020-03-23T13:11:17.441Z",
+      __v: 0
     }
   ];
+
+  // function getUserPay(id) {
+  //   axios({
+  //     method: "GET",
+  //     url: baseUrl + "/users/" + id
+  //   })
+  //     .then(response => {
+  //       console.log(response.data);
+  //       setUserPay(response.data);
+  //       return userPay;
+  //     })
+  //     .catch(err => {
+  //       console.log(err.response);
+  //     });
+  // }
+
+  // useEffect(() => {
+  //   test();
+  // }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -97,14 +159,14 @@ export default function UnpaidDetailScreen(props) {
               <TouchableOpacity
                 style={styles.boxInner}
                 onPress={() =>
-                  props.navigation.navigate("UnpaidDetail", {
+                  props.navigation.navigate("DetailUnpaid", {
                     unpaid: unpaid
                   })
                 }
               >
                 <Image
                   style={styles.imageInner}
-                  source={unpaid.User.image_profile}
+                  source="https://cdn.imgbin.com/17/8/4/imgbin-banknote-united-states-one-dollar-bill-logo-united-states-dollar-banknote-bGqSrTb5vTadEgMcxEJwcQNcK.jpg"
                 />
                 <View style={styles.textInner}>
                   <Text
@@ -114,9 +176,9 @@ export default function UnpaidDetailScreen(props) {
                       marginBottom: 5
                     }}
                   >
-                    {unpaid.Event.name}
+                    {unpaid.eventId.name}
                   </Text>
-                  <Text>{unpaid.Event.created_at}</Text>
+                  <Text>{unpaid.createdAt.slice(0, 10)}</Text>
                 </View>
                 <Ionicons
                   name="ios-arrow-forward"
