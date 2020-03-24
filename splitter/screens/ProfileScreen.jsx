@@ -9,26 +9,18 @@ import {
   TouchableOpacity,
   ScrollView
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import logoImage from "../assets/logo.jpg";
 
 export default function ProfileScreen(props) {
-  const userData = {
-    username: "Dila",
-    name: "Fadhilah Rayafi",
-    email: "fadhilahrayafi@gmail.com",
-    image_profile:
-      "https://66.media.tumblr.com/108236e6fb376a100572cb1578141f29/tumblr_oqr6teOvWw1rs1l1uo1_400.gifv",
-    accounts: [
-      {
-        type: "Gopay",
-        detail: "082116912705"
-      },
-      {
-        type: "Dana",
-        detail: "082116912705"
-      }
-    ]
-  };
+  const test = useSelector(state => {
+    return state.userReducer.UserLogin;
+  });
+
+  console.log(test, "<<<<<inininin");
+  const userData = useSelector(state => {
+    return state.userReducer.UserLogin;
+  });
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -38,7 +30,7 @@ export default function ProfileScreen(props) {
             <Image
               style={styles.imageProfile}
               source={{
-                uri: userData.image_profile
+                uri: userData.image_url
               }}
               resizeMode="cover"
             />
@@ -55,8 +47,10 @@ export default function ProfileScreen(props) {
                 <View
                   style={{ flexDirection: "row", justifyContent: "center" }}
                 >
-                  <Text style={styles.AccDetailType}>{acc.type}</Text>
-                  <Text style={styles.AccDetailNumber}>{acc.detail}</Text>
+                  <Text style={styles.AccDetailType}>{acc.name}</Text>
+                  <Text style={styles.AccDetailNumber}>
+                    {acc.accountNumber}
+                  </Text>
                 </View>
               );
             })}

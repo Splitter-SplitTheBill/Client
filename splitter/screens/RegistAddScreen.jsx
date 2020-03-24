@@ -2,9 +2,36 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, Button } from "react-native";
 import logoImage from "../assets/logo.jpg";
 import { Dropdown } from "react-native-material-dropdown";
+import axios from "axios";
 
 export default function RegistAddScreen(props) {
-  const [account, setAccount] = useState([""]);
+  console.log(props, "<<<<<");
+  const [account, setAccount] = useState([]);
+  const baseUrl = "http://localhost:3000";
+
+  const Register = () => {
+    axios({
+      method: "POST",
+      url: baseUrl + "/users/register",
+      data: {
+        name: props.route.params.names,
+        email: props.route.params.email,
+        username: props.route.params.username,
+        password: props.route.params.password,
+        image_url:
+          "https://lh3.googleusercontent.com/proxy/_bs59aeNbs6XJrlZgC5FEZ3wqDcbzRiVcCuPUyGvp0G_OyxuT8nLOtoHU72_8C7btYk4aORLfSdlV43k7y5Azks",
+        friendList: [],
+        accounts: account
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+        props.navigation.navigate("Login");
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
 
   const data = [
     {
@@ -19,15 +46,14 @@ export default function RegistAddScreen(props) {
   ];
 
   function onChangeTextPress(value) {
-    setAccount(account.concat(value));
+    setAccount(
+      account.concat({ name: value, instance: value, accountNumber: "83700" })
+    );
     console.log(account);
   }
 
-  console.log(account);
+  console.log(account, "ini acccc");
 
-  function regisAddAcc() {
-    props.navigation.navigate("Home");
-  }
   return (
     <View style={styles.container}>
       <View style={styles.boxLogo}>
@@ -38,7 +64,11 @@ export default function RegistAddScreen(props) {
         <Text style={styles.loginText}>Register</Text>
         <View>
           {account.map(acc => {
-            return <Text>{acc}</Text>;
+            return (
+              <Text>
+                {acc.name} {acc.accountNumber}
+              </Text>
+            );
           })}
         </View>
         <Text style={styles.textInput}>Add Account</Text>
@@ -63,11 +93,7 @@ export default function RegistAddScreen(props) {
           />
         </View>
         <View style={styles.buttonLogin}>
-          <Button
-            title="Register"
-            onPress={() => regisAddAcc()}
-            color="#6597A0"
-          />
+          <Button title="Register" onPress={() => Register()} color="#6597A0" />
         </View>
       </View>
     </View>

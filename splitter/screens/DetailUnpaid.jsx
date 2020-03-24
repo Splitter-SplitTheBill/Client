@@ -1,96 +1,126 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   View,
   Text,
   StyleSheet,
   Image,
-  TextInput,
   Button,
   TouchableOpacity,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  CheckBox
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+
 import axios from "axios";
 
-export default function UnpaidScreen(props) {
-  console.log("masuk detail unpaid");
+export default function detail(props) {
+  const [userPay, setUserPay] = useState({});
+
+  const dataUnpaid = props.route.params.unpaid;
+  console.log(dataUnpaid, "INI DATAAA");
+
+  const userlogin = useSelector(state => {
+    return state.userReducer.UserLogin;
+  });
+
+  console.log(userlogin, "ini userlogin");
+
+  console.log(userPay, "<<<user pay");
 
   useEffect(() => {
-    alert("hoiii");
+    getUser("5e78a782b70b3d2944d57174");
   }, []);
 
-  // const dataUnpaid = props.route.params.unpaid;
-  // console.log(dataUnpaid, "INI DATAAA");
+  function pay(eventId, userId) {
+    axios
+      .patch(`http://localhost:3000/transactions/${eventId}/${userId}`)
+      .then(response => {
+        console.log(response.data, "<<<< berhasil bayar");
+        props.navigation.navigate("Home");
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  }
 
-  // const baseUrl = "http://localhost:3000";
+  const getUser = id => {
+    axios
+      .get(`http://localhost:3000/users/${id}`, {
+        headers: {
+          token: userlogin.token
+        }
+      })
+      .then(response => {
+        console.log(response.data, "<<<< response data");
+        setUserPay(response.data);
+      })
+      .catch(err => {
+        console.log(err.response, "<<<< ini error");
+      });
+  };
 
-  // const [userPay, setUserPay] = useState({});
-
-  // console.log(userPay, "<<ini user yg bayarr");
-
-  // const formatMoney = money => {
-  //   let str = String(money);
-  //   return "Rp. " + str.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-  // };
-
-  // //harusnya gini ya bukan gitu dataUnpaid.eventId.createdUserId
-  // const getUserPay = () => {
-  //   console.log("masuk getuser");
-  //   axios
-  //     .get(`http://localhost:3000/users/5e78a782b70b3d2944d57174`)
-  //     // axios({
-  //     //   method: "GET",
-  //     //   url: `http://localhost:3000/users/5e78a782b70b3d2944d57174`
-  //     // })
-  //     .then(response => {
-  //       console.log(response.data, "<<<< response data");
-  //       setUserPay(response.data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response, "<<<< ini error");
-  //     });
-  // };
-
-  // function pay() {
-  //   props.navigation.navigate("Home");
-  // }
+  const formatMoney = money => {
+    let str = String(money);
+    return "Rp. " + str.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#6597A0", flex: 1 }}>
+    <SafeAreaView
+      style={{
+        backgroundColor: "#6597A0",
+        flex: 1
+      }}
+    >
       <ScrollView>
         <View style={styles.container}>
-          <View style={{ flexDirection: "row", backgroundColor: "#6597A0" }}>
-            {/* <View style={{ borderRadius: 99 }}> */}
+          <View
+            style={{
+              flexDirection: "row",
+              backgroundColor: "#6597A0"
+            }}
+          >
             <Image
               style={styles.imageProfile}
               source={{
-                uri: dataUnpaid.User.image_profile
+                uri: userPay.image_url
               }}
             />
-            {/* </View> */}
-            <View style={{ alignItems: "center", marginLeft: 20 }}>
-              <Text style={styles.from}>From {dataUnpaid.User.username}</Text>
-              <Text style={styles.eventName}>{dataUnpaid.Event.name}</Text>
+            <View
+              style={{
+                alignItems: "center",
+                marginLeft: 20
+              }}
+            >
+              <Text style={styles.from}>From {userPay.username}</Text>
+              <Text style={styles.eventName}>{dataUnpaid.eventId.name}</Text>
               <Text style={{ fontSize: 18 }}>
-                {dataUnpaid.Event.created_at}
+                {dataUnpaid.createdAt.slice(0, 10)}
               </Text>
             </View>
           </View>
           <View>
             <Text style={styles.boxRed}>Detail</Text>
             <View style={styles.boxDetail}>
-              <View style={{ flexDirection: "row" }}>
+              <View
+                style={{
+                  flexDirection: "row"
+                }}
+              >
                 <Text style={styles.titleDetail}>Item</Text>
-                <Text style={styles.titleDetail}>Qty</Text>
+                {/* <Text style={styles.titleDetail}>Qty</Text> */}
                 <Text style={styles.titleDetail}>Price</Text>
               </View>
               <View>
                 {dataUnpaid.items.map(item => {
                   return (
-                    <View style={{ flexDirection: "row" }}>
+                    <View
+                      style={{
+                        flexDirection: "row"
+                      }}
+                    >
                       <Text style={styles.textDetail}>{item.name}</Text>
-                      <Text style={styles.textDetail}>{item.qty}</Text>
+                      {/* <Text style={styles.textDetail}>{item.qty}</Text> */}
                       <Text style={styles.textDetail}>
                         {formatMoney(item.price)}
                       </Text>
@@ -103,7 +133,7 @@ export default function UnpaidScreen(props) {
           <View>
             <Text style={styles.boxRed}>Participants</Text>
             <View style={styles.boxParticipant}>
-              {participants.map(user => {
+              {dataUnpaid.eventId.participants.map(user => {
                 return <Text>{user.username}</Text>;
               })}
             </View>
@@ -115,7 +145,11 @@ export default function UnpaidScreen(props) {
             </View>
           </View>
           <View style={styles.buttonPay}>
-            <Button title="PAY" color="black" onPress={() => pay()} />
+            <Button
+              title="PAY"
+              color="black"
+              onPress={() => pay(dataUnpaid.eventId._id, userlogin._id)}
+            />
           </View>
         </View>
       </ScrollView>
@@ -157,7 +191,7 @@ const styles = StyleSheet.create({
   titleDetail: {
     fontSize: 18,
     fontWeight: "bold",
-    width: 100,
+    width: 150,
     padding: 5,
     textAlign: "center"
   },
@@ -167,7 +201,7 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
   textDetail: {
-    width: 100,
+    width: 150,
     textAlign: "center",
     padding: 5
   },

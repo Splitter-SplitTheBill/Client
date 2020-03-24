@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { UserLogin } from "../actions/userAction";
 import {
   View,
   Text,
@@ -13,6 +15,17 @@ import logoImage from "../assets/logo.jpg";
 export default function LoginScreen(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const login = () => {
+    if (username.length === 0 || password.length === 0) {
+      props.navigation.navigate("Login");
+    }
+    const inputLogin = { username, password };
+    dispatch(UserLogin(inputLogin));
+    props.navigation.navigate("Home");
+  };
   return (
     <View style={styles.container}>
       <View style={styles.boxLogo}>
@@ -39,11 +52,7 @@ export default function LoginScreen(props) {
           style={styles.inputLogin}
         ></TextInput>
         <View style={styles.buttonLogin}>
-          <Button
-            title="Login"
-            onPress={() => props.navigation.navigate("Home")}
-            color="#6597A0"
-          />
+          <Button title="Login" onPress={() => login()} color="#6597A0" />
         </View>
       </View>
       <TouchableOpacity
