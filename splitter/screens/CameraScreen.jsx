@@ -6,6 +6,7 @@ import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icon
 import { useDispatch } from 'react-redux'
 import { TakePicture } from '../actions/cameraAction'
 import CameraLoading from '../components/CameraLoading'
+import * as ImageManipulator from 'expo-image-manipulator';
 
 export default function CameraScreen ({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -18,8 +19,13 @@ export default function CameraScreen ({navigation}) {
     if (camera) {
       setCameraLoading(true)
       let photo = await camera.takePictureAsync();
+      const manipResult = await ImageManipulator.manipulateAsync(
+        photo.uri,
+        [],
+        { compress: 0.2}
+      )
       setCameraLoading(false)
-      dispatch(TakePicture(photo))
+      dispatch(TakePicture(manipResult))
       navigation.navigate('Create')
     }
   }
