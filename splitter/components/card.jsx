@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons'
@@ -6,25 +6,37 @@ import { Ionicons } from '@expo/vector-icons'
 import receipt from '../assets/images/receipt.png'
 
 export default function Card({methods, data}) {
+  const [status, setStatus] = useState(false)
+  console.log(data.participants , '< participants')
+  const checkStatus = () => {
+    const checkUnpaid = data.participants.filter(participant => participant.transactionId.status == 'unpaid')
+    const checkSettling = data.participants.filter(participant => participant.transactionId.status == 'settling')
+
+    if(checkUnpaid.length > 0 || checkSettling.length > 0 ) {
+      return (
+        <View style={styles.detail}>
+          <Text style={styles.eventName}>{data.name}</Text>
+          <Text style={{ fontFamily: 'ProximaNova-Regular'}}>You and {data.participants.length - 1} other people</Text>
+          <Text style={{color: '#900', fontFamily: 'ProximaNova-Regular'}}>UNCOMPLETE</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.detail}>
+          <Text style={styles.eventName}>{data.name}</Text>
+          <Text>You and {data.participants.length - 1} other people</Text>
+          <Text style={{color: '#0b8457', fontFamily: 'ProximaNova-Regular'}}>COMPLETE</Text>
+        </View>
+      )
+    }
+  }
+
   return (
     <TouchableOpacity style={styles.event} onPress={() => methods(data)} >
       <View style = {styles.circle} >
         <Image source = {receipt} style={styles.icon}/>
       </View>
-      {data.status 
-      ?
-      <View style={styles.detail}>
-        <Text style={styles.eventName}>{data.name}</Text>
-        <Text style={{ fontFamily: 'ProximaNova-Regular'}}>You and {data.participants.length - 1} other people</Text>
-        <Text style={{color: '#900', fontFamily: 'ProximaNova-Regular'}}>UNCOMPLETE</Text>
-      </View>
-      :
-      <View style={styles.detail}>
-        <Text style={styles.eventName}>{data.name}</Text>
-        <Text>You and {data.participants.length - 1} other people</Text>
-        <Text style={{color: '#0b8457', fontFamily: 'ProximaNova-Regular'}}>COMPLETE</Text>
-      </View>
-      }
+      {checkStatus()}
       <View style={styles.nextIcon}>
         <Ionicons name="ios-arrow-forward" style={styles.next} size={30} />
       </View>
@@ -42,10 +54,9 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowRadius: 1,
-    elevation: 2,
-    shadowRadius: 2,
-    elevation: 3,
+    // shadowRadius: 2,
+    // elevation: 3,
+    width: '98%'
   },
   circle: {
     backgroundColor: 'white',
@@ -61,10 +72,8 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   eventName: {
-    fontWeight: 'bold',
-    color: '#0b8457',
     fontSize: 18,
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: 'ProximaNova-Bold'
   },
   nextIcon: {
     marginLeft: 'auto'

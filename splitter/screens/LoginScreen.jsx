@@ -9,7 +9,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  Alert
+  KeyboardAvoidingView
 } from "react-native";
 import logoImage from "../assets/logo.jpg";
 import axios from "axios";
@@ -17,7 +17,8 @@ import axios from "axios";
 export default function LoginScreen(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const baseUrl = "http://localhost:3000";
+  // const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://192.168.43.186:3000";
 
   const dispatch = useDispatch();
 
@@ -56,42 +57,48 @@ export default function LoginScreen(props) {
     }
   };
   return (
+    <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "#0b8457" }}
+    behavior="padding"
+    keyboardVerticalOffset={60}
+    windowSoftInputMode="adjustResize">
     <View style={styles.container}>
       <View style={styles.boxLogo}>
         {/* <Image style={styles.imageLogo} source={logoImage} /> */}
-        <Text style={styles.textLogo}>Splitter</Text>
+        <Text style={styles.textLogo}>{' '}Splitter{' '}</Text>
         <Text style={styles.textLogo2}>Split The Bill</Text>
       </View>
-      <View style={styles.boxLogin}>
-        <Text style={styles.loginText}>Login</Text>
-        <Text style={styles.textInput}>Username</Text>
-        <TextInput
-          editable
-          maxLength={50}
-          onChangeText={text => setUsername(text)}
-          value={username}
-          style={styles.inputLogin}
-        ></TextInput>
-        <Text style={styles.textInput}>Password</Text>
-        <TextInput
-          editable
-          maxLength={50}
-          onChangeText={text => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-          style={styles.inputLogin}
-        ></TextInput>
-        <View style={styles.buttonLogin}>
-          <Button title="Login" onPress={() => login()} color="#0b8457" />
+      
+        <View style={styles.boxLogin}>
+          <Text style={styles.loginText}>Login</Text>
+          <Text style={styles.textInput}>Username</Text> 
+          <TextInput
+            editable
+            maxLength={50}
+            onChangeText={text => setUsername(text)}
+            value={username}
+            style={styles.inputLogin}
+          ></TextInput>
+          <Text style={styles.textInput}>Password</Text>
+          <TextInput
+            editable
+            maxLength={50}
+            onChangeText={text => setPassword(text)}
+            value={password}
+            secureTextEntry={true}
+            style={styles.inputLogin}
+          ></TextInput>
+          <View style={styles.buttonLogin}>
+            <Button title="Login" onPress={() => login()} color="#0b8457" />
+          </View>
         </View>
-      </View>
       <TouchableOpacity
         onPress={() => props.navigation.navigate("Register")}
         style={styles.textRegister}
-      >
+        >
         <Text style={{color: 'white', fontFamily: 'ProximaNova-Regular'}}>Register Here</Text>
       </TouchableOpacity>
     </View>
+        </KeyboardAvoidingView>
   );
 }
 
@@ -135,12 +142,12 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     shadowOpacity: 0.5,
     width: 300,
-    zIndex: 5,
+    // zIndex: 5,
     shadowRadius: 6,
     elevation: 2,
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 1,
+    // zIndex: 1,
     marginTop: 30,
     paddingBottom: 50
   },
@@ -148,7 +155,8 @@ const styles = StyleSheet.create({
     borderBottomColor: "#0b8457",
     borderBottomWidth: 2,
     marginBottom: 30,
-    width: 150
+    width: 150,
+    fontFamily: 'ProximaNova-Regular'
   },
   textInput: {
     color: "#0b8457",

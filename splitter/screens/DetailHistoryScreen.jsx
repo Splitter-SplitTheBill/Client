@@ -1,44 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { Divider } from 'react-native-elements'
 import Constants from 'expo-constants';
+import { useSelector, useDispatch } from 'react-redux'
 import { BackButton } from '../components'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios'
+import { showOneEvent } from '../actions/eventAction'
+import formatMoney from '../helpers/RpConverter'
 
 const baseUrl = "http://192.168.43.186:3000";
 
 function DetailHistory({navigation, route}) {
-  const [bill, setBill] = useState(0)
-  // const [status, setStatus] = useState(false)
+  const dispatch = useDispatch()
 
   const back = () => {
+    route.params.refresh()
     navigation.goBack()
   }
 
-  const user = useSelector(state => {
+  const getUser = useSelector(state => {
     return state.userReducer.UserLogin;
   })
 
-  const token = user.token
-
-  const data = route.params.event
+  const token = getUser.token
   const eventId = route.params.eventId
-  console.log(route.params.eventId, '< ini params ya')
+
+  useEffect(() => {
+    dispatch(showOneEvent(eventId, token))
+  }, [])
+
+  const getEvent = useSelector(state => {
+    return state.eventReducer.oneEvent;
+  })
   
   const changeStatus = (userId) => {
-    console.log(eventId, '< ini data ya')
-    console.log(userId, '< userid')
     axios({
       method: 'PATCH',
-      url: `${baseUrl}/${eventId}/${userId}`,
+      url: `${baseUrl}/transactions/${eventId}/${userId}`,
       headers: { token },
       data: {
         status: 'settled'
       }
     })
       .then(result => {
-        console.log(result, '< change status')
+        dispatch(showOneEvent(eventId, token))
       })
       .catch(err => {
         console.log(err, '< error showAllEvents')
@@ -63,7 +69,7 @@ function DetailHistory({navigation, route}) {
       )
     } else {
       return (
-        <Text style={{marginLeft: 'auto', color: '#6597a0',fontFamily: 'ProximaNova-Regular'}}>Status: COMPLETE</Text>
+        <Text style={{marginLeft: 'auto', color: '#0b8457',fontFamily: 'ProximaNova-Regular'}}>Status: COMPLETE</Text>
       )
     }
   }
@@ -76,15 +82,15 @@ function DetailHistory({navigation, route}) {
       </View>
       <View style={styles.detail}>
         <ScrollView>
-        {data && data.map(detail => {
+        {getEvent && getEvent.participants.map(detail => {
           return (
-            <View key={detail._id}>
+            <View key={detail._id} style={styles.box}>
               <Text style={{fontSize: 16,fontFamily: 'ProximaNova-Bold'}}>{detail.participantId.name}</Text>
               {detail.transactionId.items.map(item => {
                 return (
                   <View key={item._id} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text style={{fontFamily: 'ProximaNova-Regular'}}>{item.name}</Text>
-                    <Text style={{fontFamily: 'ProximaNova-Regular'}}>{item.price}</Text>
+                    <Text style={{fontFamily: 'ProximaNova-Regular'}}>Rp {formatMoney(item.price)}</Text>
                   </View>
                 )
               })}
@@ -139,8 +145,10 @@ const styles = StyleSheet.create({
     padding: 15,
     shadowRadius: 3,
     elevation: 2,
-    marginTop: 'auto',
     height: height * 0.9
+  },
+  box: {
+    marginTop: 'auto',
   }
 })
 

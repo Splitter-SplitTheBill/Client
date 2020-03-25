@@ -33,7 +33,10 @@ export default function UnpaidDetailScreen(props) {
     props.navigation.goBack();
   };
 
-  const baseUrl = "http://localhost:3000";
+  const [userData, setUserData] = useState([]);
+
+  // const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://192.168.43.186:3000";
 
   useEffect(() => {
     dispatch(getTransaction(userLogin._id, token));
@@ -85,39 +88,6 @@ export default function UnpaidDetailScreen(props) {
               <>
                 {userData.map(unpaid => {
                   return (
-<<<<<<< HEAD
-                    <TouchableOpacity
-                      style={styles.boxInner}
-                      onPress={() =>
-                        props.navigation.navigate("DetailUnpaid", {
-                          unpaid: unpaid
-                        })
-                      }
-                    >
-                      <Image
-                        style={styles.imageInner}
-                        source="https://designproficient.com/blog/wp-content/uploads/2018/07/tumblr_p8oxbeKDdZ1x47mxqo1_1280.gif"
-                      />
-                      <View style={styles.textInner}>
-                        <Text
-                          style={{
-                            fontSize: 20,
-                            fontStyle: "italic",
-                            marginBottom: 5,
-                            fontFamily: "ProximaNova-Regular"
-                          }}
-                        >
-                          {unpaid.eventId.name}
-                        </Text>
-                        <Text>{unpaid.createdAt.slice(0, 10)}</Text>
-                      </View>
-                      <Ionicons
-                        name="ios-arrow-forward"
-                        style={styles.icon}
-                        size={50}
-                      />
-                    </TouchableOpacity>
-=======
                     <View key={unpaid._id}>
                       <TouchableOpacity
                         style={styles.boxInner}
@@ -148,7 +118,6 @@ export default function UnpaidDetailScreen(props) {
                         />
                       </TouchableOpacity>
                     </View>
->>>>>>> fixing display
                   );
                 })}
               </>
@@ -164,24 +133,14 @@ const { height } = Dimensions.get("window");
 const { width } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
-<<<<<<< HEAD
-    backgroundColor: "#0b8457",
-    flex: 1
-=======
     backgroundColor: "#0B8457",
     flex: 1,
     width: width
->>>>>>> fixing display
   },
   textLogo: {
     color: "white",
     fontSize: 30,
-<<<<<<< HEAD
-    zIndex: 0,
-    fontFamily: "Hotham"
-=======
     margin: 10
->>>>>>> fixing display
   },
   imageLogo: {
     width: 100,
@@ -206,11 +165,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: height * 0.9,
     marginHorizontal: "auto",
-<<<<<<< HEAD
-    zIndex: 5,
-    marginTop: "auto",
-=======
->>>>>>> fixing display
     alignItems: "center"
   },
   boxInner: {
@@ -238,13 +192,9 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 99,
-<<<<<<< HEAD
-    borderColor: "#0b8457",
-=======
     justifyContent: "center",
     // marginBottom: 10,
     borderColor: "black",
->>>>>>> fixing display
     borderWidth: 2
   },
   textUnpaid: {
@@ -254,13 +204,8 @@ const styles = StyleSheet.create({
     fontFamily: "ProximaNova-Regular"
   },
   icon: {
-<<<<<<< HEAD
-    fontSize: 80,
-    color: "#0b8457",
-=======
     fontSize: 60,
     color: "#0B8457",
->>>>>>> fixing display
     marginLeft: 10,
     opacity: 0.5,
     fontFamily: "ProximaNova-Regular"

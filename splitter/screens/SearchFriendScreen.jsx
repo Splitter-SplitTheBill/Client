@@ -12,18 +12,13 @@ import searchFriend from "../assets/images/searchFriend.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import axios from "axios";
 
-<<<<<<< HEAD
-const baseUrl = "http://localhost:3000";
+// const baseUrl = "http://localhost:3000";
 // const baseUrl = "http://192.168.1.5:3000";
+const baseUrl = "http://192.168.43.186:3000";
 
-function SearchFriend({navigation, route}) {
-  const [input, setInput] = useState('')
-  const [error, setError] = useState('')
-=======
 function SearchFriend({ navigation, route }) {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
->>>>>>> fixing display
 
   const back = () => {
     navigation.goBack();
@@ -39,13 +34,8 @@ function SearchFriend({ navigation, route }) {
 
   const findFriend = () => {
     axios({
-<<<<<<< HEAD
       method: 'GET',
       url: `${baseUrl}/users/username/${input}`,
-=======
-      method: "GET",
-      url: `http://localhost:3000/users/username/${input}`,
->>>>>>> fixing display
       headers: { token }
     })
       .then(res => {
@@ -53,16 +43,9 @@ function SearchFriend({ navigation, route }) {
         navigation.navigate("AddFriendScreen", { data: friend });
       })
       .catch(err => {
-<<<<<<< HEAD
         setError('Username not found!')
       })
   }
-=======
-        const error = err.response.data.message;
-        setError(error);
-      });
-  };
->>>>>>> fixing display
 
   return (
     <View style={styles.container}>
@@ -117,11 +100,7 @@ const styles = StyleSheet.create({
   next: {
     height: 60,
     width: 60,
-<<<<<<< HEAD
     backgroundColor: '#0b8457',
-=======
-    backgroundColor: "#6597a0",
->>>>>>> fixing display
     borderRadius: 40,
     justifyContent: "center",
     alignItems: "center"

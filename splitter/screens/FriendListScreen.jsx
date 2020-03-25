@@ -52,7 +52,7 @@ function FriendListScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Friends</Text>
+      <Text style={styles.title}>{' '}Friends{' '}</Text>
       <View style={styles.search}>
         <SearchBar search={searchInput}/>
         <Ionicons name="md-person-add" style={styles.addIcon} size={32} onPress={addFriend}/>
