@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.background}>
-        <View>
+        <View style={styles.headline}>
           <Text style={styles.title}>Splitter</Text>
           <Text style={styles.desc}>Split The Bill</Text>
         </View>
@@ -31,14 +31,14 @@ export default function HomeScreen({ navigation }) {
               onPress={() => navigation.navigate("Unpaid")}
             >
               <Image source={recentEvent} style={styles.logo} />
-              <Text>Recent Event</Text>
+              <Text style={styles.textBox}>Recent Event</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.boxes}
               onPress={() => navigation.navigate("HistoryScreen")}
             >
               <Image source={history} style={styles.logo} />
-              <Text>History</Text>
+              <Text style={styles.textBox}>History</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -46,7 +46,7 @@ export default function HomeScreen({ navigation }) {
             onPress={() => navigation.navigate("Create")}
           >
             <Image source={add} style={styles.logo} />
-            <Text>Add Bill</Text>
+            <Text style={styles.textBox}>Add Bill</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -68,14 +68,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 10
   },
+  headline: {
+    marginLeft: 10,
+  },
   title: {
-    color: "#117c6f",
-    fontSize: 30
+    color: "#0b8457",
+    fontSize: 40,
+    fontFamily: 'Hotham'
   },
   desc: {
-    color: "#117c6f",
-    fontSize: 18,
-    fontStyle: "italic"
+    color: "#0b8457",
+    fontSize: 16,
+    fontFamily: 'ProximaNova-Regular'
   },
   image: {
     width: height * 0.32,
@@ -83,8 +87,11 @@ const styles = StyleSheet.create({
     marginTop: "auto",
     marginBottom: 10
   },
+  textBox: {
+    fontFamily: 'ProximaNova-Regular'
+  },
   box: {
-    backgroundColor: "#117c6f",
+    backgroundColor: "#0b8457",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 15,
@@ -98,14 +105,13 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   boxes: {
-    backgroundColor: "white",
+    backgroundColor: "#eeeeee",
     padding: 10,
     borderRadius: 10,
-    shadowRadius: 2,
-    shadowColor: "white",
+    shadowRadius: 4,
+    shadowColor: "gray",
     elevation: 2,
     margin: 8,
-    opacity: 0.8,
     height: height * 0.3,
     width: width * 0.4,
     justifyContent: "center",
@@ -117,14 +123,13 @@ const styles = StyleSheet.create({
     margin: 5
   },
   button: {
-    backgroundColor: "white",
+    backgroundColor: "#eeeeee",
     padding: 10,
     borderRadius: 10,
-    shadowRadius: 2,
-    shadowColor: "white",
+    shadowRadius: 4,
+    shadowColor: "gray",
     elevation: 2,
     margin: 8,
-    opacity: 0.8,
     height: height * 0.17,
     width: width * 0.85,
     justifyContent: "center",

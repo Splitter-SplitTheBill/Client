@@ -24,7 +24,7 @@ export default function NewEventParticipantCard ({ participantData }) {
                             <Feather name="check-circle" size={50} color="green" />
                     </View>
                     <View style={{width: '45%', height: '100%', justifyContent: 'center', marginHorizontal: 10}}>
-                        <Text style={{textAlign: 'right', fontSize: 15, marginBottom: 5, fontWeight: 'bold'}}>{participantData.participantId.username} </Text>
+                        <Text style={{textAlign: 'right', fontSize: 15, marginBottom: 5, fontFamily: 'ProximaNova-Bold'}}>{participantData.participantId.username} </Text>
                         <Text style={{textAlign: 'right'}}>Rp. {ConvertToIDR(participantData.transactionId.total)} ,-</Text>
                     </View>
                     <Image style={styles.ParticipantPic} source={{uri: participantData.participantId.image_url}}/>
@@ -48,7 +48,7 @@ export default function NewEventParticipantCard ({ participantData }) {
                 </View>
                 <View style={{width: '45%', height: '100%', justifyContent: 'center', marginHorizontal: 10}}>
                     <Text style={{textAlign: 'right', fontSize: 15, marginBottom: 5, fontWeight: 'bold'}}>{participantData.participantId.username} </Text>
-                    <Text style={{textAlign: 'right'}}>Rp. {ConvertToIDR(participantData.transactionId.total)} ,-</Text>
+                    <Text style={{textAlign: 'right', fontFamily: 'ProximaNova-Regular'}}>Rp. {ConvertToIDR(participantData.transactionId.total)} ,-</Text>
                 </View>
                 <Image style={styles.ParticipantPic} source={{uri: participantData.participantId.image_url}}/>
             </View>

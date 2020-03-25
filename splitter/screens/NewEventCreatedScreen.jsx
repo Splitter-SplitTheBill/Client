@@ -14,7 +14,7 @@ export default function NewEventCreatedScreen ({ navigation }) {
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('TabNavigation')}>
-                    <Ionicons name="ios-home" size={30} color="green" />
+                    <Ionicons name="ios-home" size={30} color="#0b8457" />
                 </TouchableOpacity>
                 <View style={styles.header}>
                     {/* <Text>Your New Event!!</Text> */}
@@ -22,8 +22,8 @@ export default function NewEventCreatedScreen ({ navigation }) {
             </View>
             <View style={styles.eventOverviewContainer}>
                 <View style={styles.eventOverview}>
-                    <Text style={{fontSize: 30}}>{newEvent.name}</Text>
-                    <Text>{new Date(newEvent.createdAt).toDateString()}</Text>
+                    <Text style={{fontSize: 30, fontFamily: 'ProximaNova-Regular'}}>{newEvent.name}</Text>
+                    <Text style={{fontFamily: 'ProximaNova-Regular'}}>{new Date(newEvent.createdAt).toDateString()}</Text>
                     <View style={styles.overviewImageContainer}>
                         <Image style={{height: '100%', width: '100%', resizeMode: 'cover'}} source={require('../assets/NewEventHeaderPic.png')} />
                     </View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         width: '80%',
         height: '100%',
         borderRadius: 20,
-        backgroundColor: '#6597A0',
+        backgroundColor: '#0b8457',
         transform: [{
             translateX: 50,
             translateY: -40

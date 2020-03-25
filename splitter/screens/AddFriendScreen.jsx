@@ -63,7 +63,7 @@ function AddFriend({ route, navigation }) {
             <Image source={boyImage} style={styles.image} />
           )}
         </View>
-        <Text style={{fontSize: 16, margin:10}}>{friend.name}</Text>
+        <Text style={{fontSize: 16, margin:10, fontFamily: 'ProximaNova-Regular'}}>{friend.name}</Text>
         {checkFriend()}
       </View>
     </View>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     width: 100
   },
   add: {
-    backgroundColor: "#6597a0",
+    backgroundColor: "#0b8457",
     padding: 10,
     width: 180,
     borderRadius: 40,

@@ -179,6 +179,7 @@ export default function UnpaidDetailScreen(props) {
                     style={{
                       fontSize: 20,
                       fontStyle: "italic",
+                      fontFamily: 'ProximaNova-Regular',
                       marginBottom: 5
                     }}
                   >
@@ -205,13 +206,14 @@ const styles = StyleSheet.create({
   container: {
     // alignItems: "center",
     // justifyContent: "center",
-    backgroundColor: "#6597A0",
+    backgroundColor: "#0b8457",
     flex: 1
   },
   textLogo: {
     color: "white",
     fontSize: 30,
-    zIndex: 0
+    zIndex: 0,
+    fontFamily: 'Hotham'
   },
   imageLogo: {
     width: 200,
@@ -219,7 +221,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   boxLogo: {
-    backgroundColor: "#6597A0",
+    backgroundColor: "#0b8457",
     width: "100%",
     zIndex: 1,
     flexDirection: "row",
@@ -237,7 +239,7 @@ const styles = StyleSheet.create({
     height: height * 0.7,
     marginHorizontal: "auto",
     zIndex: 5,
-    // marginTop: "10%",
+    marginTop: "auto",
     alignItems: "center"
   },
   boxInner: {
@@ -254,24 +256,27 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 20,
     marginLeft: 20,
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'ProximaNova-Regular'
   },
   imageInner: {
     width: 70,
     height: 70,
     borderRadius: 99,
-    borderColor: "#6597A0",
+    borderColor: "#0b8457",
     borderWidth: 2
   },
   textUnpaid: {
     fontSize: 20,
     fontWeight: "bold",
-    fontStyle: "italic"
+    fontStyle: "italic",
+    fontFamily: 'ProximaNova-Regular'
   },
   icon: {
     fontSize: 80,
-    color: "#6597A0",
+    color: "#0b8457",
     marginLeft: 10,
-    opacity: 0.5
+    opacity: 0.5,
+    fontFamily: 'ProximaNova-Regular'
   }
 });

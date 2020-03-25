@@ -21,7 +21,7 @@ export default function ChoosePaymentScreen ({navigation}) {
             <View style={styles.header}>
                 <Image source={require('../assets/paymentMethod.png')} style={{height: '75%', width: '70%', resizeMode: 'contain'}} />
             </View>
-            <Text style={{fontSize: 23, fontWeight: 'bold', marginTop: 10}}>Choose Your Methods</Text>
+            <Text style={{fontSize: 23, marginTop: 10, fontFamily: 'ProximaNova-Bold'}}>Choose Your Methods</Text>
             {/* <ScrollView>
             <View style={styles.paymentMethodCardContainer}>
                 {
@@ -49,14 +49,14 @@ export default function ChoosePaymentScreen ({navigation}) {
                             style={{width: 100,
                             marginTop: 10,
                             height: 45,
-                            backgroundColor: '#00b894',
+                            backgroundColor: '#0b8457',
                             flexDirection: 'row',
                             justifyContent: 'center',
                             alignItems: 'center',
                             borderRadius: 10}}>
 
-                                <Text style={{marginRight: 5, fontWeight: 'bold'}}>Next</Text>
-                                <AntDesign name="doubleright" size={20} color="green" />
+                                <Text style={{marginRight: 5, color:'white', fontFamily: 'ProximaNova-Bold'}}>Next</Text>
+                                <AntDesign name="doubleright" size={20} color="white" />
                         </TouchableOpacity>
         </View>
     )
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         height: '25%',
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: '#6597A0',
+        backgroundColor: '#0b8457',
         alignItems: 'center',
         borderBottomEndRadius: 30,
         borderBottomLeftRadius: 30,

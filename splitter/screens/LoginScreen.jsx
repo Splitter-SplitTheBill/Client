@@ -49,8 +49,9 @@ export default function LoginScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.boxLogo}>
-        <Image style={styles.imageLogo} source={logoImage} />
+        {/* <Image style={styles.imageLogo} source={logoImage} /> */}
         <Text style={styles.textLogo}>Splitter</Text>
+        <Text style={styles.textLogo2}>Split The Bill</Text>
       </View>
       <View style={styles.boxLogin}>
         <Text style={styles.loginText}>Login</Text>
@@ -72,14 +73,14 @@ export default function LoginScreen(props) {
           style={styles.inputLogin}
         ></TextInput>
         <View style={styles.buttonLogin}>
-          <Button title="Login" onPress={() => login()} color="#6597A0" />
+          <Button title="Login" onPress={() => login()} color="#0b8457" />
         </View>
       </View>
       <TouchableOpacity
         onPress={() => props.navigation.navigate("Register")}
         style={styles.textRegister}
       >
-        <Text>Register Here</Text>
+        <Text style={{color: 'white', fontFamily: 'ProximaNova-Regular'}}>Register Here</Text>
       </TouchableOpacity>
     </View>
   );
@@ -88,13 +89,24 @@ export default function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "#0b8457",
+    height: '100%'
   },
   textLogo: {
     color: "white",
     fontSize: 50,
-    marginLeft: 10,
-    zIndex: 0
+    // marginLeft: 10,
+    zIndex: 0,
+    fontFamily: 'Hotham'
+  },
+  textLogo2: {
+    color: "white",
+    fontSize: 20,
+    // marginLeft: 10,
+    // zIndex: 0,
+    marginBottom: 'auto',
+    fontFamily: 'ProximaNova-Regular'
   },
   imageLogo: {
     width: 100,
@@ -105,7 +117,8 @@ const styles = StyleSheet.create({
   loginText: {
     fontSize: 25,
     fontWeight: "normal",
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'ProximaNova-Regular'
   },
   boxLogin: {
     backgroundColor: "white",
@@ -123,37 +136,39 @@ const styles = StyleSheet.create({
     paddingBottom: 50
   },
   inputLogin: {
-    borderBottomColor: "#6597A0",
+    borderBottomColor: "#0b8457",
     borderBottomWidth: 2,
     marginBottom: 30,
     width: 150
   },
   textInput: {
-    color: "#6597A0",
+    color: "#0b8457",
     marginBottom: 5,
     marginTop: 5,
     marginRight: "auto",
-    fontSize: 17
+    fontSize: 17,
+    fontFamily: 'ProximaNova-Regular'
   },
   boxLogo: {
     paddingTop: 80,
-    paddingBottom: 50,
-    backgroundColor: "#6597A0",
+    // paddingBottom: 50,
+    backgroundColor: "#0b8457",
     width: "100%",
     zIndex: 1,
-    flexDirection: "row",
+    // flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    // justifyContent: "center"
   },
   buttonLogin: {
     width: 100,
     shadowRadius: 3,
     elevation: 2,
     marginTop: 30,
-    zIndex: 3
+    zIndex: 3,
+    fontFamily: 'ProximaNova-Regular'
   },
   textRegister: {
     marginTop: 30,
-    fontSize: 25
+    fontSize: 25,
   }
 });

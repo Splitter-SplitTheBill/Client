@@ -191,7 +191,7 @@ export default function EditProfileScreen(props) {
               onPress={() => _pickImage()}
             >
               <Text
-                style={{ color: "black", opacity: 0.5, textAlign: "center" }}
+                style={{ color: "black", opacity: 0.5, textAlign: "center", fontFamily: 'ProximaNova-Regular' }}
               >
                 Change Profile Picture
               </Text>
@@ -242,7 +242,7 @@ export default function EditProfileScreen(props) {
                   borderColor: "lightgrey",
                   borderRadius: 50,
                   width: 250,
-                  paddingLeft: 3
+                  paddingLeft: 3,
                 }}
                 rippleCentered={true}
                 inputContainerStyle={{ borderBottomColor: "transparent" }}
@@ -291,43 +291,50 @@ const styles = StyleSheet.create({
     width: 150
   },
   inputLogin: {
-    borderBottomColor: "#6597A0",
+    borderBottomColor: "#0b8457",
     borderBottomWidth: 2,
-    marginBottom: 30
+    marginBottom: 30,
+    fontFamily: 'ProximaNova-Regular'
   },
   textInput: {
-    color: "#6597A0",
+    color: "#0b8457",
     marginBottom: 5,
     marginTop: 20,
     marginRight: "auto",
     fontSize: 17,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: 'ProximaNova-Regular'
   },
   textTitleAcc: {
     fontSize: 20,
     margin: 10,
-    backgroundColor: "#6597A0",
+    backgroundColor: "#0b8457",
     color: "white",
     paddingBottom: 7,
     borderRadius: 10,
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'ProximaNova-Regular'
   },
   AccDetailType: {
-    borderColor: "#6597A0",
+    borderColor: "#0b8457",
     borderWidth: 1,
     padding: 5,
-    width: 80
+    width: 80,
+    fontFamily: 'ProximaNova-Regular',
+    width: '40%'
   },
   AccDetailNumber: {
-    borderColor: "#6597A0",
+    borderColor: "#0b8457",
     borderWidth: 1,
     padding: 5,
     width: 150,
     textAlign: "center",
-    flexDirection: "row"
+    flexDirection: "row",
+    fontFamily: 'ProximaNova-Regular',
+    width: '50%'
   },
   textChangeImage: {
-    borderColor: "#6597A0",
+    borderColor: "#0b8457",
     borderWidth: 1,
     padding: 5,
     margin: 20

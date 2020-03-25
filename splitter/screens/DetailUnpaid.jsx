@@ -73,7 +73,7 @@ export default function detail(props) {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: "#6597A0",
+        backgroundColor: "#0b8457",
         flex: 1
       }}
     >
@@ -82,7 +82,7 @@ export default function detail(props) {
           <View
             style={{
               flexDirection: "row",
-              backgroundColor: "#6597A0"
+              backgroundColor: "#0b8457"
             }}
           >
             <Image
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: "20%",
-    backgroundColor: "#6597A0"
+    backgroundColor: "#0b8457"
   },
   imageProfile: {
     width: 100,

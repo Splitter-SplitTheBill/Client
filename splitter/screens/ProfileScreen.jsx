@@ -80,10 +80,11 @@ const styles = StyleSheet.create({
     marginTop: "20%"
   },
   titlePage: {
-    color: "#6597A0",
+    color: "#0b8457",
     fontSize: 50,
     marginBottom: 15,
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'ProximaNova-Regular'
   },
   imageProfile: {
     alignSelf: "center",
@@ -97,35 +98,40 @@ const styles = StyleSheet.create({
   },
   textDetail: {
     textAlign: "center",
-    fontSize: 17
+    fontSize: 17,
+    fontFamily: 'ProximaNova-Regular'
   },
   textUsername: {
     fontSize: 20,
-    color: "#6597A0",
+    color: "#0b8457",
     textAlign: "center",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: 'ProximaNova-Regular'
   },
   textTitleAcc: {
     fontSize: 20,
     margin: 10,
-    backgroundColor: "#6597A0",
+    backgroundColor: "#0b8457",
     color: "white",
     paddingBottom: 7,
     borderRadius: 10,
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'ProximaNova-Regular'
   },
   AccDetailType: {
     borderColor: "#6597A0",
     borderWidth: 1,
     padding: 5,
-    width: 80
+    width: 80,
+    fontFamily: 'ProximaNova-Regular'
   },
   AccDetailNumber: {
-    borderColor: "#6597A0",
+    borderColor: "#0b8457",
     borderWidth: 1,
     padding: 5,
     width: 120,
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'ProximaNova-Regular'
   },
   buttonManage: {
     borderRadius: 6,
