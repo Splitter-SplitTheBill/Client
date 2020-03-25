@@ -43,7 +43,6 @@ export default function UnpaidDetailScreen(props) {
       .then(response => {
         console.log(response.data, "<<<<< ini transaction ");
         setUserData(response.data);
-        // props.navigation.navigate("Login");
       })
       .catch(err => {
         console.log(err.response);
@@ -61,7 +60,10 @@ export default function UnpaidDetailScreen(props) {
           <BackButton methods={back} />
         </View>
         <View style={styles.boxLogo}>
-          <Image style={styles.imageLogo} source={logoImage} />
+          <Image
+            style={styles.imageLogo}
+            source="https://files.slack.com/files-pri/T1UKZ9NBV-F010QJJLJHW/page_4__2_.png"
+          />
           <Text style={styles.textLogo}>Split The Bill</Text>
         </View>
 
@@ -106,7 +108,7 @@ export default function UnpaidDetailScreen(props) {
                     >
                       <Image
                         style={styles.imageInner}
-                        source="https://cdn.imgbin.com/17/8/4/imgbin-banknote-united-states-one-dollar-bill-logo-united-states-dollar-banknote-bGqSrTb5vTadEgMcxEJwcQNcK.jpg"
+                        source="https://designproficient.com/blog/wp-content/uploads/2018/07/tumblr_p8oxbeKDdZ1x47mxqo1_1280.gif"
                       />
                       <View style={styles.textInner}>
                         <Text
@@ -114,7 +116,7 @@ export default function UnpaidDetailScreen(props) {
                             fontSize: 20,
                             fontStyle: "italic",
                             marginBottom: 5,
-                            fontFamily: 'ProximaNova-Regular'
+                            fontFamily: "ProximaNova-Regular"
                           }}
                         >
                           {unpaid.eventId.name}
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     zIndex: 0,
-    fontFamily: 'Hotham'
+    fontFamily: "Hotham"
   },
   imageLogo: {
     width: 200,
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 20,
     fontSize: 20,
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   imageInner: {
     width: 70,
@@ -205,13 +207,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     fontStyle: "italic",
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   icon: {
     fontSize: 80,
     color: "#0b8457",
     marginLeft: 10,
     opacity: 0.5,
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   }
 });

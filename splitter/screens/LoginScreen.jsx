@@ -23,7 +23,7 @@ export default function LoginScreen(props) {
 
   const login = () => {
     if (!username || !password) {
-      alert(
+      Alert.alert(
         "Oopss..",
         "You must filled username and password to login",
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
@@ -44,8 +44,9 @@ export default function LoginScreen(props) {
           props.navigation.navigate("TabNavigation");
         })
         .catch(err => {
-          console.log(err.response);
-          alert(
+          console.log(err);
+          console.log("err");
+          Alert.alert(
             "Oopss..",
             "Your username or password did not match",
             [{ text: "OK", onPress: () => console.log("OK Pressed") }],

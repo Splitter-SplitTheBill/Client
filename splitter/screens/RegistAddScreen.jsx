@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     marginLeft: 10,
     zIndex: 0,
-    fontFamily: 'Hotham',
+    fontFamily: "Hotham"
   },
   imageLogo: {
     width: 100,
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   loginText: {
     fontSize: 25,
     textAlign: "center",
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   boxLogin: {
     backgroundColor: "white",
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginRight: "auto",
     fontSize: 17,
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   boxLogo: {
     paddingTop: 80,

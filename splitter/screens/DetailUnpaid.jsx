@@ -15,11 +15,16 @@ import axios from "axios";
 
 export default function detail(props) {
   const [userPay, setUserPay] = useState({});
+  const [pars, setPars] = useState([]);
 
   const dataUnpaid = props.route.params.unpaid;
   console.log(dataUnpaid, "INI DATAAA");
 
   const userlogin = useSelector(state => {
+    return state.userReducer.UserLogin;
+  });
+
+  const token = useSelector(state => {
     return state.userReducer.UserLogin;
   });
 
@@ -50,6 +55,27 @@ export default function detail(props) {
         console.log(err.response, "<<<< ini error");
       });
   };
+  // let partici = dataUnpaid;
+  // const getUserPar = id => {
+  //   let namePar = null;
+  //   axios
+  //     .get(`http://localhost:3000/users/${id}`, {
+  //       headers: {
+  //         token: token
+  //       }
+  //     })
+  //     .then(response => {
+  //       console.log(response.data.username, "<<<< response data");
+  //       setPars(response.data.username);
+  //       console.log(pars, "pars");
+  //       // return response.data.username;
+  //     })
+  //     .catch(err => {
+  //       console.log(err.response, "<<<< ini error");
+  //     });
+  //   console.log(namePar, "nama");
+  //   // return namePar;
+  // };
 
   const formatMoney = money => {
     let str = String(money);
@@ -124,12 +150,18 @@ export default function detail(props) {
                     );
                   })}
                 </View>
-                <View style={{ marginBottom: 15 }}>
+                {/* <View style={{ marginBottom: 15 }}>
                   <Text style={styles.textTitle}>Participants</Text>
-                  {dataUnpaid.eventId.participants.map(user => {
-                    return <Text style={styles.textData}>{user.username}</Text>;
+                  {dataUnpaid.eventId.participants.map((user, index) => {
+                    return (
+                      <View key={index}>
+                        <Text style={styles.textData}>
+                          {getUserPar(user.participantId)}
+                        </Text>
+                      </View>
+                    );
                   })}
-                </View>
+                </View> */}
                 <View style={{ marginBottom: 15 }}>
                   <Text style={styles.textTitle}>Total</Text>
                   <Text style={styles.textData}>
@@ -160,8 +192,8 @@ export default function detail(props) {
 
           <View style={styles.buttonPay}>
             <Button
-              title="Go Back"
-              color="black"
+              title="Pay"
+              color="#0B8457"
               onPress={() => pay(dataUnpaid.eventId._id, userlogin._id)}
             />
           </View>
