@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { UserLogin } from "../actions/userAction";
 import {
   View,
@@ -12,15 +12,15 @@ import {
   Alert
 } from "react-native";
 import logoImage from "../assets/logo.jpg";
+import axios from "axios";
 
 export default function LoginScreen(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const baseUrl = "http://localhost:3000";
 
   const dispatch = useDispatch();
-  const test = useSelector(state => {
-    return state.userReducer.UserLogin;
-  });
+
   const login = () => {
     if (!username || !password) {
       alert(
@@ -30,20 +30,28 @@ export default function LoginScreen(props) {
         { cancelable: false }
       );
     } else {
-      const inputLogin = { username, password };
-      dispatch(UserLogin(inputLogin));
-      if (!test.username) {
-        console.log("masuk else???haaa");
-        alert(
-          "Oopss..",
-          "Your username or password did not match",
-          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-          { cancelable: false }
-        );
-      } else {
-        console.log("masuk else???");
-        props.navigation.navigate("TabNavigation");
-      }
+      axios({
+        method: "POST",
+        url: baseUrl + "/users/login",
+        data: {
+          username,
+          password
+        }
+      })
+        .then(response => {
+          dispatch(UserLogin(response.data));
+          console.log(response.data);
+          props.navigation.navigate("TabNavigation");
+        })
+        .catch(err => {
+          console.log(err.response);
+          alert(
+            "Oopss..",
+            "Your username or password did not match",
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+        });
     }
   };
   return (
