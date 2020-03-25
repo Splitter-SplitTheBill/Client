@@ -4,15 +4,22 @@ import Constants from 'expo-constants'
 import { Feather } from '@expo/vector-icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { ResetPicture } from '../actions/cameraAction'
-import { SetEventName, SetParticipantsId, userMockFetch } from '../actions/eventAction'
+import { SetEventName, SetParticipantsId, ResetEvent } from '../actions/eventAction'
 import EventFriend from '../components/EventFriend'
 import { AntDesign } from '@expo/vector-icons'
 
-export default function CreateEventScreen ({navigation}) {
+export default function CreateEventScreen ({navigation, route}) {
     const billPicture = useSelector(state => state.cameraReducer.newBillPicture)
     // const [newEventName, setNewEventName] = useState('')
     const userData = useSelector(state => state.userReducer.UserLogin)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!route.params) {
+            dispatch(ResetPicture())
+            dispatch(ResetEvent())
+        }
+    }, [])
 
     // // JANGAN LUPA DI HAPUS INI HANYA UNTUK TESTING
     // const profPicUri = 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_weight_other/1800x1200_cat_weight_other.jpg?resize=600px:*'

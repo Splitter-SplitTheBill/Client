@@ -13,9 +13,10 @@ const userReducer = (state = initialState, action) => {
       const user = action.payload.user;
       return { ...state, UserLogin: user, token: user.token };
     case "EDITPROFILE":
-      console.log(action.payload.profile, "<<<reducr tucyy");
-      const profile = action.payload.profile;
-      return { ...state, UserLogin: profile };
+      const profile = action.payload.updatedUserData;
+      profile.token = state.token
+      console.log(profile, '<<<<<<<<<<<<==========')
+      return { ...state, UserLogin: state.UserLogin = action.payload.updatedUserData };
     case "UNPAID":
       const unpaid = action.payload.unpaid;
       return { ...state, dataUnpaid: unpaid };

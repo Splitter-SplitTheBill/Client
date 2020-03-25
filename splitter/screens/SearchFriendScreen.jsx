@@ -35,7 +35,7 @@ function SearchFriend({ navigation, route }) {
   const findFriend = () => {
     axios({
       method: 'GET',
-      url: `${baseUrl}/users/username/${input}`,
+      url: `http://192.168.1.5:3000/users/username/${input}`,
       headers: { token }
     })
       .then(res => {

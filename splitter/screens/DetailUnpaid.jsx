@@ -69,7 +69,7 @@ export default function detail(props) {
 
   const getUser = id => {
     axios
-      .get(`http://localhost:3000/users/${id}`, {
+      .get(`http://192.168.1.5:3000/users/${id}`, {
         headers: {
           token: userlogin.token
         }
@@ -95,13 +95,8 @@ export default function detail(props) {
   return (
     <SafeAreaView
       style={{
-<<<<<<< HEAD
         backgroundColor: "#0b8457",
         flex: 1
-=======
-        flex: 1,
-        backgroundColor: "white"
->>>>>>> fixing display
       }}
     >
       <View style={{ marginLeft: 5 }}>
@@ -112,11 +107,7 @@ export default function detail(props) {
           <View
             style={{
               flexDirection: "row",
-<<<<<<< HEAD
               backgroundColor: "#0b8457"
-=======
-              marginBottom: 20
->>>>>>> fixing display
             }}
           >
             <Image
@@ -228,13 +219,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-<<<<<<< HEAD
-    marginTop: "20%",
-    backgroundColor: "#0b8457"
-=======
     marginTop: Constant.statusBarHeight,
     backgroundColor: "white"
->>>>>>> fixing display
   },
   imageProfile: {
     width: 130,

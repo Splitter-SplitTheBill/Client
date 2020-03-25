@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import TransactionItem from '../components/TransactionItems'
 import { useSelector, useDispatch } from 'react-redux'
 import ReceiptImageModal from '../components/ReceiptImageModal'
+import { ResetPicture } from '../actions/cameraAction'
 import { submitEvent, setParticipantsWithItems, FetchTransactionItemsAgain, AddTransactionItem } from '../actions/eventAction'
 import ConvertToIdr from '../helpers/RpConverter'
 import ConfirmationModal from '../components/ConfirmationModal'
@@ -119,6 +120,12 @@ export default function AssignBillScreen ({ navigation }) {
                             dispatch(FetchTransactionItemsAgain(receiptImageUrl))
                         }}>
                             <FontAwesome name="refresh" size={20} color="green" />
+                        </TouchableOpacity>
+                        <Text>Or Click Here to try taking a picture of the bill again</Text>
+                        <TouchableOpacity style={styles.tryAgainButton} onPress={() => {
+                            navigation.navigate('Create',{newBill: true})
+                        }}>
+                            <Ionicons name="md-return-left" size={20} color="green" />
                         </TouchableOpacity>
                     </View>
                     : <View style={styles.tryAgainContainer}>    
