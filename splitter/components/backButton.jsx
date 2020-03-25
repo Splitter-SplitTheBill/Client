@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   back: {
-    color: '#6597a0',
+    color: '#0b8457',
    
   }
 })

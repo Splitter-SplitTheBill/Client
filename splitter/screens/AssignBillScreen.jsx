@@ -63,29 +63,29 @@ export default function AssignBillScreen ({ navigation }) {
                         {
                             receiptImageUrl
                             ? <Image source={{uri: receiptImageUrl}} style={styles.receipt} />
-                            : <ActivityIndicator size="small" color='#6597A0' />
+                            : <ActivityIndicator size="small" color='#0b8457' />
                         }
                     </View>
                 </TouchableOpacity>
                 <View style={styles.eventDetails}>
-                    <Text style={{fontSize: 25, fontWeight: 'bold', flexWrap: 'wrap', textAlign: 'center', flexDirection: 'row', width: 110, marginBottom: 5}}>{eventName}</Text>
-                    <Text style={{marginBottom: 5}}>Paid by: {userData.username}</Text>
-                    <Text>{new Date().toDateString()}</Text>
+                    <Text style={{color: 'white', fontSize: 25, flexWrap: 'wrap', textAlign: 'center', flexDirection: 'row', width: 110, marginBottom: 5, fontFamily: 'ProximaNova-Bold'}}>{eventName}</Text>
+                    <Text style={{color: 'white', marginBottom: 5, fontFamily: 'ProximaNova-Regular'}}>Paid by: {userData.username}</Text>
+                    <Text style={{color: 'white', fontFamily: 'ProximaNova-Regular'}}>{new Date().toDateString()}</Text>
                 </View>
             </View>
             <View style={styles.receiptDetailsContainer}>
-                <View style={{borderTopStartRadius: 10, borderTopEndRadius: 10, borderWidth: 3, borderColor: 'red', backgroundColor: 'red', width: '35%', height: '8%', alignItems: 'center'}}>
-                    <Text style={{fontSize: 13, fontWeight: 'bold'}}>Transaction Details</Text>
+                <View style={{borderTopStartRadius: 10, borderTopEndRadius: 10, borderWidth: 3, borderColor: '#900', backgroundColor: '#900', width: '45%', height: '8%', alignItems: 'center'}}>
+                    <Text style={{fontSize: 13, fontFamily: 'ProximaNova-Bold', color: 'white'}}>Transaction Details</Text>
                 </View>
                 {   
                     transactionItems.length > 1
                     ? <><View style={styles.transactionDetails}>
                         <View style={styles.transactionItemHeader}>
                             <View style={{height: '100%', width: '40%', alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Menu</Text>
+                                <Text style={{fontSize: 20, fontFamily: 'ProximaNova-Bold'}}>Menu</Text>
                             </View>
                             <View style={{height: '100%', width: '30%', alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Price</Text>
+                                <Text style={{fontSize: 20, fontFamily: 'ProximaNova-Bold'}}>Price</Text>
                             </View>
                         </View>
                         <ScrollView>
@@ -129,13 +129,13 @@ export default function AssignBillScreen ({ navigation }) {
                         </TouchableOpacity>
                     </View>
                     : <View style={styles.tryAgainContainer}>    
-                        <ActivityIndicator size="large" color='#6597A0' />
+                        <ActivityIndicator size="large" color='#0b8457' />
                     </View>
                     
                 }
             </View>
             <TouchableOpacity style={styles.splitTheBillButton} onPress={() => setConfirmTrigger(true)}>
-                <Text>Split The Bill!</Text>
+                <Text style={{fontFamily: 'ProximaNova-Regular', color: 'white'}}>Split The Bill!</Text>
             </TouchableOpacity>
             {
                 receiptModalTrigger
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 3,
-        borderColor: 'green',
+        borderColor: '#0b8457',
         backgroundColor: 'white'
     },
     receipt: {
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         translateX: -100,
         zIndex: -1,
-        backgroundColor: 'green'
+        backgroundColor: '#0b8457'
         // transform: [{
         //     translateX: '-30%'
         // }]
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
         width: Dimensions.get('screen').width-20,
         borderWidth: 3,
         borderRadius: 20,
-        borderColor: '#6597A0',
+        borderColor: '#0b8457',
         transform: [{
             translateY: -20
         }],
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
         width: Dimensions.get('screen').width-20,
         borderWidth: 3,
         borderRadius: 20,
-        borderColor: '#6597A0',
+        borderColor: '#0b8457',
         transform: [{
             translateY: -20
         }],
@@ -244,13 +244,14 @@ const styles = StyleSheet.create({
     },
     totalInfo: {
         fontSize: 20,
-        fontWeight: 'bold'
+        // fontWeight: 'bold',
+        fontFamily: 'ProximaNova-Regular'
     },
     splitTheBillButton: {
         height: '6%',
         width: '90%',
         borderRadius: 20,
-        backgroundColor: 'green',
+        backgroundColor: '#0b8457',
         justifyContent: 'center',
         alignItems: 'center'
     },

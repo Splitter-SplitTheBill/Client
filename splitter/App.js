@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -25,10 +25,31 @@ import {
   NewEventCreatedScreen
 } from "./screens";
 import TabNavigation from "./screens/TabNavigation";
+import * as Font from 'expo-font'
+import { AppLoading } from 'expo'
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'ProximaNova-Regular' : require('./assets/fonts/ProximaNova-Regular.otf'),
+    'ProximaNova-Bold' : require('./assets/fonts/ProximaNova-Bold.otf'),
+    'Hotham' : require('./assets/fonts/Hotham.ttf'),
+  })
+}
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [font, setFont] = useState(false)
+
+  if(!font) {
+    return (
+      <AppLoading
+        startAsync = {fetchFonts}
+        onFinish = { () => setFont(true) }
+      />
+    )
+  }
+
   return (
     <Provider store={store}>
       <NavigationContainer>

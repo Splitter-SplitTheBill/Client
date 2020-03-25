@@ -29,7 +29,7 @@ function HistoryScreen({navigation}) {
   }
 
   const detailHistory = (event) => {
-    navigation.navigate('DetailHistoryScreen', {event: event.participants})
+    navigation.navigate('DetailHistoryScreen', {event: event.participants, eventId: event._id})
   }
 
   return (
@@ -38,7 +38,7 @@ function HistoryScreen({navigation}) {
         <BackButton methods={back} />
         <Image source={pay} style={styles.image}/>
         <View style={styles.title}>
-          <Text style={styles.totalBill}>HISTORY</Text>
+          <Text style={styles.totalBill}>History</Text>
           <View style={styles.boxAmount}>
             <Text style={styles.amount}>Transactions</Text>
           </View>
@@ -62,7 +62,7 @@ function HistoryScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgb(101, 151, 160)',
+    backgroundColor: '#0b8457',
     flex: 1,
   },
   head: {
@@ -83,6 +83,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: 'white',
     fontSize: 30,
+    fontFamily: 'Hotham',
+    letterSpacing: 2
   },
   boxAmount: {
     backgroundColor: 'white',
@@ -92,12 +94,11 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   amount: {
-    color: 'rgb(101, 151, 160)',
+    color: '#0b8457',
     fontSize: 14,
-    letterSpacing: 2,
+    letterSpacing: 1,
     textAlign: 'center',
-    fontWeight: 'bold',
-    fontStyle: 'italic'
+    fontFamily: 'ProximaNova-Bold'
   },
   box: {
     backgroundColor: 'white',
@@ -109,7 +110,8 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   titleTransaction: {
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: 'ProximaNova-Regular'
   },
   event: {
     backgroundColor: '#bfc6cc',
@@ -138,7 +140,8 @@ const styles = StyleSheet.create({
   },
   eventName: {
     fontWeight: 'bold',
-    color: 'rgb(101, 151, 160)',
+    color: '#0b8457',
+    fontFamily: 'ProximaNova-Regular'
   },
   next: {
     height: 20,

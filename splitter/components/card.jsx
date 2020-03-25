@@ -15,14 +15,14 @@ export default function Card({methods, data}) {
       ?
       <View style={styles.detail}>
         <Text style={styles.eventName}>{data.name}</Text>
-        <Text>You and {data.participants.length - 1} other people</Text>
-        <Text style={{color: '#900'}}>UNCOMPLETE</Text>
+        <Text style={{ fontFamily: 'ProximaNova-Regular'}}>You and {data.participants.length - 1} other people</Text>
+        <Text style={{color: '#900', fontFamily: 'ProximaNova-Regular'}}>UNCOMPLETE</Text>
       </View>
       :
       <View style={styles.detail}>
         <Text style={styles.eventName}>{data.name}</Text>
         <Text>You and {data.participants.length - 1} other people</Text>
-        <Text style={{color: '#6597a0'}}>COMPLETE</Text>
+        <Text style={{color: '#0b8457', fontFamily: 'ProximaNova-Regular'}}>COMPLETE</Text>
       </View>
       }
       <View style={styles.nextIcon}>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     height: 100,
     marginTop: 10,
     borderRadius: 15,
-    padding: 10,
+    padding: 15,
     flexDirection: 'row',
     alignItems: 'center',
     shadowRadius: 1,
@@ -62,8 +62,9 @@ const styles = StyleSheet.create({
   },
   eventName: {
     fontWeight: 'bold',
-    color: 'rgb(101, 151, 160)',
-    fontSize: 18
+    color: '#0b8457',
+    fontSize: 18,
+    fontFamily: 'ProximaNova-Regular'
   },
   nextIcon: {
     marginLeft: 'auto'
