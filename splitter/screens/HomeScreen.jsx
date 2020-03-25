@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10
   },
   title: {
-    color: "#6597a0",
+    color: "#117c6f",
     fontSize: 30
   },
   desc: {
-    color: "#6597a0",
+    color: "#117c6f",
     fontSize: 18,
     fontStyle: "italic"
   },
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   box: {
-    backgroundColor: "#6597a0",
+    backgroundColor: "#117c6f",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 15,

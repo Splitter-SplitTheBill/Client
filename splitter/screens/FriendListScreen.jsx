@@ -41,7 +41,7 @@ function FriendListScreen({navigation}) {
   // }
 
   const searchInput = (input) => {
-    const filtered = friends.filter(friend => friend.userId.name.toLowerCase().includes(input))
+    const filtered = friends.filter(friend => friend.userId.name.toLowerCase().includes(input.toLowerCase()))
     setFriend(filtered)
   }
 
@@ -89,7 +89,9 @@ function FriendListScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5
+    padding: 5,
+    backgroundColor: '#fff',
+    height: '100%'
   },
   title: {
     fontSize: 30,

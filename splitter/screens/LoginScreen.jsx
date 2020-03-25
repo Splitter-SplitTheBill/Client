@@ -32,18 +32,18 @@ export default function LoginScreen(props) {
     } else {
       const inputLogin = { username, password };
       dispatch(UserLogin(inputLogin));
-      if (!test.username) {
-        console.log("masuk else???haaa");
-        alert(
-          "Oopss..",
-          "Your username or password did not match",
-          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-          { cancelable: false }
-        );
-      } else {
-        console.log("masuk else???");
+      // if (!test) {
+      //   console.log("masuk else???haaa");
+      //   alert(
+      //     "Oopss..",
+      //     "Your username or password did not match",
+      //     [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+      //     { cancelable: false }
+      //   );
+      // } else {
+      //   console.log("masuk else???");
         props.navigation.navigate("TabNavigation");
-      }
+      // }
     }
   };
   return (

@@ -10,6 +10,7 @@ function AddFriend({ route, navigation }) {
   const dispatch = useDispatch();
 
   let friend = route.params.data;
+  console.log(friend, '< friend')
 
   const back = () => {
     navigation.goBack();
@@ -21,10 +22,31 @@ function AddFriend({ route, navigation }) {
   const userId = user._id;
   const token = user.token;
 
+  console.log(user, '< user login')
+
   const addFriend = () => {
     dispatch(ADDFRIEND(userId, friend._id, token));
     navigation.navigate("FriendListScreen");
   };
+
+  const checkFriend = () => {
+    const check = user.friendList.find(person => person.userId._id == friend._id)
+    if (check) {
+      return (
+        <Text style={{color: '#900'}}>Already in your friend list.</Text>
+      )
+    } else if (friend._id === userId) {
+      return (
+        <Text style={{color: '#900'}}>You can't add yourself as a friend.</Text>
+      )
+    } else {
+      return (
+        <TouchableOpacity style={styles.add} onPress={addFriend}>
+          <Text style={styles.text}>ADD FRIEND</Text>
+        </TouchableOpacity>
+      )
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -41,10 +63,8 @@ function AddFriend({ route, navigation }) {
             <Image source={boyImage} style={styles.image} />
           )}
         </View>
-        <Text>{friend.name}</Text>
-        <TouchableOpacity style={styles.add} onPress={addFriend}>
-          <Text style={styles.text}>ADD FRIEND</Text>
-        </TouchableOpacity>
+        <Text style={{fontSize: 16, margin:10}}>{friend.name}</Text>
+        {checkFriend()}
       </View>
     </View>
   );
@@ -53,7 +73,8 @@ function AddFriend({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5
+    padding: 5,
+    backgroundColor: '#fff'
   },
   box: {
     alignItems: "center",
