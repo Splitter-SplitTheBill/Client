@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getTransaction } from "../actions/userAction";
 import {
   View,
   Text,
@@ -8,12 +9,16 @@ import {
   Button,
   SafeAreaView,
   ScrollView,
-  ImageBackground
+  ImageBackground,
+  Alert
 } from "react-native";
 
 import axios from "axios";
+import { BackButton } from "../components";
+import Constant from "expo-constants";
 
 export default function detail(props) {
+  const dispatch = useDispatch();
   const [userPay, setUserPay] = useState({});
 
   const dataUnpaid = props.route.params.unpaid;
@@ -32,7 +37,34 @@ export default function detail(props) {
   }, []);
 
   function pay() {
-    props.navigation.navigate("Unpaid");
+    console.log(dataUnpaid.eventId._id, "event id");
+    console.log(userlogin._id, "user id");
+    axios({
+      method: "patch",
+      url: `http://localhost:3000/transactions/${dataUnpaid.eventId._id}/${userlogin._id}`,
+      headers: {
+        token: userlogin.token
+      },
+      data: {
+        status: "settling"
+      }
+    })
+      .then(response => {
+        console.log(response.data, "<<<< response data");
+        setUserPay(response.data);
+        dispatch(getTransaction(userlogin._id, userlogin.token));
+        props.route.params.reFetch();
+        props.navigation.navigate("Unpaid");
+        Alert.alert(
+          "Success asigning to this transaction!",
+          "Plese wait for your confirmation payment",
+          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+          { cancelable: false }
+        );
+      })
+      .catch(err => {
+        console.log(err, "<<<< ini error");
+      });
   }
 
   const getUser = id => {
@@ -56,19 +88,35 @@ export default function detail(props) {
     return "Rp. " + str.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
 
+  const back = () => {
+    props.navigation.goBack();
+  };
+
   return (
     <SafeAreaView
       style={{
+<<<<<<< HEAD
         backgroundColor: "#0b8457",
         flex: 1
+=======
+        flex: 1,
+        backgroundColor: "white"
+>>>>>>> fixing display
       }}
     >
+      <View style={{ marginLeft: 5 }}>
+        <BackButton methods={back} />
+      </View>
       <ScrollView>
         <View style={styles.container}>
           <View
             style={{
               flexDirection: "row",
+<<<<<<< HEAD
               backgroundColor: "#0b8457"
+=======
+              marginBottom: 20
+>>>>>>> fixing display
             }}
           >
             <Image
@@ -90,69 +138,74 @@ export default function detail(props) {
               </Text>
             </View>
           </View>
-          <View>
+          <View style={styles.boxDetail}>
             <Text style={styles.boxRed}>Detail</Text>
             <ImageBackground
               source={{
                 uri:
-                  "https://i.pinimg.com/originals/c1/a3/4d/c1a34df855baf464e71bf0bfc1da40fb.png"
+                  "https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
               }}
-              style={{ width: "100%", height: "100%" }}
+              style={{
+                padding: 10,
+                alignItems: "center",
+                margin: 10,
+                borderRadius: 10
+              }}
             >
-              <View style={styles.boxDetail}>
-                <View
-                  style={{
-                    flexDirection: "row"
-                  }}
-                >
-                  <Text style={styles.titleDetail}>Item</Text>
-                  <Text style={styles.titleDetail}>Price</Text>
-                </View>
-                <View style={{ marginBottom: 15 }}>
-                  {dataUnpaid.items.map(item => {
+              <View
+                style={{
+                  flexDirection: "row"
+                }}
+              >
+                <Text style={styles.titleDetail}>Item</Text>
+                <Text style={styles.titleDetail}>Price</Text>
+              </View>
+              <View style={{ marginBottom: 15 }}>
+                {dataUnpaid.items.map(item => {
+                  return (
+                    <View
+                      style={{
+                        flexDirection: "row"
+                      }}
+                    >
+                      <Text style={styles.textDetail}>{item.name}</Text>
+                      <Text style={styles.textDetail}>
+                        {formatMoney(item.price)}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
+              <View style={{ marginBottom: 15 }}>
+                <Text style={styles.textTitle}>Total</Text>
+                <Text style={styles.textData}>
+                  {formatMoney(dataUnpaid.total)}
+                </Text>
+              </View>
+              <View style={{ marginBottom: 15 }}>
+                <Text style={styles.textTitle}>Payment Methods</Text>
+                <View>
+                  {dataUnpaid.paymentSelection.map(payment => {
                     return (
                       <View
                         style={{
-                          flexDirection: "row"
+                          flexDirection: "row",
+                          borderColor: "black",
+                          borderWidth: 1,
+                          marginVertical: 10,
+                          paddingVertical: 5
                         }}
                       >
-                        <Text style={styles.textDetail}>{item.name}</Text>
-                        <Text style={styles.textDetail}>
-                          {formatMoney(item.price)}
+                        <Text style={styles.textPayment}>
+                          {payment.instance}
+                        </Text>
+                        <Text style={styles.textPayment}>{payment.name}</Text>
+                        <Text style={styles.textPayment}>
+                          {payment.accountNumber}
                         </Text>
                       </View>
                     );
                   })}
-                </View>
-                <View style={{ marginBottom: 15 }}>
-                  <Text style={styles.textTitle}>Participants</Text>
-                  {dataUnpaid.eventId.participants.map(user => {
-                    return <Text style={styles.textData}>{user.username}</Text>;
-                  })}
-                </View>
-                <View style={{ marginBottom: 15 }}>
-                  <Text style={styles.textTitle}>Total</Text>
-                  <Text style={styles.textData}>
-                    {formatMoney(dataUnpaid.total)}
-                  </Text>
-                </View>
-                <View style={{ marginBottom: 15 }}>
-                  <Text style={styles.textTitle}>Payment Methods</Text>
-                  <View>
-                    {dataUnpaid.paymentSelection.map(payment => {
-                      return (
-                        <View style={{ flexDirection: "row" }}>
-                          <Text style={styles.textPayment}>
-                            {payment.instance}
-                          </Text>
-                          <Text style={styles.textPayment}>{payment.name}</Text>
-                          <Text style={styles.textPayment}>
-                            {payment.accountNumber}
-                          </Text>
-                        </View>
-                      );
-                    })}
-                  </View>
                 </View>
               </View>
             </ImageBackground>
@@ -160,8 +213,8 @@ export default function detail(props) {
 
           <View style={styles.buttonPay}>
             <Button
-              title="Go Back"
-              color="black"
+              title="Pay"
+              color="#0B8457"
               onPress={() => pay(dataUnpaid.eventId._id, userlogin._id)}
             />
           </View>
@@ -175,12 +228,17 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
+<<<<<<< HEAD
     marginTop: "20%",
     backgroundColor: "#0b8457"
+=======
+    marginTop: Constant.statusBarHeight,
+    backgroundColor: "white"
+>>>>>>> fixing display
   },
   imageProfile: {
-    width: 100,
-    height: 100,
+    width: 130,
+    height: 130,
     borderRadius: 99,
     justifyContent: "center",
     marginBottom: 10,
@@ -196,7 +254,9 @@ const styles = StyleSheet.create({
   },
   eventName: { fontSize: 18, fontStyle: "italic" },
   boxDetail: {
-    padding: 10
+    padding: 10,
+    alignItems: "center",
+    width: "90%"
   },
   titleDetail: {
     fontSize: 18,
@@ -260,17 +320,11 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   boxRed: {
-    backgroundColor: "#BE3030",
-    color: "white",
+    color: "#BE3030",
     width: "30%",
-    padding: 8,
     textAlign: "center",
-    borderColor: "black",
-    borderWidth: 3,
-    marginTop: 20,
-    marginBottom: 5,
-    shadowRadius: 3,
-    elevation: 2
+    marginTop: 10,
+    fontSize: 30
   },
   buttonPay: {
     borderRadius: 6,

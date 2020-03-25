@@ -281,7 +281,7 @@ export default function EditProfileScreen(props) {
               >
                 <Text
                   style={{
-                    color: "#6597A0",
+                    color: "#0B8457",
                     fontSize: 15,
                     fontWeight: "bold",
                     textAlign: "center"
