@@ -48,7 +48,7 @@ export default function PaymentMethodCard ({ paymentDetails }) {
                     <View style={{width: '35%', height: '100%', justifyContent: 'center', alignItems: 'center', zIndex: 3, borderTopRightRadius: 999, borderBottomRightRadius: 999,backgroundColor: '#d1d8e0'}}>
                         <Text style={styles.instanceMethod}>{paymentDetails.instance}</Text>
                     </View>
-                    <View style={{width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', zIndex: 1, flexDirection:'row', position:'absolute', backgroundColor: '#4b6584'}}>
+                    <View style={{width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', zIndex: 1, flexDirection:'row', position:'absolute', backgroundColor: '#0b8457'}}>
                         <View style={{width: '35%', height: '100%'}}></View>
                         <View style={{width: '65%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
                             <Text style={styles.accNameMethodSelected}>{paymentDetails.name}</Text>
@@ -81,12 +81,14 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         borderRightWidth: 7,
         borderRadius: 999,
-        borderColor: '#4b6584'
+        borderColor: '#0b8457',
+        fontFamily: 'ProximaNova-Regular'
     },
     accNameMethod: {
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         fontSize: 20,
         marginBottom: 5,
+        fontFamily: 'ProximaNova-Bold'
     },
     selectedMethodNone: {
         width: '65%',
@@ -99,16 +101,18 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#4b6584',
+        backgroundColor: '#0b8457',
         color: 'white'
     },
     accNameMethodSelected: {
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         fontSize: 20,
         marginBottom: 5,
-        color: '#d1d8e0'
+        color: '#d1d8e0',
+        fontFamily: 'ProximaNova-Bold'
     },
     accNumMethodSelected: {
-        color: '#d1d8e0'
+        color: '#d1d8e0',
+        fontFamily: 'ProximaNova-Regular'
     }
 })

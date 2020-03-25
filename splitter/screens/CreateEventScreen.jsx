@@ -49,7 +49,7 @@ export default function CreateEventScreen ({navigation}) {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Image source={require('../assets/createEventHeader.png')} style={{height: '75%', width: '50%'}} />
-                    <Text style={{fontSize: 23, fontWeight: 'bold'}}>Create an Event</Text>
+                    <Text style={{fontSize: 20, color: 'white', fontFamily: 'ProximaNova-Regular'}}>Create an Event</Text>
                 </View>
                 <ScrollView>
                     <View style={styles.screenContentContainer}>
@@ -78,7 +78,7 @@ export default function CreateEventScreen ({navigation}) {
                                 <Image source={{uri: billPicture.uri}} style={{width: '100%', height: '100%'}} />
                             </View>
                             <TouchableOpacity onPress={() => resetPicture()} style={{height: '3%', marginVertical: 3, width: '50%', borderWidth: 2, justifyContent: 'center', alignItems: 'center', borderRadius: 10}}>
-                                    <Text>Change Picture</Text>
+                                    <Text style={{fontFamily: 'ProximaNova-Regular'}}>Change Picture</Text>
                                 </TouchableOpacity>
                             </>
                             : <TouchableOpacity
@@ -96,7 +96,8 @@ export default function CreateEventScreen ({navigation}) {
                                             fontSize: 16,
                                             fontWeight: 'bold',
                                             color: '#ced6e0',
-                                            marginTop: 10
+                                            marginTop: 10,
+                                            fontFamily: 'ProximaNova-Regular'
                                         }}>Click here to take picture of the bill</Text>
                                     </View>
                                 </View>
@@ -104,7 +105,7 @@ export default function CreateEventScreen ({navigation}) {
                         }
                         <ScrollView nestedScrollEnabled={true}>
                             <View style={styles.addFriendContainer}>
-                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Add Friends to this Event</Text>
+                                <Text style={{fontSize: 20, fontFamily: 'ProximaNova-Bold'}}>Add Friends to this Event</Text>
                                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap'}}>      
                                     {
                                         userData
@@ -122,14 +123,14 @@ export default function CreateEventScreen ({navigation}) {
                             style={{width: 100,
                             marginHorizontal: 5,
                             height: 45,
-                            backgroundColor: '#00b894',
+                            backgroundColor: '#0b8457',
                             flexDirection: 'row',
                             justifyContent: 'center',
                             alignItems: 'center',
                             borderRadius: 10}}>
 
-                                <Text style={{marginRight: 5, fontWeight: 'bold'}}>Next</Text>
-                                <AntDesign name="doubleright" size={20} color="green" />
+                                <Text style={{marginRight: 5, fontFamily: 'ProximaNova-Bold', color: 'white'}}>Next</Text>
+                                <AntDesign name="doubleright" size={20} color="white" />
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
         height: '25%',
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: '#6597A0',
+        backgroundColor: '#0b8457',
         alignItems: 'center',
         borderBottomEndRadius: 30,
         borderBottomLeftRadius: 30,

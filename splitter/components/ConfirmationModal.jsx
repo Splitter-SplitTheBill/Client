@@ -11,11 +11,11 @@ export default function ConfirmationModal ({ confirmationFunction }) {
                     resizeMode: 'contain',
                     marginTop: 20
                 }} source={require('../assets/forConfirmation.gif')} />
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>You are about to Split The Bill</Text>
-                <Text style={{textAlign: 'center', fontWeight: 'bold', marginVertical: 4}}>Please note that you will not be able to change this event details </Text>
+                <Text style={{fontSize: 20, fontFamily: 'ProximaNova-Bold'}}>You are about to Split The Bill</Text>
+                <Text style={{textAlign: 'center', marginVertical: 4, fontFamily: 'ProximaNova-Bold'}}>Please note that you will not be able to change this event details </Text>
                 <View style={styles.confirmationButtons}>
                     <TouchableOpacity style={{
-                        backgroundColor: '#079400',
+                        backgroundColor: '#0b8457',
                         borderRadius: 10,
                         height: '80%',
                         width: '30%',
@@ -24,10 +24,10 @@ export default function ConfirmationModal ({ confirmationFunction }) {
                     }}
                     onPress={() => confirmationFunction(true)}
                     >
-                        <Text style={{fontWeight: 'bold'}}>Continue</Text>
+                        <Text style={{color: 'white', fontFamily: 'ProximaNova-Regular'}}>Continue</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{
-                        backgroundColor: '#ff7675',
+                        backgroundColor: '#900',
                         borderRadius: 10,
                         height: '80%',
                         width: '30%',
@@ -36,7 +36,7 @@ export default function ConfirmationModal ({ confirmationFunction }) {
                     }}
                     onPress={() => confirmationFunction(false)}
                     >
-                        <Text style={{fontWeight: 'bold'}}>Cancel</Text>
+                        <Text style={{color: 'white',fontFamily: 'ProximaNova-Regular'}}>Cancel</Text>
                     </TouchableOpacity>
                 </View>
             </View>

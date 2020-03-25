@@ -181,7 +181,7 @@ export default function RegistAddScreen(props) {
               <Button
                 title="Register"
                 onPress={() => Register()}
-                color="#6597A0"
+                color="#0b8457"
               />
             </View>
             <TouchableOpacity
@@ -207,7 +207,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 50,
     marginLeft: 10,
-    zIndex: 0
+    zIndex: 0,
+    fontFamily: 'Hotham',
   },
   imageLogo: {
     width: 100,
@@ -217,8 +218,8 @@ const styles = StyleSheet.create({
   },
   loginText: {
     fontSize: 25,
-    fontWeight: "normal",
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'ProximaNova-Regular'
   },
   boxLogin: {
     backgroundColor: "white",
@@ -236,21 +237,22 @@ const styles = StyleSheet.create({
     paddingBottom: 30
   },
   inputLogin: {
-    borderBottomColor: "#6597A0",
+    borderBottomColor: "#0b8457",
     borderBottomWidth: 2,
     marginBottom: 30
   },
   textInput: {
-    color: "#6597A0",
+    color: "#0b8457",
     marginBottom: 5,
     marginTop: 5,
     marginRight: "auto",
-    fontSize: 17
+    fontSize: 17,
+    fontFamily: 'ProximaNova-Regular'
   },
   boxLogo: {
     paddingTop: 80,
     paddingBottom: 50,
-    backgroundColor: "#6597A0",
+    backgroundColor: "#0b8457",
     width: "100%",
     zIndex: 1,
     flexDirection: "row",

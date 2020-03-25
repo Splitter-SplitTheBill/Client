@@ -1,6 +1,8 @@
 import axios from 'axios'
 import eventReducer from '../reducers/eventReducer'
-const baseUrl = 'http://192.168.1.5:3000'
+// const baseUrl = 'http://192.168.1.5:3000'
+// const baseUrl = "http://localhost:3000";
+const baseUrl = "http://192.168.43.186:3000";
 
 const AddFriendToEvent = (friendData) => {
     return {
@@ -176,7 +178,7 @@ const showAllEvents = (userId, token) => {
     return (dispatch) => {
         axios({
           method: 'GET',
-          url: `http://192.168.1.5:3000/events`,
+          url: `${baseUrl}/events`,
           headers: { token }
         })
           .then(result => {
@@ -286,5 +288,5 @@ export {
     FetchTransactionItemsAgain,
     SetToPaid,
     changeBillPicture,
-    AddTransactionItem
+    AddTransactionItem,
 }

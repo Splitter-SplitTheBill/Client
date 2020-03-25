@@ -1,10 +1,13 @@
 import axios from 'axios'
+// const baseUrl = "http://localhost:3000";
+// const baseUrl = "http://192.168.1.5:3000";
+const baseUrl = "http://192.168.43.186:3000";
 
 export const ALLFRIENDS = (id, token) => {
   return (dispatch) => {
     axios({
       method: 'GET',
-      url: `http://localhost:3000/users/${id}`, 
+      url: `${baseUrl}/users/${id}`, 
       headers: { token },
     })
       .then(result => {
@@ -28,7 +31,7 @@ export const DELETEFRIEND = (userId, friendId, token) => {
   return (dispatch) => {
     axios({
       method: 'PATCH',
-      url: `http://localhost:3000/users/${userId}/friends/${friendId}`,
+      url: `${baseUrl}/users/${userId}/friends/${friendId}`,
       headers: { token }
     })
       .then(result => {
@@ -48,11 +51,11 @@ const deleted = (friend) => ({
 })
 
 
-export const ADDFRIEND = (id, friendId, token) => {
+export const ADDFRIEND = (id, friendId, token) => { 
   return (dispatch) => {
     axios({
       method: 'PATCH',
-      url: `http://localhost:3000/users/${id}/friends`,
+      url: `${baseUrl}/users/${id}/friends`,
       headers: { token },
       data: {
         friendId
@@ -62,7 +65,7 @@ export const ADDFRIEND = (id, friendId, token) => {
         console.log(result.data.userId, '< add friend action')
         axios({
           method: 'GET',
-          url: `http://localhost:3000/users/${result.data.userId}`,
+          url: `${baseUrl}/users/${result.data.userId}`,
           headers: { token }
         })
         .then(res => {

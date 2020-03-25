@@ -61,7 +61,7 @@ export default function EventFriend ({ friendData }) {
                 </View>
                 <View style={styles.FriendNameOutNone}>
                     <View style={styles.FriendNameIn}>
-                        <Text>{friendData.username}</Text>
+                        <Text style={{fontFamily: 'ProximaNova-Regular'}}>{friendData.username}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     FriendNameOut: {
         height: 35,
         width: 90,
-        backgroundColor: '#55efc4',
+        backgroundColor: '#0b8457',
         transform: [
             {
                 translateY: -10
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     },
     FriendPicOut: {
         borderRadius: 999,
-        backgroundColor: '#55efc4',
+        backgroundColor: '#0b8457',
         height: 70,
         width: 70,
         alignItems: 'center',

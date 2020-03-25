@@ -5,6 +5,7 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { SearchBar } from '../components'
 import {useSelector, useDispatch} from 'react-redux'
 import { ALLFRIENDS, DELETEFRIEND } from '../actions/friendAction'
+import Constants from 'expo-constants';
 
 function FriendListScreen({navigation}) {
   const [searchFriends, setFriend] = useState(false)
@@ -41,7 +42,7 @@ function FriendListScreen({navigation}) {
   // }
 
   const searchInput = (input) => {
-    const filtered = friends.filter(friend => friend.userId.name.toLowerCase().includes(input))
+    const filtered = friends.filter(friend => friend.userId.name.toLowerCase().includes(input.toLowerCase()))
     setFriend(filtered)
   }
 
@@ -89,12 +90,15 @@ function FriendListScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5
+    padding: 5,
+    backgroundColor: '#fff',
+    height: '100%'
   },
   title: {
-    fontSize: 30,
-    fontStyle: 'italic',
-    margin: 5
+    fontSize: 40,
+    marginTop: Constants.statusBarHeight,
+    margin: 5,
+    fontFamily: 'Hotham'
   },
   search: {
     flexDirection: 'row',
@@ -103,7 +107,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   addIcon: {
-    color: '#6597a0',
+    color: '#0b8457',
   },
   friend: {
     flexDirection: 'row',
@@ -111,7 +115,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    margin: 10
+    margin: 10,
+    fontFamily: 'ProximaNova-Regular'
   },
   deleteIcon: {
     marginLeft: 'auto',

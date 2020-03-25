@@ -11,7 +11,7 @@ function TabNavigation() {
     <Tab.Navigator 
       initialRouteName="HomeScreen"
       tabBarOptions={{
-        activeTintColor: '#6597a0', 
+        activeTintColor: '#0b8457', 
         adaptive: true,
         inactiveTintColor: 'gray',
       }}

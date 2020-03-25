@@ -20,7 +20,7 @@ export default function SearchBar({search}) {
 
 const styles = StyleSheet.create({
   search: {
-    backgroundColor: '#6597a0',
+    backgroundColor: '#0b8457',
     height: 50,
     width: "85%",
     padding: 10,
@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 18,
-    color: 'white'
+    color: 'white',
+    fontFamily: 'ProximaNova-Regular'
   },
   icon: {
     justifyContent: 'center',
