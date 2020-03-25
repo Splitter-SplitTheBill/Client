@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     marginBottom: 15,
     textAlign: "center",
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   imageProfile: {
     alignSelf: "center",
@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
   textDetail: {
     textAlign: "center",
     fontSize: 17,
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   textUsername: {
     fontSize: 20,
     color: "#0b8457",
     textAlign: "center",
     fontWeight: "bold",
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   textTitleAcc: {
     fontSize: 20,
@@ -143,14 +143,14 @@ const styles = StyleSheet.create({
     paddingBottom: 7,
     borderRadius: 10,
     textAlign: "center",
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   AccDetailType: {
-    borderColor: "#6597A0",
+    borderColor: "#0B8457",
     borderWidth: 1,
     padding: 5,
     width: 80,
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   AccDetailNumber: {
     borderColor: "#0b8457",
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     padding: 5,
     width: 120,
     textAlign: "center",
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   buttonManage: {
     borderRadius: 6,

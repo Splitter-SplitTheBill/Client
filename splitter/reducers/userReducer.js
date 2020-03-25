@@ -1,7 +1,9 @@
 const initialState = {
   UserLogin: [],
   EditProfile: [],
-  token: null
+  token: null,
+  dataUnpaid: [],
+  dataTransaction: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -14,6 +16,12 @@ const userReducer = (state = initialState, action) => {
       console.log(action.payload.profile, "<<<reducr tucyy");
       const profile = action.payload.profile;
       return { ...state, UserLogin: profile };
+    case "UNPAID":
+      const unpaid = action.payload.unpaid;
+      return { ...state, dataUnpaid: unpaid };
+    case "TRANSACTION":
+      const transaction = action.payload.transaction;
+      return { ...state, dataTransaction: transaction };
     default:
       return state;
   }

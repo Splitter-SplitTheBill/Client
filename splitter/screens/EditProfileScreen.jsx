@@ -221,9 +221,14 @@ export default function EditProfileScreen(props) {
                 style={styles.textChangeImage}
                 onPress={() => _pickImage()}
               >
-              <Text
-                style={{ color: "black", opacity: 0.5, textAlign: "center", fontFamily: 'ProximaNova-Regular' }}
-              >
+                <Text
+                  style={{
+                    color: "black",
+                    opacity: 0.5,
+                    textAlign: "center",
+                    fontFamily: "ProximaNova-Regular"
+                  }}
+                >
                   Change Profile Picture
                 </Text>
               </TouchableOpacity>
@@ -271,12 +276,12 @@ export default function EditProfileScreen(props) {
                   borderColor: "lightgrey",
                   borderRadius: 50,
                   width: 250,
-                  paddingLeft: 3,
+                  paddingLeft: 3
                 }}
               >
                 <Text
                   style={{
-                    color: "#6597A0",
+                    color: "#0B8457",
                     fontSize: 15,
                     fontWeight: "bold",
                     textAlign: "center"
@@ -394,7 +399,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#0b8457",
     borderBottomWidth: 2,
     marginBottom: 30,
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   textInput: {
     color: "#0b8457",
@@ -403,7 +408,7 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     fontSize: 17,
     fontWeight: "bold",
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   textTitleAcc: {
     fontSize: 20,
@@ -413,15 +418,15 @@ const styles = StyleSheet.create({
     paddingBottom: 7,
     borderRadius: 10,
     textAlign: "center",
-    fontFamily: 'ProximaNova-Regular'
+    fontFamily: "ProximaNova-Regular"
   },
   AccDetailType: {
     borderColor: "#0b8457",
     borderWidth: 1,
     padding: 5,
     width: 80,
-    fontFamily: 'ProximaNova-Regular',
-    width: '40%'
+    fontFamily: "ProximaNova-Regular",
+    width: "40%"
   },
   AccDetailNumber: {
     borderColor: "#0b8457",
@@ -430,8 +435,8 @@ const styles = StyleSheet.create({
     width: 150,
     textAlign: "center",
     flexDirection: "row",
-    fontFamily: 'ProximaNova-Regular',
-    width: '50%'
+    fontFamily: "ProximaNova-Regular",
+    width: "50%"
   },
   textChangeImage: {
     borderColor: "#0b8457",
