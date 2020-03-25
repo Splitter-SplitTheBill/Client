@@ -29,11 +29,13 @@ export default function UnpaidDetailScreen(props) {
     return state.userReducer.dataTransaction;
   });
 
+  // console.log(userData, '<<<<<<TRANSACTIONS')
+
   const back = () => {
     props.navigation.goBack();
   };
 
-  const [userData, setUserData] = useState([]);
+  // const [userData, setUserData] = useState([]);
 
   // const baseUrl = "http://localhost:3000";
   const baseUrl = "http://192.168.43.186:3000";
@@ -49,10 +51,10 @@ export default function UnpaidDetailScreen(props) {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <View style={{ position: "absolute", width: "100%", paddingLeft: 20 }}>
+        <View style={styles.boxLogo}>
+        <View style={{ position: "absolute", width: "100%", height: '100%'}}>
           <BackButton methods={back} />
         </View>
-        <View style={styles.boxLogo}>
           <Image style={styles.imageLogo} source={logoImage} />
           <Text style={styles.textLogo}>Split The Bill</Text>
         </View>
@@ -98,7 +100,9 @@ export default function UnpaidDetailScreen(props) {
                           })
                         }
                       >
-                        <Image style={styles.imageInner} source={unpaidImage} />
+                        <View style={styles.imageInnerContainer}>
+                          <Image style={styles.imageInner} source={unpaidImage} />
+                        </View>
                         <View style={styles.textInner}>
                           <Text
                             style={{
@@ -135,7 +139,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#0B8457",
     flex: 1,
-    width: width
+    width: width,
+    paddingTop: Constant.statusBarHeight-23
   },
   textLogo: {
     color: "white",
@@ -182,20 +187,29 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   textInner: {
+    width: 150,
     textAlign: "center",
     // marginTop: 20,
     marginLeft: 20,
     fontSize: 20,
-    fontFamily: "ProximaNova-Regular"
+    fontFamily: "ProximaNova-Regular",
+    alignItems: 'center'
+  },
+  imageInnerContainer: {
+    width: 70,
+    height: 70,
+    borderRadius: 999,
+    overflow: 'hidden'
   },
   imageInner: {
     width: 70,
     height: 70,
-    borderRadius: 99,
+    borderRadius: 999,
     justifyContent: "center",
     // marginBottom: 10,
     borderColor: "black",
-    borderWidth: 2
+    borderWidth: 2,
+    overflow: 'hidden'
   },
   textUnpaid: {
     fontSize: 20,

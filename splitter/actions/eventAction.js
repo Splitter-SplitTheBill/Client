@@ -1,8 +1,8 @@
 import axios from 'axios'
 import eventReducer from '../reducers/eventReducer'
-// const baseUrl = 'http://192.168.1.5:3000'
+const baseUrl = 'http://192.168.1.5:3000'
 // const baseUrl = "http://localhost:3000";
-const baseUrl = "http://192.168.43.186:3000";
+// const baseUrl = "http://192.168.43.186:3000";
 
 const AddFriendToEvent = (friendData) => {
     return {
@@ -78,6 +78,10 @@ const FetchTransactionItems = (photo) => {
             (result) => {
             // console.log(result, "DATA YEUUUUUUH")
               if    (result.transactions) {
+                let transactions = result.transactions
+                transactions.map(transaction => {
+                  transaction.price = Math.round(transaction.price)
+                })
                 dispatch({
                     type: 'FetchTransactionItems',
                     payload: {
@@ -86,6 +90,7 @@ const FetchTransactionItems = (photo) => {
                     }
                 })
               } else {
+                console.log('gagal')
                 dispatch({
                     type: 'FetchTransactionItems',
                     payload: {

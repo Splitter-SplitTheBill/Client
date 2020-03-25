@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { View, Text, StyleSheet, Image, Modal, Dimensions } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import Constant from 'expo-constants'
 
 import pay from '../assets/images/pay.png'
 
@@ -38,7 +39,7 @@ function HistoryScreen({navigation}) {
 
   return (
     <View style={styles.container} >
-        <View style={{paddingTop: 5, position: 'absolute'}}>
+        <View style={{paddingTop: 5, position: 'absolute', marginTop: Constant.statusBarHeight}}>
           <BackButton methods={back} />
         </View>
       <View style={styles.head}>
@@ -58,7 +59,7 @@ function HistoryScreen({navigation}) {
             )
           })} 
         </ScrollView>
-      </View>
+          </View>
     </View>
   )
 }
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#0b8457',
     flex: 1,
+    paddingTop: Constant.statusBarHeight
   },
   head: {
     paddingLeft: 5,

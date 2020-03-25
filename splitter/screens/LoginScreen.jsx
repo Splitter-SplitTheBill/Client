@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { UserLogin } from "../actions/userAction";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { UserLogin, LogOut } from "../actions/userAction";
 import {
   View,
   Text,
@@ -9,7 +9,8 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Alert
 } from "react-native";
 import logoImage from "../assets/logo.jpg";
 import axios from "axios";
@@ -18,7 +19,8 @@ export default function LoginScreen(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   // const baseUrl = "http://localhost:3000";
-  const baseUrl = "http://192.168.43.186:3000";
+  // const baseUrl = "http://192.168.43.186:3000";
+  const baseUrl = 'http://192.168.1.5:3000'
 
   const dispatch = useDispatch();
 
@@ -42,6 +44,8 @@ export default function LoginScreen(props) {
         .then(response => {
           dispatch(UserLogin(response.data));
           console.log(response.data);
+          setUsername('')
+          setPassword('')
           props.navigation.navigate("TabNavigation");
         })
         .catch(err => {

@@ -1,5 +1,5 @@
 const initialState = {
-  UserLogin: [],
+  UserLogin: null,
   EditProfile: [],
   token: null,
   dataUnpaid: [],
@@ -21,8 +21,16 @@ const userReducer = (state = initialState, action) => {
       const unpaid = action.payload.unpaid;
       return { ...state, dataUnpaid: unpaid };
     case "TRANSACTION":
-      const transaction = action.payload.transaction;
+      const transaction = action.payload.transaction.filter(transaction => transaction.status == 'unpaid');
+      console.log(transaction, "TRANSACTION REDUCEEEER")
       return { ...state, dataTransaction: transaction };
+    case 'LogOut':
+      return {
+        ...state, dataTransaction: state.dataTransaction = [],
+        dataUnpaid: state.dataUnpaid = [],
+        token: state.token = null,
+        UserLogin: state.UserLogin = null
+      }
     default:
       return state;
   }

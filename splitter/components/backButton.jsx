@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     width: 40,
     padding: 10,
     borderRadius: 10,
-    marginTop: Constants.statusBarHeight,
     justifyContent: 'center',
     alignItems: 'center'
   },
