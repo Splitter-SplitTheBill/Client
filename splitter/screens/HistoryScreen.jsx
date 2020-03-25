@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { View, Text, StyleSheet, Image, Modal } from 'react-native'
+import { View, Text, StyleSheet, Image, Modal, Dimensions } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 
 import pay from '../assets/images/pay.png'
@@ -28,17 +28,23 @@ function HistoryScreen({navigation}) {
     navigation.goBack()
   }
 
+  const refreshScreen = () => {
+    dispatch(showAllEvents(userId, token))
+  }
+
   const detailHistory = (event) => {
-    navigation.navigate('DetailHistoryScreen', {event: event.participants, eventId: event._id})
+    navigation.navigate('DetailHistoryScreen', {eventId: event._id, refresh: refreshScreen })
   }
 
   return (
     <View style={styles.container} >
+        <View style={{paddingTop: 5, position: 'absolute'}}>
+          <BackButton methods={back} />
+        </View>
       <View style={styles.head}>
-        <BackButton methods={back} />
         <Image source={pay} style={styles.image}/>
         <View style={styles.title}>
-          <Text style={styles.totalBill}>History</Text>
+          <Text style={styles.totalBill}>{' '}History{' '}</Text>
           <View style={styles.boxAmount}>
             <Text style={styles.amount}>Transactions</Text>
           </View>
@@ -48,11 +54,9 @@ function HistoryScreen({navigation}) {
         <ScrollView>
           {allEvents.map(event => {
             return (
-              <View key={event._id}>
-                <CustomCard methods={detailHistory} data={event} />
-              </View>
+              <CustomCard methods={detailHistory} data={event} key={event._id}/>
             )
-          })}
+          })} 
         </ScrollView>
       </View>
     </View>
@@ -68,37 +72,42 @@ const styles = StyleSheet.create({
   head: {
     paddingLeft: 5,
     flexDirection: 'row',
+    justifyContent: 'center',
+    zIndex: -1
   },
   title: {
     justifyContent: 'center',
-    marginLeft: 'auto',
-    marginRight: 20
+    marginLeft: 5,
   },
   image: {
     height: 150,
     width: 100,
-    marginLeft: 10
+    marginLeft: '10%'
   },
   totalBill: {
     marginTop: 20,
     color: 'white',
-    fontSize: 30,
+    fontSize: 40,
     fontFamily: 'Hotham',
-    letterSpacing: 2
+    letterSpacing: 2,
+    marginLeft: '20%'
   },
   boxAmount: {
     backgroundColor: 'white',
     padding: 5,
-    borderRadius: 15,
     shadowRadius: 2,
-    elevation: 2
+    elevation: 2,
+    width: 200,
+    transform: [{
+      translateX: 50
+    }]
   },
   amount: {
     color: '#0b8457',
     fontSize: 14,
     letterSpacing: 1,
-    textAlign: 'center',
-    fontFamily: 'ProximaNova-Bold'
+    fontFamily: 'ProximaNova-Bold',
+    marginRight: '15%'
   },
   box: {
     backgroundColor: 'white',
@@ -108,6 +117,7 @@ const styles = StyleSheet.create({
     padding: 15,
     shadowRadius: 15,
     elevation: 10,
+    height: Dimensions.get('screen').height-300,
   },
   titleTransaction: {
     fontSize: 14,

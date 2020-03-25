@@ -6,8 +6,9 @@ import searchFriend from '../assets/images/searchFriend.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import axios from 'axios'
 
-const baseUrl = "http://localhost:3000";
+// const baseUrl = "http://localhost:3000";
 // const baseUrl = "http://192.168.1.5:3000";
+const baseUrl = "http://192.168.43.186:3000";
 
 function SearchFriend({navigation, route}) {
   const [input, setInput] = useState('')

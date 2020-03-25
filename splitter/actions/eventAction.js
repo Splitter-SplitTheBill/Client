@@ -271,6 +271,28 @@ const AddTransactionItem = () => {
   }
 }
 
+const showOneEvent = (eventId, token) => {
+  return (dispatch) => {
+      axios({
+        method: 'GET',
+        url: `${baseUrl}/events/${eventId}`,
+        headers: { token }
+      })
+        .then(result => {
+          console.log(result, '<<<< Resultt one event')
+          dispatch(getEvents({event: result.data.event}))
+        })
+        .catch(err => {
+          console.log(err, '< error showOneEvent')
+        })
+    }
+}
+
+const getEvents = (event) => ({
+  type: 'showOneEvent',
+  payload: event
+})
+
 export {
     setParticipantsWithItems,
     submitEvent,
@@ -289,4 +311,5 @@ export {
     SetToPaid,
     changeBillPicture,
     AddTransactionItem,
+    showOneEvent
 }

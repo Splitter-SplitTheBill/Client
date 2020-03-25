@@ -18,7 +18,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.background}>
         <View style={styles.headline}>
-          <Text style={styles.title}>Splitter</Text>
+          <Text style={styles.title}>{' '}Splitter{' '}</Text>
           <Text style={styles.desc}>Split The Bill</Text>
         </View>
         <Image source={peopleMoney} style={styles.image} />
@@ -68,15 +68,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 10
   },
-  headline: {
-    marginLeft: 10,
-  },
   title: {
     color: "#0b8457",
     fontSize: 40,
-    fontFamily: 'Hotham'
+    fontFamily: 'Hotham',
   },
   desc: {
+    marginLeft: 10,
     color: "#0b8457",
     fontSize: 16,
     fontFamily: 'ProximaNova-Regular'

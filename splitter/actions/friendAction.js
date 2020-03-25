@@ -14,7 +14,7 @@ export const ALLFRIENDS = (id, token) => {
         dispatch(allfriends(result.data.friendList))
       })
       .catch(err => {
-        console.log(err.response, '< error show all friends')
+        console.log(err, '< error show all friends')
       })
   }
 }
@@ -35,10 +35,10 @@ export const DELETEFRIEND = (userId, friendId, token) => {
       headers: { token }
     })
       .then(result => {
-        dispatch(deleted(result.data.userId))
+        dispatch(deleted(result.data.friendList))
       })
       .catch(err => {
-        console.log(err.response, '< error delete friend action')
+        console.log(err, '< error delete friend action')
       })
   }
 }
@@ -62,21 +62,22 @@ export const ADDFRIEND = (id, friendId, token) => {
       }
     })
       .then(result => {
-        console.log(result.data.userId, '< add friend action')
+        console.log(result.data._id, '< add friend action')
         axios({
           method: 'GET',
-          url: `${baseUrl}/users/${result.data.userId}`,
+          url: `${baseUrl}/users/${friendId}`,
           headers: { token }
         })
         .then(res => {
+          console.log(res, '< ini res')
           dispatch(added(res.data))
         })
         .catch(err => {
-          console.log(err.response, '< error add friend action findOne')
+          console.log(err, '< error add friend action findOne')
         })
       })
       .catch(err => {
-        console.log(err.response, '< error add friend action')
+        console.log(err, '< error add friend action')
       })
   }
 }

@@ -217,12 +217,13 @@ export default function EditProfileScreen(props) {
                 marginTop: 40
               }}
             >
+              <TouchableOpacity
+                style={styles.textChangeImage}
+                onPress={() => _pickImage()}
+              >
               <Text
                 style={{ color: "black", opacity: 0.5, textAlign: "center", fontFamily: 'ProximaNova-Regular' }}
               >
-                <Text
-                  style={{ color: "black", opacity: 0.5, textAlign: "center" }}
-                >
                   Change Profile Picture
                 </Text>
               </TouchableOpacity>
