@@ -7,7 +7,7 @@ export const ALLFRIENDS = (id, token) => {
   return dispatch => {
     axios({
       method: 'GET',
-      url: `${baseUrl}/users/${id}`, 
+      url: `http://192.168.1.5:3000/users/${id}`, 
       headers: { token },
     })
       .then(result => {
@@ -30,7 +30,7 @@ export const DELETEFRIEND = (userId, friendId, token) => {
   return dispatch => {
     axios({
       method: 'PATCH',
-      url: `${baseUrl}/users/${userId}/friends/${friendId}`,
+      url: `http://192.168.1.5:3000/users/${userId}/friends/${friendId}`,
       headers: { token }
     })
       .then(result => {
@@ -53,7 +53,7 @@ export const ADDFRIEND = (id, friendId, token) => {
   return (dispatch) => {
     axios({
       method: 'PATCH',
-      url: `${baseUrl}/users/${id}/friends`,
+      url: `http://192.168.1.5:3000/users/${id}/friends`,
       headers: { token },
       data: {
         friendId
@@ -63,7 +63,7 @@ export const ADDFRIEND = (id, friendId, token) => {
         console.log(result.data._id, '< add friend action')
         axios({
           method: 'GET',
-          url: `${baseUrl}/users/${result.data.userId}`,
+          url: `http://192.168.1.5:3000/users/${result.data.userId}`,
           headers: { token }
         })
           .then(res => {

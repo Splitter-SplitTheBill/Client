@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // const baseUrl = "http://localhost:3000";
-const baseUrl = "http://192.168.43.186:3000";
+// const baseUrl = "http://192.168.43.186:3000";
+const baseUrl = 'http://192.168.1.5:3000'
 
 const UserLogin = inputLogin => {
   return dispatch => {
@@ -12,11 +13,13 @@ const UserLogin = inputLogin => {
   };
 };
 
-const profileUpdate = input => {
+const profileUpdate = updatedUserData => {
   return dispatch => {
     dispatch({
       type: "EDITPROFILE",
-      payload: { profile: input }
+      payload: { 
+        updatedUserData
+       }
     });
   };
 };
@@ -66,4 +69,10 @@ const getTransaction = (id, token) => {
   };
 };
 
-export { UserLogin, profileUpdate, changeStatus, getTransaction };
+const LogOut = () => {
+  return {
+    type: 'LogOut'
+  }
+}
+
+export { UserLogin, profileUpdate, changeStatus, getTransaction, LogOut };

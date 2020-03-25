@@ -24,7 +24,7 @@ export default function Card({methods, data}) {
       return (
         <View style={styles.detail}>
           <Text style={styles.eventName}>{data.name}</Text>
-          <Text>You and {data.participants.length - 1} other people</Text>
+          <Text>You and {data.participants.length} other people</Text>
           <Text style={{color: '#0b8457', fontFamily: 'ProximaNova-Regular'}}>COMPLETE</Text>
         </View>
       )

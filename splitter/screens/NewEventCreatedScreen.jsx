@@ -1,9 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Image, FlatList } from 'react-native'
 import { useSelector } from 'react-redux'
 import Constants from 'expo-constants'
 import NewEventParticipantCard from '../components/NewEventParticipantCard'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons'
 
 export default function NewEventCreatedScreen ({ navigation }) {
@@ -13,9 +13,6 @@ export default function NewEventCreatedScreen ({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('TabNavigation')}>
-                    <Ionicons name="ios-home" size={30} color="#0b8457" />
-                </TouchableOpacity>
                 <View style={styles.header}>
                     {/* <Text>Your New Event!!</Text> */}
                 </View>
@@ -29,6 +26,7 @@ export default function NewEventCreatedScreen ({ navigation }) {
                     </View>
                 </View>
             </View>
+            {/* <ScrollView>
             <View style={styles.contentContainer}>
                 {
                     newEvent.participants.map(participant => {
@@ -38,7 +36,22 @@ export default function NewEventCreatedScreen ({ navigation }) {
                     })
                 }
                 
+                
             </View>
+            </ScrollView> */}
+            <FlatList
+                    data={newEvent.participants}
+                    style={styles.contentContainer}
+                    renderItem={({ item }) => {
+                        return (
+                            <NewEventParticipantCard participantData={item} />
+                        )
+                    }}
+                    keyExtractor={(item, i) => i}
+                    />
+            <TouchableOpacity style={styles.homeButton} onPress={() => navigation.navigate('TabNavigation')}>
+                    <Ionicons name="ios-home" size={30} color="#0b8457" />
+            </TouchableOpacity>
         </View>
     )
 } else {
@@ -65,7 +78,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '10%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         marginTop: 30
     },
     eventOverviewContainer: {
@@ -98,15 +111,14 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     contentContainer: {
-        height: '50%',
-        width: '100%'
+        height: 310,
+        width: Dimensions.get('screen').width
     },
     homeButton: {
-        width: 100,
-        height: 35,
+        width: '100%',
+        height: 60,
         backgroundColor: '#32ff7e',
         borderRadius: 10,
-        marginLeft: 20,
         alignItems: 'center',
         justifyContent: 'center'
     }

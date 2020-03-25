@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
 import { Divider } from 'react-native-elements'
 import Constants from 'expo-constants';
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,8 +8,10 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios'
 import { showOneEvent } from '../actions/eventAction'
 import formatMoney from '../helpers/RpConverter'
+import Constant from 'expo-constants'
 
-const baseUrl = "http://192.168.43.186:3000";
+// const baseUrl = "http://192.168.43.186:3000";
+const baseUrl = "http://192.168.1.5:3000";
 
 function DetailHistory({navigation, route}) {
   const dispatch = useDispatch()
@@ -62,7 +64,7 @@ function DetailHistory({navigation, route}) {
           <Text style={{marginLeft: 'auto', color: '#900',fontFamily: 'ProximaNova-Regular'}}>Status: SETTLING</Text>
           <TouchableOpacity onPress={() => changeStatus(userId)} style={{marginLeft: 'auto', backgroundColor: '#0b8457', padding: 5, borderRadius: 5, paddingHorizontal: 10, marginBottom: 5}}>
             <Text style={{color: 'white'}}>
-              Paid
+              Confirm
             </Text>
           </TouchableOpacity>
         </View>
@@ -85,6 +87,12 @@ function DetailHistory({navigation, route}) {
         {getEvent && getEvent.participants.map(detail => {
           return (
             <View key={detail._id} style={styles.box}>
+              {
+                detail.transactionId.status == 'settled'
+                && <View style={styles.settled}>
+                <Image source={require('../assets/settled.png')} style={styles.settledImg} />
+              </View>
+              }
               <Text style={{fontSize: 16,fontFamily: 'ProximaNova-Bold'}}>{detail.participantId.name}</Text>
               {detail.transactionId.items.map(item => {
                 return (
@@ -109,7 +117,8 @@ const { height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0b8457'
+    backgroundColor: '#0b8457',
+    paddingTop: Constant.statusBarHeight
   },
   back: {
     padding: 5,
@@ -149,6 +158,19 @@ const styles = StyleSheet.create({
   },
   box: {
     marginTop: 'auto',
+  },
+  settled: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    backgroundColor: 'rgba(0,0,0,0.55)',
+    alignItems: 'center',
+    borderRadius: 10
+  },
+  settledImg: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain'
   }
 })
 
