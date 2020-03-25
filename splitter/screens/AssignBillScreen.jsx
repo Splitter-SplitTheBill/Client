@@ -5,9 +5,10 @@ import { ScrollView } from 'react-native-gesture-handler'
 import TransactionItem from '../components/TransactionItems'
 import { useSelector, useDispatch } from 'react-redux'
 import ReceiptImageModal from '../components/ReceiptImageModal'
-import { submitEvent, setParticipantsWithItems, FetchTransactionItemsAgain } from '../actions/eventAction'
+import { submitEvent, setParticipantsWithItems, FetchTransactionItemsAgain, AddTransactionItem } from '../actions/eventAction'
 import ConvertToIdr from '../helpers/RpConverter'
 import ConfirmationModal from '../components/ConfirmationModal'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 export default function AssignBillScreen ({ navigation }) {
     const eventName = useSelector(state => state.eventReducer.eventName)
@@ -33,7 +34,10 @@ export default function AssignBillScreen ({ navigation }) {
             setConfirmTrigger(false)
             console.log( 'cancelled' )
         }
-        
+    }
+
+    const addAnItem = () => {
+        dispatch(AddTransactionItem())
     }
 
     useEffect(() => {
@@ -44,7 +48,7 @@ export default function AssignBillScreen ({ navigation }) {
         if(transactionItems.length > 1) {
             let newTotal = 0
             transactionItems.forEach(item => {
-                newTotal += item.price
+                newTotal += Number(item.price)
             })
             setTotalReceipt(newTotal)
         }
@@ -63,8 +67,8 @@ export default function AssignBillScreen ({ navigation }) {
                     </View>
                 </TouchableOpacity>
                 <View style={styles.eventDetails}>
-                    <Text style={{fontSize: 25, fontWeight: 'bold', flexWrap: 'wrap', textAlign: 'center', flexDirection: 'row'}}>{eventName}</Text>
-                    <Text>Paid by: {userData.username}</Text>
+                    <Text style={{fontSize: 25, fontWeight: 'bold', flexWrap: 'wrap', textAlign: 'center', flexDirection: 'row', width: 110, marginBottom: 5}}>{eventName}</Text>
+                    <Text style={{marginBottom: 5}}>Paid by: {userData.username}</Text>
                     <Text>{new Date().toDateString()}</Text>
                 </View>
             </View>
@@ -92,6 +96,9 @@ export default function AssignBillScreen ({ navigation }) {
                                         )
                                     })
                                 }
+                                <TouchableOpacity style={styles.addTransactionSection} onPress={() => addAnItem()}>
+                                    <Ionicons name="md-add-circle-outline" size={32} color="#7bed9f" />
+                                </TouchableOpacity>
                                 <View style={styles.totalSection}>
                                     <Text style={styles.totalInfo}>
                                         Total
@@ -104,16 +111,19 @@ export default function AssignBillScreen ({ navigation }) {
                         </ScrollView>
                     </View></>
                     : transactionItems.length == 1 
-                    ? <View style={styles.transactionDetails}>
-                        <TouchableOpacity onPress={() => {
+                    ? <View style={styles.tryAgainContainer}>
+                        <Text>Oops!</Text>
+                        <Text>there's an error in scanning your bill</Text>
+                        <Text>Please press the button below to retry the process</Text>
+                        <TouchableOpacity style={styles.tryAgainButton} onPress={() => {
                             dispatch(FetchTransactionItemsAgain(receiptImageUrl))
                         }}>
-                            <Text>TryAgain</Text>
+                            <FontAwesome name="refresh" size={20} color="green" />
                         </TouchableOpacity>
                     </View>
-                    : <View style={styles.transactionDetails}>
-                    <ActivityIndicator size="large" color='#6597A0' />
-                        </View>
+                    : <View style={styles.tryAgainContainer}>    
+                        <ActivityIndicator size="large" color='#6597A0' />
+                    </View>
                     
                 }
             </View>
@@ -156,7 +166,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 3,
-        borderColor: 'green'
+        borderColor: 'green',
+        backgroundColor: 'white'
     },
     receipt: {
         height: '95%',
@@ -167,12 +178,34 @@ const styles = StyleSheet.create({
     },
     eventDetails: {
         justifyContent: 'center',
-        alignItems: 'center',
-        width: '50%'
+        alignItems: 'flex-end',
+        width: '75%',
+        paddingRight: 50,
+        height: '80%',
+        borderRadius: 20,
+        translateX: -100,
+        zIndex: -1,
+        backgroundColor: 'green'
+        // transform: [{
+        //     translateX: '-30%'
+        // }]
     },
     receiptDetailsContainer: {
         height: '65%',
         width: '95%'
+    },
+    tryAgainContainer: {
+        height: Dimensions.get('screen').height-350,
+        width: Dimensions.get('screen').width-20,
+        borderWidth: 3,
+        borderRadius: 20,
+        borderColor: '#6597A0',
+        transform: [{
+            translateY: -20
+        }],
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     transactionDetails: {
         height: Dimensions.get('screen').height-350,
@@ -213,5 +246,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    tryAgainButton: {
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        backgroundColor: '#10ac84',
+        borderRadius: 10,
+        marginTop: 10
+    },
+    addTransactionSection: {
+        height: 40,
+        width: '100%',
+        // borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        backgroundColor: '#01a3a4'
     }
 })

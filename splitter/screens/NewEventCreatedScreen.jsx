@@ -17,7 +17,7 @@ export default function NewEventCreatedScreen ({ navigation }) {
                     <Ionicons name="ios-home" size={30} color="green" />
                 </TouchableOpacity>
                 <View style={styles.header}>
-                    <Text>Your New Event!!</Text>
+                    {/* <Text>Your New Event!!</Text> */}
                 </View>
             </View>
             <View style={styles.eventOverviewContainer}>

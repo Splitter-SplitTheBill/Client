@@ -99,6 +99,15 @@ const eventReducer = (state=initialState, action) => {
             return {
                 ...state, newEvent: state.newEvent = action.payload.updatedNewEvent
             }
+        case 'changeBillPicture':
+            return {
+                ...state, billPicture: state.billPicture = '',
+                transactionItems: state.transactionItems = []
+            }
+        case 'AddTransactionItem':
+            return {
+                ...state, transactionItems: state.transactionItems = [...state.transactionItems, {name: '', price: ''}]
+            }
         default:
             return state
     }

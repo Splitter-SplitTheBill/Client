@@ -53,6 +53,12 @@ const SetEventName = (eventName) => {
     }
 }
 
+const changeBillPicture = () => {
+  return {
+    type: 'changeBillPicture'
+}
+}
+
 const FetchTransactionItems = (photo) => {
     return (dispatch, getState) => {
         const data = new FormData()
@@ -170,11 +176,11 @@ const showAllEvents = (userId, token) => {
     return (dispatch) => {
         axios({
           method: 'GET',
-          url: `http://localhost:3000/events`,
+          url: `http://192.168.1.5:3000/events`,
           headers: { token }
         })
           .then(result => {
-            // console.log(result, '<<<< Resultt')
+            console.log(result, '<<<< Resultt')
             dispatch(allEvents({events: result.data.events, user: userId}))
           })
           .catch(err => {
@@ -257,6 +263,12 @@ const SetToPaid = (eventId, participantId) => {
 }
 }
 
+const AddTransactionItem = () => {
+  return {
+      type: 'AddTransactionItem'
+  }
+}
+
 export {
     setParticipantsWithItems,
     submitEvent,
@@ -272,5 +284,7 @@ export {
     ChangeItemPrice,
     SetParticipantsId,
     FetchTransactionItemsAgain,
-    SetToPaid
+    SetToPaid,
+    changeBillPicture,
+    AddTransactionItem
 }
