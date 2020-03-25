@@ -16,11 +16,16 @@ import logoImage from "../assets/logo.jpg";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { BackButton } from "../components";
 
 export default function UnpaidDetailScreen(props) {
   const userLogin = useSelector(state => {
     return state.userReducer.UserLogin;
   });
+
+  const back = () => {
+    props.navigation.goBack();
+  };
 
   const [userData, setUserData] = useState([]);
 
@@ -45,167 +50,97 @@ export default function UnpaidDetailScreen(props) {
       });
   };
 
-  // const userData = [
-  //   {
-  //     _id: "5e78b57527668fabf8f4862a",
-  //     userId: {
-  //       _id: "5e78b2baab98c8a9c5cb94d7",
-  //       name: "Okka2",
-  //       email: "okka2@mail.com",
-  //       username: "okka12",
-  //       accounts: [],
-  //       friendList: [],
-  //       __v: 0
-  //     },
-  //     items: [
-  //       {
-  //         _id: "5e78b57527668fabf8f4862b",
-  //         name: " TU Rice Org nik",
-  //         price: 454
-  //       },
-  //       {
-  //         _id: "5e78b57527668fabf8f4862c",
-  //         name: " TU Rice Org nik",
-  //         price: 454
-  //       }
-  //     ],
-  //     total: 908,
-  //     status: false,
-  //     paymentSelection: [
-  //       {
-  //         _id: "5e78b57527668fabf8f48622",
-  //         name: "Okka Linardi",
-  //         instance: "Ovo"
-  //       },
-  //       {
-  //         _id: "5e78b57527668fabf8f48623",
-  //         name: "Okka Linardi",
-  //         instance: "BCA"
-  //       }
-  //     ],
-  //     eventId: {
-  //       _id: "5e78b57527668fabf8f48621",
-  //       name: "Test eventsssss",
-  //       photo:
-  //         "https://jsprojectdev37.s3.ap-southeast-1.amazonaws.com/1584969059895-test.jpg",
-  //       status: "false",
-  //       participants: [
-  //         {
-  //           _id: "5e78b57527668fabf8f4862f",
-  //           participantId: "5e78b2a9ab98c8a9c5cb94d6",
-  //           transactionId: "5e78b57527668fabf8f48624",
-  //           username: "ajenggila"
-  //         },
-  //         {
-  //           _id: "5e78b57527668fabf8f48630",
-  //           participantId: "5e78b2baab98c8a9c5cb94d7",
-  //           transactionId: "5e78b57527668fabf8f4862a",
-  //           username: "ajenggila"
-  //         }
-  //       ],
-  //       accounts: [
-  //         {
-  //           _id: "5e78b57527668fabf8f48622",
-  //           name: "Okka Linardi",
-  //           instance: "Ovo"
-  //         },
-  //         {
-  //           _id: "5e78b57527668fabf8f48623",
-  //           name: "Okka Linardi",
-  //           instance: "BCA"
-  //         }
-  //       ],
-  //       createdUserId: "5e78b2e7ab98c8a9c5cb94d8",
-  //       __v: 0
-  //     },
-  //     createdAt: "2020-03-23T13:11:17.441Z",
-  //     updatedAt: "2020-03-23T13:11:17.441Z",
-  //     __v: 0
-  //   }
-  // ];
-
-  // function getUserPay(id) {
-  //   axios({
-  //     method: "GET",
-  //     url: baseUrl + "/users/" + id
-  //   })
-  //     .then(response => {
-  //       console.log(response.data);
-  //       setUserPay(response.data);
-  //       return userPay;
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response);
-  //     });
-  // }
-
   useEffect(() => {
     test();
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.boxLogo}>
-        <Image style={styles.imageLogo} source={logoImage} />
-        <Text style={styles.textLogo}>Split The Bill</Text>
-      </View>
-
-      <View style={styles.boxUnpaid}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.textUnpaid}>Unpaid</Text>
-          <Badge
-            status="error"
-            containerStyle={{ top: -4, right: -4 }}
-            value={userData.length}
-          />
+    <>
+      <SafeAreaView style={styles.container}>
+        <View style={{ marginLeft: 5 }}>
+          <BackButton methods={back} />
         </View>
-        <ScrollView>
-          {userData.map(unpaid => {
-            return (
-              <TouchableOpacity
-                style={styles.boxInner}
-                onPress={() =>
-                  props.navigation.navigate("DetailUnpaid", {
-                    unpaid: unpaid
-                  })
-                }
-              >
+        <View style={styles.boxLogo}>
+          <Image style={styles.imageLogo} source={logoImage} />
+          <Text style={styles.textLogo}>Split The Bill</Text>
+        </View>
+
+        <View style={styles.boxUnpaid}>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.textUnpaid}>Unpaid</Text>
+            <Badge
+              status="error"
+              containerStyle={{ top: -4, right: -4 }}
+              value={userData.length}
+            />
+          </View>
+          <ScrollView>
+            {userData.length < 1 ? (
+              <>
+                <Text
+                  style={{
+                    fontSize: 25,
+                    marginTop: "30%",
+                    fontStyle: "italic",
+                    color: "lightgrey"
+                  }}
+                >
+                  Nothing Here
+                </Text>
                 <Image
-                  style={styles.imageInner}
-                  source="https://cdn.imgbin.com/17/8/4/imgbin-banknote-united-states-one-dollar-bill-logo-united-states-dollar-banknote-bGqSrTb5vTadEgMcxEJwcQNcK.jpg"
+                  style={{ width: 150, height: 150 }}
+                  source="https://thumbs.gfycat.com/ComfortableSmartGrosbeak-max-1mb.gif"
                 />
-                <View style={styles.textInner}>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontStyle: "italic",
-                      fontFamily: 'ProximaNova-Regular',
-                      marginBottom: 5
-                    }}
-                  >
-                    {unpaid.eventId.name}
-                  </Text>
-                  <Text>{unpaid.createdAt.slice(0, 10)}</Text>
-                </View>
-                <Ionicons
-                  name="ios-arrow-forward"
-                  style={styles.icon}
-                  size={50}
-                />
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+              </>
+            ) : (
+              <>
+                {userData.map(unpaid => {
+                  return (
+                    <TouchableOpacity
+                      style={styles.boxInner}
+                      onPress={() =>
+                        props.navigation.navigate("DetailUnpaid", {
+                          unpaid: unpaid
+                        })
+                      }
+                    >
+                      <Image
+                        style={styles.imageInner}
+                        source="https://cdn.imgbin.com/17/8/4/imgbin-banknote-united-states-one-dollar-bill-logo-united-states-dollar-banknote-bGqSrTb5vTadEgMcxEJwcQNcK.jpg"
+                      />
+                      <View style={styles.textInner}>
+                        <Text
+                          style={{
+                            fontSize: 20,
+                            fontStyle: "italic",
+                            marginBottom: 5,
+                            fontFamily: 'ProximaNova-Regular'
+                          }}
+                        >
+                          {unpaid.eventId.name}
+                        </Text>
+                        <Text>{unpaid.createdAt.slice(0, 10)}</Text>
+                      </View>
+                      <Ionicons
+                        name="ios-arrow-forward"
+                        style={styles.icon}
+                        size={50}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+              </>
+            )}
+          </ScrollView>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 
 const { height } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
-    // alignItems: "center",
-    // justifyContent: "center",
     backgroundColor: "#0b8457",
     flex: 1
   },

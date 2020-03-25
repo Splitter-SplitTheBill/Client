@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  Button,
+  TouchableOpacity
+} from "react-native";
 import logoImage from "../assets/logo.jpg";
 
 export default function RegistAddScreen(props) {
@@ -63,6 +71,12 @@ export default function RegistAddScreen(props) {
           />
         </View>
       </View>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("Login")}
+        style={styles.textRegister}
+      >
+        <Text>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -136,5 +150,9 @@ const styles = StyleSheet.create({
     elevation: 2,
     marginTop: 30,
     zIndex: 3
+  },
+  textRegister: {
+    marginTop: 30,
+    fontSize: 25
   }
 });

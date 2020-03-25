@@ -6,10 +6,9 @@ import {
   StyleSheet,
   Image,
   Button,
-  TouchableOpacity,
   SafeAreaView,
   ScrollView,
-  CheckBox
+  ImageBackground
 } from "react-native";
 
 import axios from "axios";
@@ -28,24 +27,11 @@ export default function detail(props) {
 
   console.log(userPay, "<<<user pay");
 
-  //harusnya dataUnpaid.eventId.createdUserId
   useEffect(() => {
     getUser(dataUnpaid.eventId.createdUserId);
   }, []);
 
   function pay() {
-    // axios
-    //   .patch(`http://localhost:3000/transactions/${eventId}/${userId}`, {
-    //     headers: {
-    //       token: userlogin.token
-    //     }
-    //   })
-    //   .then(response => {
-    //     console.log(response.data, "<<<< berhasil bayar");
-    //   })
-    //   .catch(err => {
-    //     console.log(err.response);
-    //   });
     props.navigation.navigate("Unpaid");
   }
 
@@ -106,49 +92,72 @@ export default function detail(props) {
           </View>
           <View>
             <Text style={styles.boxRed}>Detail</Text>
-            <View style={styles.boxDetail}>
-              <View
-                style={{
-                  flexDirection: "row"
-                }}
-              >
-                <Text style={styles.titleDetail}>Item</Text>
-                {/* <Text style={styles.titleDetail}>Qty</Text> */}
-                <Text style={styles.titleDetail}>Price</Text>
+            <ImageBackground
+              source={{
+                uri:
+                  "https://i.pinimg.com/originals/c1/a3/4d/c1a34df855baf464e71bf0bfc1da40fb.png"
+              }}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <View style={styles.boxDetail}>
+                <View
+                  style={{
+                    flexDirection: "row"
+                  }}
+                >
+                  <Text style={styles.titleDetail}>Item</Text>
+                  <Text style={styles.titleDetail}>Price</Text>
+                </View>
+                <View style={{ marginBottom: 15 }}>
+                  {dataUnpaid.items.map(item => {
+                    return (
+                      <View
+                        style={{
+                          flexDirection: "row"
+                        }}
+                      >
+                        <Text style={styles.textDetail}>{item.name}</Text>
+                        <Text style={styles.textDetail}>
+                          {formatMoney(item.price)}
+                        </Text>
+                      </View>
+                    );
+                  })}
+                </View>
+                <View style={{ marginBottom: 15 }}>
+                  <Text style={styles.textTitle}>Participants</Text>
+                  {dataUnpaid.eventId.participants.map(user => {
+                    return <Text style={styles.textData}>{user.username}</Text>;
+                  })}
+                </View>
+                <View style={{ marginBottom: 15 }}>
+                  <Text style={styles.textTitle}>Total</Text>
+                  <Text style={styles.textData}>
+                    {formatMoney(dataUnpaid.total)}
+                  </Text>
+                </View>
+                <View style={{ marginBottom: 15 }}>
+                  <Text style={styles.textTitle}>Payment Methods</Text>
+                  <View>
+                    {dataUnpaid.paymentSelection.map(payment => {
+                      return (
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={styles.textPayment}>
+                            {payment.instance}
+                          </Text>
+                          <Text style={styles.textPayment}>{payment.name}</Text>
+                          <Text style={styles.textPayment}>
+                            {payment.accountNumber}
+                          </Text>
+                        </View>
+                      );
+                    })}
+                  </View>
+                </View>
               </View>
-              <View>
-                {dataUnpaid.items.map(item => {
-                  return (
-                    <View
-                      style={{
-                        flexDirection: "row"
-                      }}
-                    >
-                      <Text style={styles.textDetail}>{item.name}</Text>
-                      {/* <Text style={styles.textDetail}>{item.qty}</Text> */}
-                      <Text style={styles.textDetail}>
-                        {formatMoney(item.price)}
-                      </Text>
-                    </View>
-                  );
-                })}
-              </View>
-            </View>
+            </ImageBackground>
           </View>
-          <View>
-            <Text style={styles.boxRed}>Participants</Text>
-            <View style={styles.boxParticipant}>
-              {dataUnpaid.eventId.participants.map(user => {
-                return <Text>{user.username}</Text>;
-              })}
-            </View>
-          </View>
-          <View>
-            <Text style={styles.boxRed}>Total</Text>
-            <View style={styles.boxTotal}>
-              <Text>{formatMoney(dataUnpaid.total)}</Text>
-            </View>
-          </View>
+
           <View style={styles.buttonPay}>
             <Button
               title="Go Back"
@@ -174,24 +183,20 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 99,
     justifyContent: "center",
-    marginBottom: 10
-    // borderColor: "black",
-    // borderWidth: 4
+    marginBottom: 10,
+    borderColor: "black",
+    borderWidth: 2
   },
   from: {
     fontSize: 20,
     fontStyle: "italic",
     fontWeight: "bold",
-    color: "white",
+    color: "#BE3030",
     marginTop: 10
   },
   eventName: { fontSize: 18, fontStyle: "italic" },
   boxDetail: {
-    borderColor: "black",
-    borderWidth: 3,
-    borderRadius: 15,
-    padding: 10,
-    backgroundColor: "white"
+    padding: 10
   },
   titleDetail: {
     fontSize: 18,
@@ -208,7 +213,22 @@ const styles = StyleSheet.create({
   textDetail: {
     width: 150,
     textAlign: "center",
-    padding: 5
+    padding: 5,
+    fontSize: 15
+  },
+  textData: {
+    textAlign: "center",
+    fontSize: 15
+  },
+  textTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  textPayment: {
+    width: 100,
+    textAlign: "center",
+    padding: 2
   },
   boxTotal: {
     borderColor: "black",
@@ -229,17 +249,28 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center"
   },
+  boxPayment: {
+    borderColor: "black",
+    borderWidth: 3,
+    borderRadius: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    width: "100%",
+    backgroundColor: "white",
+    alignItems: "center"
+  },
   boxRed: {
     backgroundColor: "#BE3030",
     color: "white",
-    borderRadius: 10,
     width: "30%",
     padding: 8,
     textAlign: "center",
     borderColor: "black",
     borderWidth: 3,
     marginTop: 20,
-    marginBottom: 5
+    marginBottom: 5,
+    shadowRadius: 3,
+    elevation: 2
   },
   buttonPay: {
     borderRadius: 6,
