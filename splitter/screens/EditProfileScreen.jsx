@@ -11,8 +11,10 @@ import {
   SafeAreaView
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BackButton } from "../components";
+
+import { profileUpdate } from "../actions/userAction";
 
 import axios from "axios";
 
@@ -21,12 +23,18 @@ import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 
 export default function EditProfileScreen(props) {
+  const dispatch = useDispatch();
+
   const getUser = useSelector(state => {
     return state.userReducer.UserLogin;
   });
 
+  const token = useSelector(state => {
+    return state.userReducer.token;
+  });
+
   const [userData, setUserData] = useState(getUser);
-  const userId = userData._id;
+  const userId = getUser._id;
   console.log(userData, "<<<<<<<userdata");
 
   const [image_url, setImange] = useState(userData.image_url);
@@ -67,17 +75,17 @@ export default function EditProfileScreen(props) {
         }
       })
       .then(response => {
-        console.log(response.data, "<<<< response data");
+        console.log(response.data, "<<<< response data re get");
         setUserData(response.data);
       })
       .catch(err => {
-        console.log(err, "<<<< ini error");
+        console.log(err, "<<<< ini error profile");
       });
   };
 
-  useEffect(() => {
-    reGetData();
-  }, []);
+  // useEffect(() => {
+  //   reGetData();
+  // }, []);
 
   function editProfile() {
     console.log(getUser.token, "<<<<< token nih");
@@ -85,7 +93,7 @@ export default function EditProfileScreen(props) {
       method: "PATCH",
       url: `http://localhost:3000/users/${userId}`,
       headers: {
-        token: getUser.token
+        token: token
       },
       data: {
         name,
@@ -97,7 +105,9 @@ export default function EditProfileScreen(props) {
       .then(response => {
         console.log(response.data);
         console.log("berhasul bung");
-        reGetData();
+        dispatch(editProfile(response.data));
+        // setName(response.data.name);
+        // setImange(response.data.image_url);
 
         // props.navigation.navigate("Profile");
       })

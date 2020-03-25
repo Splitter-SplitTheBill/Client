@@ -16,32 +16,32 @@ export default function ProfileScreen(props) {
     props.navigation.goBack();
   };
 
-  const getUser = useSelector(state => {
-    return state.userReducer.EditProfile;
+  const userData = useSelector(state => {
+    return state.userReducer.UserLogin;
   });
 
-  const [userData, setUserData] = useState(getUser);
+  // const [userData, setUserData] = useState(getUser);
 
-  const reGetData = () => {
-    console.log("kepanggil");
-    axios
-      .get(`http://localhost:3000/users/${userData._id}`, {
-        headers: {
-          token: getUser.token
-        }
-      })
-      .then(response => {
-        console.log(response.data, "<<<< response data");
-        setUserData(response.data);
-      })
-      .catch(err => {
-        console.log(err.response, "<<<< ini error");
-      });
-  };
+  // const reGetData = id => {
+  //   console.log("kepanggil");
+  //   axios
+  //     .get(`http://localhost:3000/users/${id}`, {
+  //       headers: {
+  //         token: getUser.token
+  //       }
+  //     })
+  //     .then(response => {
+  //       console.log(response.data, "<<<< response data");
+  //       setUserData(response.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err.response, "<<<< ini error");
+  //     });
+  // };
 
-  useEffect(() => {
-    setUserData(getUser);
-  }, []);
+  // useEffect(() => {
+  //   reGetData(getUser._id);
+  // }, []);
   return (
     <>
       <View style={{ marginLeft: 5 }}>

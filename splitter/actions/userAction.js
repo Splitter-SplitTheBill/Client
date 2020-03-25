@@ -11,7 +11,7 @@ const UserLogin = inputLogin => {
   };
 };
 
-const editProfile = input => {
+const profileUpdate = input => {
   return dispatch => {
     dispatch({
       type: "EDITPROFILE",
@@ -20,4 +20,4 @@ const editProfile = input => {
   };
 };
 
-export { UserLogin, editProfile };
+export { UserLogin, profileUpdate };
