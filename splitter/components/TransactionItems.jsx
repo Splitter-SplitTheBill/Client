@@ -55,12 +55,28 @@ export default function TransactionItems ({ itemDetails, indexNum }) {
     return (
         <View style={styles.transactionItemCard}>
             <View style={{height: '100%', width: '40%', alignItems: 'center', justifyContent: 'center'}}>
-                <TextInput style={{textAlign: 'center', maxWidth: '100%'}} multiline = {true} onChangeText={(newItemName) => changeName(newItemName)}>{itemName}</TextInput>
+                {
+                    itemName
+                    ? <TextInput style={{textAlign: 'center', maxWidth: '100%'}} multiline = {true} onChangeText={(newItemName) => changeName(newItemName)}>{itemName}</TextInput>
+                    : <TextInput style={{textAlign: 'center', maxWidth: '100%', minWidth: '35%', borderBottomWidth: 1}} multiline = {true} onChangeText={(newItemName) => changeName(newItemName)}>{itemName}</TextInput>
+                }
+                
             </View>
             <View style={{height: '100%', width: '30%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-                <Text>Rp.</Text>
-                <TextInput keyboardType={'numeric'} onChangeText={(newPrice) => changePrice(newPrice)}>{displayPrice}</TextInput>
-                <Text>,-</Text>
+                {
+                    displayPrice
+                    ? <>
+                        <Text>Rp.</Text>
+                            <TextInput keyboardType={'numeric'} onChangeText={(newPrice) => changePrice(newPrice)}>{displayPrice}</TextInput>
+                        <Text>,-</Text>
+                        </>
+                    : <>
+                        <Text>Rp.</Text>
+                            <TextInput style={{textAlign: 'center', maxWidth: '100%', minWidth: '15%', borderBottomWidth: 1}} keyboardType={'numeric'} onChangeText={(newPrice) => changePrice(newPrice)}>{displayPrice}</TextInput>
+                        <Text>,-</Text>
+                        </>
+                }
+                
             </View>
             <View style={{height: '100%', width: '30%', alignItems: 'center', justifyContent: 'center'}}>
                 <Dropdown

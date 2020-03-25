@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, ImageBackground, Dimensions, Image, TextInput, TouchableOpacity, ScrollView, Button } from 'react-native'
+import { StyleSheet, View, Text, FlatList, Dimensions, Image, TextInput, TouchableOpacity, ScrollView, Button } from 'react-native'
 import Constants from 'expo-constants'
 import { Feather } from '@expo/vector-icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { ResetPicture } from '../actions/cameraAction'
 import { SetEventName, SetParticipantsId, userMockFetch } from '../actions/eventAction'
 import EventFriend from '../components/EventFriend'
+import { AntDesign } from '@expo/vector-icons'
 
 export default function CreateEventScreen ({navigation}) {
     const billPicture = useSelector(state => state.cameraReducer.newBillPicture)
@@ -68,7 +69,7 @@ export default function CreateEventScreen ({navigation}) {
                         {
                             billPicture
                             ? <><View style={{
-                                height: '40%',
+                                height: '60%',
                                 width: '95%',
                                 marginTop: 20,
                                 borderRadius: 20,
@@ -82,7 +83,7 @@ export default function CreateEventScreen ({navigation}) {
                             </>
                             : <TouchableOpacity
                                 style={{
-                                    height: '40%',
+                                    height: '60%',
                                     width: '95%',
                                     marginTop: 20
                                 }}
@@ -101,20 +102,35 @@ export default function CreateEventScreen ({navigation}) {
                                 </View>
                             </TouchableOpacity>
                         }
-                        <View style={styles.addFriendContainer}>
-                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Add Friends to this Event</Text>
-                            <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap'}}>      
-                                {
-                                    userData
-                                    && userData.friendList.map(friend => {
-                                        return (
-                                            <EventFriend friendData={friend.userId}></EventFriend>
-                                        )
-                                    })
-                                }
+                        <ScrollView nestedScrollEnabled={true}>
+                            <View style={styles.addFriendContainer}>
+                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Add Friends to this Event</Text>
+                                <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap'}}>      
+                                    {
+                                        userData
+                                        && userData.friendList.map(friend => {
+                                            return (
+                                                <EventFriend friendData={friend.userId} />
+                                            )
+                                        })
+                                    }
+                                </View>
                             </View>
-                        </View>
-                        <Button title="Create Event" onPress={() => goToPaymentSelection()} />
+                        </ScrollView>
+                        {/* <Button title="Ne" onPress={() => goToPaymentSelection()} /> */}
+                        <TouchableOpacity onPress={() => goToPaymentSelection()}
+                            style={{width: 100,
+                            marginHorizontal: 5,
+                            height: 45,
+                            backgroundColor: '#00b894',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 10}}>
+
+                                <Text style={{marginRight: 5, fontWeight: 'bold'}}>Next</Text>
+                                <AntDesign name="doubleright" size={20} color="green" />
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </View>
@@ -157,22 +173,24 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     eventNameInputContainer: {
-        height: '4%',
+        height: '5%',
         width: '75%',
         backgroundColor: '#a4b0be',
-        marginTop: 30,
+        marginTop: 20,
         alignItems: 'center',
         borderRadius: 5
     },
     screenContentContainer: {
-        height: Dimensions.get('screen').height+500,
+        height: Dimensions.get('screen').height+200,
         width: Dimensions.get('screen').width,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 30
     },
     addFriendContainer: {
-        height: '28%',
-        width: '100%',
-        marginTop: 10,
+        // height: '28%',
+        width: 410,
+        // width: '100%',
+        marginVertical: 20,
         alignItems: 'center'
     }
 })

@@ -6,7 +6,7 @@ export default function CameraLoading () {
         <View style={styles.loadingContainer}>
             <Image style={{height: 500, width: 500, resizeMode: 'contain'}} source={require('../assets/cameraLoadingSpinner.gif')} />
             <Text>Please wait a moment</Text>
-            <Text>Taking Picture. . .</Text>
+            <Text>Saving Picture. . .</Text>
         </View>
     )
 }
