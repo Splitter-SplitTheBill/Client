@@ -63,6 +63,7 @@ const FetchTransactionItems = (photo) => {
     return (dispatch, getState) => {
         const data = new FormData()
         data.append('photo', {uri: photo.uri, name: 'test.jpg', type: 'image/jpeg' })
+        console.log(data)
         fetch(baseUrl + '/events/ocr', {
             method: 'POST',
             body: data,
@@ -106,6 +107,7 @@ const FetchTransactionItemsAgain = (photoUrl) => {
         })
         const data = new FormData()
         data.append('photo', photoUrl)
+        console.log(photoUrl)
         fetch(baseUrl + '/events/ocr', {
             method: 'POST',
             body: data,
@@ -241,8 +243,13 @@ const SetToPaid = (eventId, participantId) => {
   return (dispatch, getState) => {
     fetch(`${baseUrl}/transactions/${eventId}/${participantId}`, {
         method: 'PATCH',
+        body: JSON.stringify({
+          status: 'settled'
+        }),
         headers: {
-        'token': getState().userReducer.UserLogin.token
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'token': getState().userReducer.UserLogin.token
     }
     })
     .then(res => res.json())
@@ -269,6 +276,12 @@ const AddTransactionItem = () => {
   }
 }
 
+const ResetEvent = () => {
+  return {
+    type: 'ResetEvent'
+  }
+}
+
 export {
     setParticipantsWithItems,
     submitEvent,
@@ -286,5 +299,6 @@ export {
     FetchTransactionItemsAgain,
     SetToPaid,
     changeBillPicture,
-    AddTransactionItem
+    AddTransactionItem,
+    ResetEvent
 }

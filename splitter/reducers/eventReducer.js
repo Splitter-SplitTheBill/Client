@@ -108,6 +108,17 @@ const eventReducer = (state=initialState, action) => {
             return {
                 ...state, transactionItems: state.transactionItems = [...state.transactionItems, {name: '', price: ''}]
             }
+        case 'ResetEvent':
+            return {
+                ...state, newEvent: state.newEvent = null,
+                friendInEvent: state.friendInEvent = [],
+                paymentSelection: state.paymentSelection = [],
+                eventName: state.eventName = '',
+                transactionItems: state.transactionItems = [],
+                billPicture: state.billPicture = '',
+                participants: state.participants = [],
+                newEventTransactions: state.newEventTransactions = []
+            }
         default:
             return state
     }

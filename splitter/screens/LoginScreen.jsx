@@ -17,7 +17,7 @@ import axios from "axios";
 export default function LoginScreen(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://192.168.1.5:3000";
 
   const dispatch = useDispatch();
 

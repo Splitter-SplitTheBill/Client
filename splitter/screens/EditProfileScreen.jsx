@@ -13,30 +13,16 @@ import {
 import { Dropdown } from "react-native-material-dropdown";
 import { useSelector, useDispatch } from "react-redux";
 import { BackButton } from "../components";
-
 import { profileUpdate } from "../actions/userAction";
-
 import axios from "axios";
-
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 
 export default function EditProfileScreen(props) {
   const dispatch = useDispatch();
-
-  const getUser = useSelector(state => {
-    return state.userReducer.UserLogin;
-  });
-
-  const token = useSelector(state => {
-    return state.userReducer.token;
-  });
-
-  const [userData, setUserData] = useState(getUser);
-  const userId = getUser._id;
-  console.log(userData, "<<<<<<<userdata");
-
+  const userData = useSelector(state => state.userReducer.UserLogin)
+  const token = useSelector(state => state.userReducer.token)
   const [image_url, setImange] = useState(userData.image_url);
   const [name, setName] = useState(userData.name);
   const [accounts, setAccount] = useState(userData.accounts);
@@ -66,32 +52,10 @@ export default function EditProfileScreen(props) {
     }
   ];
 
-  const reGetData = () => {
-    console.log("kepanggil");
-    axios
-      .get(`http://localhost:3000/users/${userData._id}`, {
-        headers: {
-          token: getUser.token
-        }
-      })
-      .then(response => {
-        console.log(response.data, "<<<< response data re get");
-        setUserData(response.data);
-      })
-      .catch(err => {
-        console.log(err, "<<<< ini error profile");
-      });
-  };
-
-  // useEffect(() => {
-  //   reGetData();
-  // }, []);
-
-  function editProfile() {
-    console.log(getUser.token, "<<<<< token nih");
+  const editProfile = () => {
     axios({
       method: "PATCH",
-      url: `http://localhost:3000/users/${userId}`,
+      url: `http://192.168.1.5:3000/users/${userData._id}`,
       headers: {
         token: token
       },
@@ -103,13 +67,8 @@ export default function EditProfileScreen(props) {
       }
     })
       .then(response => {
-        console.log(response.data);
-        console.log("berhasul bung");
-        dispatch(editProfile(response.data));
-        // setName(response.data.name);
-        // setImange(response.data.image_url);
-
-        // props.navigation.navigate("Profile");
+        console.log(response.data, '<<<<<<<<<<<<<INI UPDATED DATA');
+        dispatch(profileUpdate(response.data));
       })
       .catch(err => {
         console.log(err.response);
@@ -131,9 +90,9 @@ export default function EditProfileScreen(props) {
       }
     })
       .then(response => {
-        console.log(response.data);
-        console.log("berhasul bung");
-        console.log(accounts);
+        // console.log(response.data);
+        // console.log("berhasul bung");
+        // console.log(accounts);
         setAccNumber("");
         setAccNamne("");
         setAddStatus(false);

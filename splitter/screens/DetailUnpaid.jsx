@@ -37,7 +37,7 @@ export default function detail(props) {
 
   const getUser = id => {
     axios
-      .get(`http://localhost:3000/users/${id}`, {
+      .get(`http://192.168.1.5:3000/users/${id}`, {
         headers: {
           token: userlogin.token
         }

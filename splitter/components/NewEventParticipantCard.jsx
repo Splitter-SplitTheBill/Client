@@ -15,7 +15,7 @@ export default function NewEventParticipantCard ({ participantData }) {
         // console.log(participantData.transactionId.eventId,participantData.participantId._id)
     }
 
-    if (participantData.transactionId.status) {
+    if (participantData.transactionId.status == 'settled' || participantData.transactionId.status == 'settling') {
         // console.log(participantData.participantId.username)
         return (
             <>
@@ -39,7 +39,7 @@ export default function NewEventParticipantCard ({ participantData }) {
             </>
             )
     }
-
+    else if (participantData.transactionId.status == 'unpaid'){
     return (
         <TouchableOpacity onPress={() => setPaid()}>
             <View style={styles.cardContainer}>
@@ -54,6 +54,7 @@ export default function NewEventParticipantCard ({ participantData }) {
             </View>
         </TouchableOpacity>
     )
+    }
 }
 
 const styles = StyleSheet.create({

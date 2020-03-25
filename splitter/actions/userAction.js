@@ -11,11 +11,13 @@ const UserLogin = inputLogin => {
   };
 };
 
-const profileUpdate = input => {
+const profileUpdate = updatedUserData => {
   return dispatch => {
     dispatch({
       type: "EDITPROFILE",
-      payload: { profile: input }
+      payload: { 
+        updatedUserData
+       }
     });
   };
 };
