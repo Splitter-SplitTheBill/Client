@@ -1,5 +1,6 @@
 const initialState = {
-  UserLogin: []
+  UserLogin: [],
+  EditProfile: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -8,7 +9,10 @@ const userReducer = (state = initialState, action) => {
       console.log(action.payload.user, "<<<reducr tucyy");
       const user = action.payload.user;
       return { ...state, UserLogin: user };
-
+    case "EDITPROFILE":
+      console.log(action.payload.profile, "<<<reducr tucyy");
+      const profile = action.payload.profile;
+      return { ...state, EditProfile: profile };
     default:
       return state;
   }
