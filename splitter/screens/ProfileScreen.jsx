@@ -58,7 +58,7 @@ export default function ProfileScreen(props) {
     <>
       <View style={styles.container}>
         <ScrollView>
-          <View>
+          <View style={{width: Dimensions.get('screen').width}}>
             <TouchableOpacity style={styles.logOutButton} onPress={() => logoutFromAccount()}>
               <SimpleLineIcons name="logout" size={32} color="black" />
               <Text style={{marginLeft: 5, fontSize: 15}}>Logout</Text>
@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
   },
   logOutButton: {
     marginTop: 5,
+    marginRight: 5,
     width: 100,
     height: 40,
     backgroundColor: '#ff7675',
