@@ -8,7 +8,8 @@ const initialState = {
     participants: [],
     newEvent: null,
     newEventTransactions: [],
-    oneEvent: null
+    oneEvent: null,
+    settlingTransactions: 0
 }
 
 const eventReducer = (state=initialState, action) => {
@@ -26,7 +27,15 @@ const eventReducer = (state=initialState, action) => {
             const events = action.payload.events
             const user = action.payload.user
             const userEvents = events.filter(event => event.createdUserId._id == user)
-            return { ...state, allEvents: userEvents }
+            let NumOfSettling = 0
+            userEvents.forEach(event => {
+                event.participants.forEach(participant => {
+                if(participant.transactionId.status == 'settling') {
+                    NumOfSettling ++
+                }
+                })
+            })
+            return { ...state, allEvents: userEvents, settlingTransactions: NumOfSettling }
         case 'AddPaymentMethod':
             return {
                 ...state, paymentSelection: state.paymentSelection = [...state.paymentSelection, action.payload.paymentDetails]

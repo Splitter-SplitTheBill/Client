@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons'
@@ -7,7 +7,17 @@ import receipt from '../assets/images/receipt.png'
 
 export default function Card({methods, data}) {
   const [status, setStatus] = useState(false)
-  console.log(data.participants , '< participants')
+  const [Settling, setSettling] = useState(false)
+
+  useEffect(() => {
+    let settling = data.participants.filter(participant => participant.transactionId.status == 'settling')
+    if(settling.length > 0) {
+      setSettling(true)
+    } else {
+      setSettling(false)
+    }
+  }, [])
+
   const checkStatus = () => {
     const checkUnpaid = data.participants.filter(participant => participant.transactionId.status == 'unpaid')
     const checkSettling = data.participants.filter(participant => participant.transactionId.status == 'settling')
@@ -16,7 +26,7 @@ export default function Card({methods, data}) {
       return (
         <View style={styles.detail}>
           <Text style={styles.eventName}>{data.name}</Text>
-          <Text style={{ fontFamily: 'ProximaNova-Regular'}}>You and {data.participants.length - 1} other people</Text>
+          <Text style={{ fontFamily: 'ProximaNova-Regular'}}>You and {data.participants.length} other people</Text>
           <Text style={{color: '#900', fontFamily: 'ProximaNova-Regular'}}>UNCOMPLETE</Text>
         </View>
       )
@@ -34,6 +44,11 @@ export default function Card({methods, data}) {
   return (
     <TouchableOpacity style={styles.event} onPress={() => methods(data)} >
       <View style = {styles.circle} >
+        {
+          Settling
+          && <Text style={styles.notificationSettling}>!</Text>
+        }
+        {/* <Text style={styles.notificationSettling}>!</Text> */}
         <Image source = {receipt} style={styles.icon}/>
       </View>
       {checkStatus()}
@@ -84,4 +99,15 @@ const styles = StyleSheet.create({
   next: {
     color: 'white'
   },
+  notificationSettling: {
+    height: 20,
+    width: 20,
+    borderRadius: 999,
+    backgroundColor: 'green',
+    position: 'absolute',
+    zIndex: 10,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    alignSelf: 'flex-end'
+  }
 });

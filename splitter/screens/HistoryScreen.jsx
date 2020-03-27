@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { View, Text, StyleSheet, Image, Modal, Dimensions } from 'react-native'
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, Image, Modal, Dimensions, TouchableOpacity, ScrollView, RefreshControl  } from 'react-native'
 import Constant from 'expo-constants'
 
 import pay from '../assets/images/pay.png'
@@ -18,6 +17,11 @@ function HistoryScreen({navigation}) {
 
   const userId = user._id
   const token = user.token
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    dispatch(showAllEvents(userId, token))
+  }, []);
 
   useEffect(() => {
     dispatch(showAllEvents(userId, token))
@@ -52,7 +56,9 @@ function HistoryScreen({navigation}) {
         </View>
       </View>
       <View style={styles.box}>
-        <ScrollView>
+        <ScrollView refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
           {allEvents.map(event => {
             return (
               <CustomCard methods={detailHistory} data={event} key={event._id}/>
