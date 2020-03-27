@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { BackButton } from '../components'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios'
-import { showOneEvent } from '../actions/eventAction'
+import { showOneEvent, showAllEvents } from '../actions/eventAction'
 import formatMoney from '../helpers/RpConverter'
 import Constant from 'expo-constants'
 
@@ -47,6 +47,7 @@ function DetailHistory({navigation, route}) {
     })
       .then(result => {
         dispatch(showOneEvent(eventId, token))
+        dispatch(showAllEvents(getUser._id, token))
       })
       .catch(err => {
         console.log(err, '< error showAllEvents')

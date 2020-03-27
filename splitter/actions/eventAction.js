@@ -101,6 +101,13 @@ const FetchTransactionItems = (photo) => {
               }
             },
             (error) => {
+              dispatch({
+                type: 'FetchTransactionItems',
+                payload: {
+                  transactionList: ['try again'],
+                  billPic: result.photo
+                }
+            })
               console.log(error)
             }
           )

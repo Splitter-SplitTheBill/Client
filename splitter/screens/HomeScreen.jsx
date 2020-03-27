@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,8 +12,23 @@ import peopleMoney from "../assets/images/peopleMoney.png";
 import recentEvent from "../assets/images/recentEvent.png";
 import history from "../assets/images/bill.png";
 import add from "../assets/images/add.png";
+import { useDispatch, useSelector } from "react-redux";
+import { showAllEvents } from '../actions/eventAction'
 
 export default function HomeScreen({ navigation }) {
+  const dispatch = useDispatch()
+  const user = useSelector(state => {
+    return state.userReducer.UserLogin;
+  })
+  const settling = useSelector(state => state.eventReducer.settlingTransactions)
+
+  const userId = user._id
+  const token = user.token
+
+  useEffect( () => {
+  dispatch(showAllEvents(userId, token))
+  }, [])
+
   return (
     <View style={styles.container}>
       <View style={styles.background}>
@@ -37,6 +52,11 @@ export default function HomeScreen({ navigation }) {
               style={styles.boxes}
               onPress={() => navigation.navigate("HistoryScreen")}
             >
+              {
+                settling > 0
+                && <Text style={styles.settlingNotif}>{String(settling)}</Text>
+              }
+              {/* <Text style={styles.settlingNotif}>{settling}</Text> */}
               <Image source={history} style={styles.logo} />
               <Text style={styles.textBox}>History</Text>
             </TouchableOpacity>
@@ -132,5 +152,21 @@ const styles = StyleSheet.create({
     width: width * 0.85,
     justifyContent: "center",
     alignItems: "center"
+  },
+  settlingNotif: {
+    height: 20,
+    width: 20,
+    borderRadius: 999,
+    backgroundColor: 'green',
+    position: 'absolute',
+    zIndex: 3,
+    transform: [{
+      translateX: 20
+    },{
+      translateY: -40
+    }],
+    textAlignVertical: 'center',
+    textAlign: 'center'
+
   }
 });
